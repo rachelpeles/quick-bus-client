@@ -1,0 +1,207 @@
+<mat-card>
+
+    <mat-card-title>
+        ברוכים הבאים מלא את פרטיך
+    </mat-card-title>
+
+    <!-- Actual content starts from here -->
+    <mat-card-content>
+
+
+        <form [formGroup]="regiForm" (ngSubmit)="onFormSubmit()">
+            <mat-vertical-stepper _ngcontent-aih-c0="" class="mat-stepper-vertical ng-tns-c2-1" [linear]=false #stepper aria-orientation="vertical"
+                labelposition="bottom" role="tablist">
+                <table>
+                    <mat-step>
+                        <ng-template matStepLabel>שם וסיסמא</ng-template>
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="UserName" matInput placeholder="שם משתמש">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('UserName').valid && regiForm.get('UserName').touched">
+                                        שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="password" matInput placeholder="סיסמא">
+                                </mat-form-field>
+                                <mat-error>
+                                    <!-- <span *ngIf="!regiForm.get('password').valid && regiForm.get('password').touched">
+                                        שדה זה חובה</span> -->
+                                    <span *ngIf="password.invalid">{{ChekPassword()}}</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="Chekpassword" matInput placeholder="אימות סיסמא">
+                                </mat-form-field>
+                                <mat-error>
+                                    <!-- <span *ngIf="!regiForm.get('Chekpassword').valid && regiForm.get('Chekpassword').touched">
+                                            שדה זה חובה</span> -->
+                                    <span *ngIf="Chekpassword.invalid">{{getErrorPassword()}}</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+                        <button type="button" mat-mini-fab color="white" matStepperNext>
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </button>
+
+                    </mat-step>
+
+                    <mat-step>
+                        <ng-template matStepLabel>פרטי נוסע</ng-template>
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="PassengerId" matInput placeholder="תעודת זהות">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('PassengerId').valid && regiForm.get('PassengerId').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="PassengerFirstName" matInput placeholder="שם פרטי">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('PassengerFirstName').valid && regiForm.get('PassengerFirstName').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="PassengerLastName" matInput placeholder="שם משפחה">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('PassengerLastName').valid && regiForm.get('PassengerLastName').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="EstablishmentId" matInput placeholder=" קוד מוסד">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('EstablishmentId').valid && regiForm.get('EstablishmentId').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+                        <!-- <button type="button" mat-mini-fab color="white" matStepperPrevious>
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </button> -->
+                        <button type="button" mat-mini-fab color="white" matStepperNext>
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </button>
+
+                    </mat-step>
+
+                    <mat-step>
+                        <ng-template matStepLabel>כתובת</ng-template>
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="StreetId" matInput placeholder="רחוב">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('StreetId').valid && regiForm.get('StreetId').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="Building" matInput placeholder="מספר בניין">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('Building').valid && regiForm.get('Building').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+                        <!-- <button type="button" mat-mini-fab color="white" matStepperPrevious>
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </button> -->
+                        <button type="button" mat-mini-fab color="white" matStepperNext>
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </button>
+
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>פרטי תקשורת</ng-template>
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="Telephone" matInput placeholder="מספר טלפון">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('Telephone').valid && regiForm.get('Telephone').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="FatherCell" matInput placeholder="נייד אבא">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('FatherCell').valid && regiForm.get('FatherCell').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="MotherCell" matInput placeholder="נייד אמא">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('MotherCell').valid && regiForm.get('MotherCell').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <mat-form-field class="demo-full-width">
+                                    <input formControlName="Email" matInput placeholder="אימייל">
+                                </mat-form-field>
+                                <mat-error>
+                                    <span *ngIf="!regiForm.get('Email').valid && regiForm.get('Email').touched"> שדה זה חובה</span>
+                                </mat-error>
+                            </td>
+                        </tr>
+                        <button type="button" mat-mini-fab color="white" matStepperPrevious>
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </button>
+
+                    </mat-step>
+
+                    <tr>
+                        <td colspan="2" class="content-center">
+                            <button mat-raised-button color="accent" (click)="ChekPassword()" [disabled]="!regiForm.valid || IsAccepted==0">המשך</button>
+                        </td>
+                    </tr>
+
+
+
+                </table>
+            </mat-vertical-stepper>
+        </form>
+    </mat-card-content>
+</mat-card>

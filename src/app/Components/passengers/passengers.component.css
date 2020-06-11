@@ -1,0 +1,30 @@
+
+.header
+{
+    font-size: larger;
+    text-align: center;
+    color: teal;
+}
+
+.flexdiv 
+{
+    display: flex;
+    justify-content: center;
+}
+
+table
+{
+    width: 70em;
+    margin: 10px;
+}
+
+.mat-raised-button
+{
+    font-size: medium;
+    font-family:Tahoma;
+    margin-right: 8px;
+}
+.buttons
+{
+   text-align: center;
+}

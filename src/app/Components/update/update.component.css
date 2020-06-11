@@ -1,0 +1,71 @@
+.upDate-form
+{
+    direction: rtl;
+    text-align: center;
+    font-size: large;
+}
+#wrapper
+{
+  max-width: 1500px;
+  margin: 0px, auto, auto, auto;
+}
+
+.mat-raised-button
+{
+    font-size: medium;
+    font-family:Tahoma;
+    margin-right: 8px;
+    -moz-box-align: end;
+}
+
+.mat-stepper-vertical
+{
+  direction: rtl;
+  display: grid;
+  justify-content: right;
+  margin-top: 8px;
+}
+  
+.mat-form-field 
+{
+    text-align: right;
+    margin-top: 16px;
+}
+
+::ng-deep
+.mat-step-header .mat-step-icon 
+{
+  background-color: rgb(115, 148, 148); 
+}
+
+::ng-deep
+.mat-step-header .mat-step-icon-selected 
+{
+  background-color: rgb(16, 179, 179);
+}
+
+.mat-vertical-stepper-content{
+    height: 100%;
+    display: flex;
+  }
+ .buttons{
+    display: flex;
+    justify-content: center;
+  }
+  .mat-mini-fab
+  {
+    color: teal;
+  }
+   double, groove
+  .buttonStep
+  {
+    display: table-cell;
+  }
+  .buttonStep button
+  {
+    margin-right: 8px;
+    font-size: medium;
+    -moz-box-align: end;
+    box-shadow: none;
+    background-color: rgb(244, 248, 248);
+  } 
