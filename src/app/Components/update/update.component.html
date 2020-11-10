@@ -18,17 +18,20 @@
 
 
 
-
-<div id="wrapper">
+<mat-card id="wrapper" (ngSubmit)="update()">
   <div _ngcontent-aih-c0 class="ng-tnsc0-0 right" id="stepper">
-    <mat-vertical-stepper _ngcontent-aih-c0="" class="mat-stepper-vertical ng-tns-c2-1" [linear]=false #stepper aria-orientation="vertical"
+    <mat-horizontal-stepper _ngcontent-aih-c0="" class="mat-stepper-horizontal ng-tns-c2-1" [linear]=false #stepper aria-orientation="horizontal"
       labelposition="bottom" role="tablist">
-      <mat-step [stepControl]="nameFormGroup">
-        <form [formGroup]="nameFormGroup">
-          <ng-template matStepLabel>שם קבוצה</ng-template>
+      <mat-step [stepControl]="personalDeatailsFormGroup">
+        <form [formGroup]="personalDeatailsFormGroup">
+          <ng-template matStepLabel>פרטים אישיים</ng-template>
           <mat-form-field>
             <!-- <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required> -->
             <input matInput placeholder="שם" formControlName="firstName" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="כתובת" formControlName="address" required>
           </mat-form-field>
 
           <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_down</mat-icon> -->
@@ -37,42 +40,11 @@
             <i class="material-icons">keyboard_arrow_down</i>
           </button>
           <mat-error>
-            <span *ngIf="nameFormGroup.invalid">{{getErrorName()}}</span>
+            <span *ngIf="personalDeatailsFormGroup.invalid">{{getErrorName()}}</span>
           </mat-error>
         </form>
       </mat-step>
-      <mat-step [stepControl]="addressFormGroup">
-        <form [formGroup]="addressFormGroup">
-          <ng-template matStepLabel>כתובת</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="עיר" formControlName="city" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="שכונה" formControlName="neighborhood" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput placeholder="רחוב" formControlName="street" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input type="number" matInput placeholder="בנין" formControlName="building" required>
-          </mat-form-field>
-          <mat-error>
-            <!-- <span *ngIf="addressFormGroup.building.invalid">{{getErrorBuilding()}}</span> -->
-          </mat-error>
-          <br>
-          <div class="buttonStep">
-            <button mat-mini-fab color="white" matStepperPrevious>
-              <i class="material-icons">keyboard_arrow_up</i>
-            </button>
-            <button mat-mini-fab color="white" matStepperNext>
-              <i class="material-icons">keyboard_arrow_down</i>
-            </button>
-          </div>
-        </form>
-      </mat-step>
+      
       <mat-step [stepControl]="contactFormGroup">
         <form [formGroup]="contactFormGroup">
           <ng-template matStepLabel>פרטי התקשרות</ng-template>
@@ -97,7 +69,7 @@
       </mat-step>
       <mat-step [stepControl]="transportationTimes">
         <ng-template matStepLabel>זמני הסעה</ng-template>
-        <div class="mat-vertical-content ng-star-inserted">
+        <div class="mat-horizontal-content ng-star-inserted">
           <form [formGroup]="timesFormGroup">
 
             <mat-form-field>
@@ -126,14 +98,13 @@
           </form>
         </div>
       </mat-step>
-    </mat-vertical-stepper>
+    </mat-horizontal-stepper>
   </div>
   <div class="buttons">
-    <button mat-raised-button type="submit" [disabled]="!(nameFormGroup.valid && addressFormGroup.valid && contactFormGroup.valid && timesFormGroup.valid)">עדכן</button>
+    <button mat-raised-button type="submit" [disabled]="!(personalDeatailsFormGroup.valid && contactFormGroup.valid && timesFormGroup.valid)" (click)="update()">עדכן</button>
     <button mat-raised-button type="reset" (click)="cancel()">ביטול</button>
   </div>
-</div>
-
+</mat-card>
 
 
 

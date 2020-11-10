@@ -1,0 +1,23 @@
+<h1 *ngIf="data.actionType=='edit'" mat-dialog-title>עדכון כלי רכב {{data.vehicleId}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>סוג רכב</mat-label>
+    <input matInput [(ngModel)]="data.vehicleType">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>מספר מקומות</mat-label>
+    <input matInput [(ngModel)]="data.amountPlaces">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>מחיר</mat-label>
+    <input matInput [(ngModel)]="data.price">
+  </mat-form-field>
+</div>
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">ביטול</button>
+  <button mat-button [mat-dialog-close]="data.vehicle" cdkFocusInitial>שמירה</button>
+</div>

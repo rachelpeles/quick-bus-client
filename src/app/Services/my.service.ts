@@ -18,17 +18,17 @@
 // }
 
 import { Injectable } from '@angular/core';
-import { Passenger } from '../Classes/passenger';
+import { Family } from '../Classes/Family'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyService {
 
-  passenger:Passenger=new Passenger() ;
+  family:Family=new Family();
   constructor() {
-    this.passenger.UserName=null;
-    this.passenger.password=null;
+    this.family.userName=null;
+    this.family.password=null;
 
    }
 }

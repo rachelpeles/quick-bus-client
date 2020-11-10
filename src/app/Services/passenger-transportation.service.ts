@@ -2,24 +2,26 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transportation } from '../Classes/transportation';
 import { HttpClient } from '@angular/common/http';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PassengerTransportationService {
 
-  baseURL="http://localhost:10481/api/Transportations/";
-  constructor(private http:HttpClient) { }
-
+  myurl: any;
+  constructor(private http: HttpClient, private globalService: GlobalService) {
+    this.myurl = globalService.baseURL;
+  }
   getAllPassengertransport():Observable<Array<Transportation>>
   {
-    var res = this.http.get<Array<Transportation>>(this.baseURL+'GetAll')
+    var res = this.http.get<Array<Transportation>>(this.myurl+'GetAllTransportation')
     return res;
   }
 
   delete(id)
   {
-    this.http.delete(this.baseURL+'DeleteTransportations/{id}', id);
+    this.http.delete(this.myurl+'DeleteTransportations/{id}', id);
   }
 
 }

@@ -3,38 +3,17 @@
  <div class="flexdiv">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <ng-container matColumnDef="select">
-    <th mat-header-cell *matHeaderCellDef>
-      <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    [aria-label]="checkboxLabel()">
-      </mat-checkbox>
-    </th>
-    <td mat-cell *matCellDef="let row">
-      <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)"
-                    [aria-label]="checkboxLabel(row)">
-      </mat-checkbox>
-    </td>
-  </ng-container>
+    
 
-    <ng-container matColumnDef="vehicleId">
+    <ng-container matColumnDef="vehiclesId">
       <th mat-header-cell *matHeaderCellDef> קוד רכב </th>
-      <td mat-cell *matCellDef="let element"> {{element.vehicleId}} </td>
-      <button mat-mini-fab color="white" (click)="delete()">
-        <i class="material-icons">delete</i>
-      </button>
+      <td mat-cell *matCellDef="let element"> {{element.vehiclesId}} </td>
     </ng-container>
   
 
-    <ng-container matColumnDef="vehicleType">
+    <ng-container matColumnDef="typeVhicles">
       <th mat-header-cell *matHeaderCellDef> סוג רכב </th>
-      <td mat-cell *matCellDef="let element">{{element.vehicleType}} </td>
+      <td mat-cell *matCellDef="let element">{{element.typeVhicles}} </td>
     </ng-container>
   
 
@@ -44,23 +23,39 @@
     </ng-container>
   
 
-    <ng-container matColumnDef="price">
+    <ng-container matColumnDef="priceForKM">
       <th mat-header-cell *matHeaderCellDef> מחיר </th>
-      <td mat-cell *matCellDef="let element"> {{element.price}}</td>
+      <td mat-cell *matCellDef="let element"> {{element.priceForKM}}</td>
     </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <th mat-cell *matCellDef="let element">
+        <button class="deleteAndEdit" mat-mini-fab color="white" (click)="action('delete', element)">
+          <i class="material-icons">delete</i>
+        </button>
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <th mat-cell *matCellDef="let element">
+        <button class="deleteAndEdit" mat-mini-fab color="white" (click)="action('edit', element)">
+          <i class="material-icons">edit</i>
+        </button>
+      </th>
+    </ng-container>
+    
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
  </div>
 
-<div class="buttons">
-  <!-- <button mat-raised-button disabled="isSelected()" (click)="delete()">מחק</button> -->
-  <button mat-raised-button disabled="isSelected()">עדכן</button>
-  <button mat-raised-button (click)="add()">הוסף</button>
-</div>
+ <button class="b" mat-fab color="white" (click)="action('add', element)">
+  <i class="material-icons add">add</i>
+</button>
 
-<router-outlet></router-outlet>
 
 <!-- <form class="form" [formGroup]="addVehicle" (ngSubmit)="update()">
 <mat-form-field>

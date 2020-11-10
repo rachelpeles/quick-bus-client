@@ -4,13 +4,12 @@
         ברוכים הבאים מלא את פרטיך
     </mat-card-title>
 
-    <!-- Actual content starts from here -->
     <mat-card-content>
 
 
         <form [formGroup]="regiForm" (ngSubmit)="onFormSubmit()">
-            <mat-vertical-stepper _ngcontent-aih-c0="" class="mat-stepper-vertical ng-tns-c2-1" [linear]=false #stepper
-                aria-orientation="vertical" labelposition="bottom" role="tablist">
+            <mat-vertical-stepper _ngcontent-aih-c0="" class="mat-stepper-vertical ng-tns-c2-1" [linear]=false #stepper aria-orientation="vertical"
+                labelposition="bottom" role="tablist">
                 <table>
                     <mat-step>
                         <ng-template matStepLabel>שם וסיסמא</ng-template>
@@ -20,8 +19,7 @@
                                     <input formControlName="EstablishmentName" matInput placeholder="שם מוסד">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span
-                                        *ngIf="!regiForm.get('EstablishmentName').valid && regiForm.get('EstablishmentName').touched">
+                                    <span *ngIf="!regiForm.get('EstablishmentName').valid && regiForm.get('EstablishmentName').touched">
                                         שדה זה חובה</span>
                                 </mat-error>
                             </td>
@@ -32,8 +30,7 @@
                                     <input formControlName="password" matInput placeholder="סיסמא">
                                 </mat-form-field>
                                 <mat-error>
-                                    <!-- <span *ngIf="!regiForm.get('password').valid && regiForm.get('password').touched">
-                                        שדה זה חובה</span> -->
+
                                     <span *ngIf="password.invalid">{{ChekPassword()}}</span>
                                 </mat-error>
                             </td>
@@ -45,8 +42,7 @@
                                     <input formControlName="Chekpassword" matInput placeholder="אימות סיסמא">
                                 </mat-form-field>
                                 <mat-error>
-                                    <!-- <span *ngIf="!regiForm.get('Chekpassword').valid && regiForm.get('Chekpassword').touched">
-                                            שדה זה חובה</span> -->
+
                                     <span *ngIf="Chekpassword.invalid">{{getErrorPassword()}}</span>
                                 </mat-error>
                             </td>
@@ -65,8 +61,7 @@
                                     <input formControlName="address" matInput placeholder="כתובת">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span *ngIf="!regiForm.get('address').valid && regiForm.get('address').touched"> שדה
-                                        זה חובה</span>
+                                    <span *ngIf="!regiForm.get('address').valid && regiForm.get('address').touched"> שדה זה חובה</span>
                                 </mat-error>
                             </td>
                         </tr>
@@ -77,8 +72,8 @@
                                     <input type="email" formControlName="Email" matInput placeholder="מייל">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span *ngIf="!regiForm.get('Email').valid && regiForm.get('Email').touched"> שדה זה
-                                        חובה</span>
+                                    <span *ngIf="!regiForm.get('Email').valid && regiForm.get('Email').touched"> שדה זה חובה
+                                    </span>
                                 </mat-error>
                             </td>
                         </tr>
@@ -89,8 +84,7 @@
                                     <input formControlName="ContactCell" matInput placeholder="טלפון איש קשר">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span
-                                        *ngIf="!regiForm.get('ContactCell').valid && regiForm.get('ContactCell').touched">
+                                    <span *ngIf="!regiForm.get('ContactCell').valid && regiForm.get('ContactCell').touched">
                                         שדה זה חובה</span>
                                 </mat-error>
                             </td>
@@ -104,8 +98,7 @@
                     </mat-step>
 
                     <td colspan="2" class="content-center">
-                        <button mat-raised-button color="accent" (click)="ChekPassword()"
-                            [disabled]="!regiForm.valid || IsAccepted==0">המשך</button>
+                        <button mat-raised-button color="accent" (click)="ChekPassword()" [disabled]="!regiForm.valid || IsAccepted==0">המשך</button>
                     </td>
 
                 </table>

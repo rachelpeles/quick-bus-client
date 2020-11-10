@@ -1,0 +1,26 @@
+.mat-stepper-horizontal
+{
+  direction: rtl;
+  display: grid;
+  justify-content: right;
+  margin-top: 8px;
+}
+::ng-deep
+.mat-step-header .mat-step-icon 
+{
+  background-color: rgb(148, 115, 135); 
+}
+
+::ng-deep
+.mat-step-header .mat-step-icon-selected 
+{
+  background-color: rgb(179, 16, 97);
+}
+
+.mat-horizontal-stepper-content{
+    height: 100%;
+    display: flex;
+  }
+  .mat-form{
+    justify-content: center;
+  }

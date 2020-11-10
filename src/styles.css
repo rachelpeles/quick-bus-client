@@ -1,10 +1,10 @@
-You can add global styles to this file, and also import other style files */
+/*You can add global styles to this file, and also import other style files */
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';    
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';    
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import '~https://fonts.googleapis.com/icon?family=Material+Icons';    
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';    
 .mat-card {    
     text-align: -webkit-center;    
 }    
@@ -55,4 +55,9 @@ mat-toolbar-row {
 }
 .mat-fab.mat-accent, .mat-flat-button.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent{
     background-color: palevioletred
+}
+
+.material-icons
+{
+    cursor: pointer;
 }

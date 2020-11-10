@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h2>Contact Me</h2>
+        <form method="post" action="SendMail.cshtml">
+            <div>
+                Your name:
+                <input type="text" name="Name" />
+            </div>
+            <div>
+            Your email:
+            <input type="text" name="Email" />
+            </div>
+            <div>
+                Subject:
+                <input type="text" name="Subject" />
+            </div>
+            <div>
+                Message: <br />
+                <textarea cols="30" rows="5" name="Message"></textarea>
+            </div>
+            <div>
+                <input type="submit" value="Send!" />
+            </div>
+        </form>
+    </body>
+</html>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { HttpService } from 'src/app/Services/http.service';
 import { Router } from '@angular/router';
-import { Passenger } from 'src/app/Classes/passenger';
+import { Family } from 'src/app/Classes/Family';
+import { FamilyService } from '../../Services/Family.service';
 
 @Component({
   selector: 'app-add-passenger',
@@ -12,33 +12,26 @@ import { Passenger } from 'src/app/Classes/passenger';
 export class AddPassengerComponent implements OnInit {
 
   regiForm: FormGroup;
-  constructor(private httpSer: HttpService, private router: Router, private fb: FormBuilder) {
+  constructor(private familySer: FamilyService, private router: Router, private fb: FormBuilder) {
 
     this.regiForm = this.fb.group({
-      'PassengerId': [null, Validators.required],
-      'PassengerFirstName': [null, Validators.required],
-      'PassengerLastName': [null, Validators.required],
-      'StreetId': [null, Validators.required],
-      'Building': [null, Validators.required],
-      'Telephone': [null, Validators.required],
-      'FatherCell': [null, Validators.required],
-      'MotherCell': [null, Validators.required],
-      'Email': [null, Validators.required],
-      'EstablishmentId': [null, Validators.required],
       'UserName': [null, Validators.required],
       'password': [null, [Validators.required, Validators.minLength(6)]],
-      'Chekpassword': [null, [chek, Validators.required, Validators.minLength(6)]]
-
+      'Chekpassword': [null, [chek, Validators.required, Validators.minLength(6)]],
+      'Email': ['', ([Validators.required, Validators.email])],
+      'Address': [null, Validators.required],
+      'Telephone': [null, Validators.required],
+      'Phelephone': [null, Validators.required]
     })
 
   }
 
-  PassengerList: Array<Passenger> = [];
+  FamilyList: Array<Family> = [];
 
   ngOnInit() {
-    this.httpSer.getPassengerList().subscribe(
+    this.familySer.getFamilyList().subscribe(
       data => {
-        this.PassengerList = data;
+        this.FamilyList = data;
       },
       error => {
         alert(error.message);
@@ -51,13 +44,14 @@ export class AddPassengerComponent implements OnInit {
   UserName: string;
   flag: boolean = false;
   flag2: boolean = true;
+  
   get password() { return this.regiForm.get('password'); }
   get Chekpassword() { return this.regiForm.get('Chekpassword'); }
 
   ChekPassword() {
 
-    for (var i = 0; i < this.PassengerList.length && this.flag2; i++) {
-      if (this.PassengerList[i].UserName == this.UserName && this.PassengerList[i].password == this.password.value)
+    for (var i = 0; i < this.FamilyList.length && this.flag2; i++) {
+      if (this.FamilyList[i].userName == this.UserName && this.FamilyList[i].password == this.password.value)
         this.flag2 = false;
     }
     if (this.flag2 == false) {
@@ -71,28 +65,24 @@ export class AddPassengerComponent implements OnInit {
 
 
   onFormSubmit() {
-    let newPassenger: Passenger = new Passenger(
-      this.regiForm.get('PassengerId').value,
-      this.regiForm.get('PassengerFirstName').value,
-      this.regiForm.get('PassengerLastName').value,
-      this.regiForm.get('StreetId').value,
-      this.regiForm.get('Building').value,
-      this.regiForm.get('Telephone').value,
-      this.regiForm.get('FatherCell').value,
-      this.regiForm.get('MotherCell').value,
-      this.regiForm.get('Email').value,
-      this.regiForm.get('EstablishmentId').value,
+    let newFamily: Family = new Family(
       this.regiForm.get('UserName').value,
       this.regiForm.get('password').value,
+      this.regiForm.get('Email').value,
+      this.regiForm.get('Address').value,
+      this.regiForm.get('Telephone').value,
+      this.regiForm.get('Phelephone').value
     );
 
-    this.httpSer.AddPassenger(newPassenger).subscribe(
+    this.familySer.AddFamily(newFamily).subscribe(
       data => console.log(data),
       err => console.log(err)
     );
 
     if (data => console.log(data)) {
-      alert("נוספתם בהצלחה לרשימת נוסעינו!")
+      alert("פרטיכם נקלטו בהצלחה במערכת");
+      this.router.navigate(["/AddChild"]);
+
       this.router.navigate(["/MyTablesComponent"]);
     }
   }

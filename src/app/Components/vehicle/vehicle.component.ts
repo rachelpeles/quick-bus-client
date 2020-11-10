@@ -4,9 +4,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { VehiclesService } from 'src/app/Services/vehicles.service';
 import { Vehicles } from 'src/app/Classes/vehicles';
 import { ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTable, MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormGroup } from '@angular/forms';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 
 
 @Component({
@@ -17,9 +18,9 @@ import { FormGroup } from '@angular/forms';
 
 export class VehicleComponent implements OnInit {
   //@ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(private httpSer: VehiclesService) {
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  constructor(private httpSer: VehiclesService, private dialog: MatDialog) {
 
   }
   addVehicle: FormGroup;
@@ -27,11 +28,11 @@ export class VehicleComponent implements OnInit {
   vehicle: Vehicles[];
   // vehicle = ELEMENT_DATA;
 
-  displayedColumns = ['vehicleId', 'vehicleType', 'amountPlaces', 'price']
+  displayedColumns = ['vehiclesId', 'typeVhicles', 'amountPlaces', 'priceForKM', 'delete', 'edit']
 
   ngOnInit() {
     this.vehicle = [
-      { amountPlaces: 33333, price: 12, vehicleId: 33, vehicleType: 'ss' }
+      { amountPlaces: 33333, priceForKM : 12, vehiclesId: 33, typeVhicles: 'ss' }
     ];
     this.dataSource = new MatTableDataSource<Vehicles>(this.vehicle);
 
@@ -39,7 +40,7 @@ export class VehicleComponent implements OnInit {
       console.log("getAllVehicles data:")
       console.log(data);
       this.vehicle = data;
-      this.dataSource = new MatTableDataSource<Vehicles>(this.vehicle);
+      this.dataSource = new MatTableDataSource<Vehicles>(data);
       //this.table.renderRows();
     },
       (err) => {
@@ -48,36 +49,16 @@ export class VehicleComponent implements OnInit {
     );
   }
 
-  selection = new SelectionModel<Vehicles>(true, []);
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
+  action(actionType, thisVehicle): void {
+    const dialogRef = this.dialog.open(EditDialogComponent,
+      {
+        width: '250px',
+        data: { actionType: actionType, thisVehicle: thisVehicle }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.dataSource.vehicle = result;
+    });
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Vehicles): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.vehicleId + 1}`;
-  }
-
-  add() {
-    this.httpSer.add(this.addVehicle);
-  }
-  update() {
-    this.httpSer.update(this.addVehicle);
-  }
-  delete() {
-    this.dataSource.data.forEach(this.httpSer.del(this.dataSource.data.vehicleId));
-  }
 }

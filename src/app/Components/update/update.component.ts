@@ -19,10 +19,7 @@ export class UpdateComponent implements OnInit {
   }
   myForm: FormGroup;
   firstName;
-  city;
-  neighborhood;
-  street;
-  building;
+  address;
   telephon;
   email;
   startHour;
@@ -31,9 +28,10 @@ export class UpdateComponent implements OnInit {
   day;
 
   constructor(private httpSer:ChangesService, private fb: FormBuilder, private location: Location) {
-    this.nameFormGroup = this.fb.group(
+    this.personalDeatailsFormGroup = this.fb.group(
       {
         'firstName': ['', Validators.required],
+        'address': ['', Validators.required]
       }
     )
 
@@ -42,11 +40,7 @@ export class UpdateComponent implements OnInit {
 
      });
     
-    this.addressFormGroup = this.fb.group({
-    'city': ['', Validators.required],
-    'neighborhood': ['', Validators.required],
-    'street': ['', Validators.required],
-    'building': ['', ([Validators.required, Validators.min(1)])],})
+    
     
     this.contactFormGroup=this.fb.group({
       'telephon': ['', ([Validators.required, Validators.minLength(7), Validators.maxLength(10)])],
@@ -65,8 +59,7 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit() {
   }
-  nameFormGroup=new FormGroup({});
-  addressFormGroup=new FormGroup({});
+  personalDeatailsFormGroup=new FormGroup({});
   contactFormGroup=new FormGroup({});
   timesFormGroup=new FormGroup({});
 
@@ -76,25 +69,11 @@ export class UpdateComponent implements OnInit {
   {
       return 'שדה זה חובה';
   }
-  getErrorCity()
+  getErrorAddress()
   {
       return 'שדה זה חובה';
   }
-  getErrorNeighborhood()
-  {
-      return 'שדה זה חובה';
-  }
-  getErrorStreet()
-  {
-      return 'שדה זה חובה';
-  }
-  getErrorBuilding()
-  {
-    if(this.building.hasError(MinLengthValidator))
-        return 'מספר בנין לא חוקי'
-    else
-        return 'שדה זה חובה';
-  }
+  
   getErrorPhon()
   {
       return 'שדה זה חובה';
@@ -112,9 +91,9 @@ export class UpdateComponent implements OnInit {
 
   update()
   {
+    debugger;
     var nouveauProjet = {
-      ...this.nameFormGroup.value,
-      ...this.addressFormGroup.value,
+      ...this.personalDeatailsFormGroup.value,
       ...this.contactFormGroup.value,
       ...this.timesFormGroup.value
     };
@@ -131,10 +110,6 @@ export class UpdateComponent implements OnInit {
 //     return this.firstName;
 //   }
 
-//   get street()
-//   {
-//     return this.street;
-//   }
 //   get neighborhood()
 //   {
 //     return this.neighborhood;

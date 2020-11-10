@@ -18,7 +18,7 @@
     -moz-box-align: end;
 }
 
-.mat-stepper-vertical
+.mat-stepper-horizontal
 {
   direction: rtl;
   display: grid;
@@ -44,7 +44,7 @@
   background-color: rgb(16, 179, 179);
 }
 
-.mat-vertical-stepper-content{
+.mat-horizontal-stepper-content{
     height: 100%;
     display: flex;
   }

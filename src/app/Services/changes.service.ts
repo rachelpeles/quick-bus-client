@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ChangesService {
 
-  baseURL="http://localhost:10481/api/Establishment/";
+  baseURL="https://localhost:44366/api/Establishment/";
 
   constructor(private http:HttpClient) { }
 
@@ -21,16 +21,6 @@ export class ChangesService {
 
   add(est:Establishment)
   {
-    // var street = this.getStreetId(addressFormGroup.value.street).subscribe(res=>{
-    //   this.est= new Establishment(
-    //     null,
-    //     res,
-    //     addressFormGroup.value.building,
-    //     nameFormGroup.value.firstName,
-    //     contactFormGroup.value.telephon,
-    //     contactFormGroup.value.email,
-    //     timesFormGroup.value.startHour,
-    //     timesFormGroup.value.endHour);
       this.http.post(this.baseURL+'AddEstablishment', est).subscribe(x=> console.log(x));
 
 
@@ -39,13 +29,5 @@ export class ChangesService {
   deletepass(id)
   {
     this.http.delete(this.baseURL+'DeleteEstablishment/{id}', id);
-  }
-
-  streetURL="http://localhost:10481/api/Street/";
-
-  getStreetId(streetName)
-  {
-    return this.http.get<number>(this.streetURL+'GetStreetByName/'+streetName).subscribe(res=>{return res})
-
   }
 }

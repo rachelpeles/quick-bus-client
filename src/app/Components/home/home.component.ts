@@ -2,9 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Passenger } from 'src/app/Classes/passenger';
-import { HttpService } from 'src/app/Services/http.service';
+import { FamilyService } from 'src/app/Services/Family.service';
+import { EstablishmentService } from 'src/app/Services/Establishment.service';
 import { MyService } from 'src/app/Services/my.service';
+import { Family } from '../../Classes/Family';
+import { Establishment } from '../../Classes/establishment';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +15,13 @@ import { MyService } from 'src/app/Services/my.service';
 })
 export class HomeComponent implements OnInit {
 
-  PassengerList: Array<Passenger> = [];
+  FamilyList: Array<Family> = [];
+  EstablishmentList: Array<Establishment> = [];
   regiForm: FormGroup;
-  UserName: string;
-  password: string;
+  // UserName: string;
+  // password: string;
 
-  constructor(private httpSer: HttpService, private router: Router, private fb: FormBuilder, private mySer: MyService) {
+  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService) {
     this.regiForm = this.fb.group({
       'UserName': [null, Validators.required],
       'Password': [null, [Validators.required, Validators.minLength(6)]],
@@ -28,9 +31,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpSer.getPassengerList().subscribe(
+    this.FamilySer.getFamilyList().subscribe(
       data => {
-        this.PassengerList = data;
+        this.FamilyList = data;
+      },
+      error => {
+        alert(error.message);
+      }
+
+    );
+
+    this.EstablishmentSer.getEstablishmentList().subscribe(
+      data => {
+        this.EstablishmentList = data;
       },
       error => {
         alert(error.message);
@@ -38,39 +51,33 @@ export class HomeComponent implements OnInit {
 
     );
   }
-
+  get Password() { return this.regiForm.get('Password'); }
+  get UserName() { return this.regiForm.get('UserName'); }
   LogInto() {
-    this.httpSer.getPassengerList().subscribe(
-      data => {
-        this.PassengerList = data;
-      },
-      error => {
-        alert(error.message);
-      }
-    );
 
     var flag: boolean = false;
-    for (var i = 0; i < this.PassengerList.length && !flag; i++) {
+    for (var i = 0; i < this.FamilyList.length && !flag; i++) {
 
-      if (this.PassengerList[i].UserName == this.UserName && this.PassengerList[i].password == this.password) {
+      if (this.FamilyList[i].userName == this.UserName.value && this.FamilyList[i].password == this.Password.value) {
         flag = true;
-        this.mySer.passenger = this.PassengerList[i];
+        this.mySer.family = this.FamilyList[i];
+        alert("ברוכים הבאים ל"+this.UserName.value);
+        this.router.navigate(["/PassengersComponent"]);
 
       }
     }
 
-    if (flag) {
+    if (!flag) {
 
       alert("שם משתמש או הסיסמא שגויים");
       this.regiForm.value.password = "";
-    }
-    else {
-      this.router.navigate(["/MyTablesComponent"]);
-    }
+    }      
   }
 
   New() {
-    if (this.regiForm.value.kind == 'manager')
+    debugger;
+    
+    if (this.regiForm.value.Kind == 'manager')
       this.router.navigate(["/NewManager"]);
     else
       this.router.navigate(["/AddPassenger"]);

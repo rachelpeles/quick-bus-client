@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Establishment } from '../../Classes/establishment';
-import { Passenger } from '../../Classes/passenger';
-import { HttpService } from '../../Services/http.service';
+import { Family } from '../../Classes/Family';
+import { FamilyService } from '../../Services/Family.service';
+import { EstablishmentService } from '../../Services/Establishment.service';
 
 
 @Component({
@@ -14,16 +15,16 @@ import { HttpService } from '../../Services/http.service';
 export class NewManagerComponent implements OnInit {
 
   regiForm: FormGroup;
-  PassengerList: Array<Passenger> = [];
+  FamilyList: Array<Family> = [];
   EstablishmentList: Array<Establishment> = [];
   newEstablishment: Establishment;
 
-  constructor(private httpSer: HttpService, private router: Router, private fb: FormBuilder) {
+  constructor(private familySer: FamilyService, private router: Router, private fb: FormBuilder, private EstablishmentSer: EstablishmentService) {
 
     this.regiForm = this.fb.group({
       'EstablishmentName': [null, Validators.required],
       'password': [null, [Validators.required, Validators.minLength(6)]],
-      'Chekpassword': [null, [this.ChekPassword(), Validators.required, Validators.minLength(6)]],
+      'Chekpassword': [null, [Validators.required, Validators.minLength(6)]],
       'address': [null, Validators.required],
       'Email': [null, Validators.required, Validators.email],
       'ContactCell': [null, Validators.required],
@@ -31,9 +32,9 @@ export class NewManagerComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.httpSer.getPassengerList().subscribe(
+    this.familySer.getFamilyList().subscribe(
       data => {
-        this.PassengerList = data;
+        this.FamilyList = data;
       },
       error => {
         alert(error.message);
@@ -42,7 +43,7 @@ export class NewManagerComponent implements OnInit {
     );
 
 
-    this.httpSer.getEstablishmentList().subscribe(
+    this.EstablishmentSer.getEstablishmentList().subscribe(
       data => {
         this.EstablishmentList = data;
       },
@@ -55,9 +56,9 @@ export class NewManagerComponent implements OnInit {
 
   flag2 = true;
   ChekPassword() {
-
-    for (var i = 0; i < this.PassengerList.length && this.flag2; i++) {
-      if (this.PassengerList[i].password == this.regiForm.value.password)
+    return { a: true }
+    for (var i = 0; i < this.FamilyList.length && this.flag2; i++) {
+      if (this.FamilyList[i].password == this.regiForm.value.password)
         this.flag2 = false;
     }
 
@@ -76,7 +77,7 @@ export class NewManagerComponent implements OnInit {
 
     );
 
-    this.httpSer.AddEstablishment(newEstablishment).subscribe(
+    this.EstablishmentSer.AddEstablishment(newEstablishment).subscribe(
       data => console.log(data),
       err => console.log(err)
     );

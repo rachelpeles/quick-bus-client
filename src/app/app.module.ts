@@ -1,16 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule, MatFormFieldModule, MatRippleModule } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule } from '@angular/material';
-import { MatStepperModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule , MatOptionModule} from '@angular/material';
+import {
+  MatSelectModule,
+  MatOptionModule,
+  MatInputModule,
+  MatButtonModule,
+  MatTableModule,
+  MatStepperModule,
+  MatFormFieldModule,
+  MatRippleModule,
+  MatSliderModule,
+  MatPaginatorModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatRadioModule,
+  MatSortModule,
+  MatGridListModule,
+  MatSlideToggleModule,
+  // MatDialogModule
+  //ErrorStateMatcher,
+  //ShowOnDirtyErrorStateMatcher
+} from '@angular/material';
 
 import { AppComponent } from './app.component'
 import { UpdateComponent } from './Components/update/update.component'
@@ -20,11 +37,19 @@ import { MyRoutingModule } from './my-routing/my-routing.module'
 import { HomeComponent } from './Components/home/home.component';
 import { AddPassengerComponent } from './Components/add-passenger/add-passenger.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
-import { MyTableComponent } from './Components/my-table/my-table.component'
-import { NewManagerComponent } from './Components/new-manager/new-manager.component'
+import { NewManagerComponent } from './Components/new-manager/new-manager.component';
+import { AddChildComponent } from './Components/add-child/add-child.component'
+import {MyGridComponent} from './Components/my-grid/my-grid.component';
+import { RouterModule } from '@angular/router';
+import { formatNumber } from '@angular/common';
+import { UserMainComponent } from './Components/user-main/user-main.component';
+// import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
+
+// import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 
 
 @NgModule({
+  // entryComponents: [ MsgDialogComponent ],
   declarations: [
     AppComponent,
     UpdateComponent,
@@ -33,29 +58,46 @@ import { NewManagerComponent } from './Components/new-manager/new-manager.compon
     HomeComponent,
     AddPassengerComponent,
     NotFoundComponent,
-    MyTableComponent,
     NewManagerComponent,
-    
+    AddChildComponent,
+    MyGridComponent,
+    UserMainComponent,
+    // AddVehicleComponent,
+    // MsgDialogComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     MyRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
+    MatGridListModule,
     MatFormFieldModule,
+    FormsModule,
+    MatNativeDateModule,
     MatRippleModule,
     ReactiveFormsModule,
+    MatRadioModule,
     HttpClientModule,
     MatTableModule,
-    //NoopAnimationsModule ,
+    MatSlideToggleModule,
+    //ErrorStateMatcher,
+    //ShowOnDirtyErrorStateMatcher,
+    MatMenuModule,
+    MatCardModule,
+    MatSortModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatDatepickerModule,
     MatStepperModule,
     MatSelectModule,
-    MatOptionModule
-
+    MatOptionModule,
+    MatPaginatorModule,
+    // MatDialogModule
   ],
-  schemas:[
+  schemas: [
     CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA
   ],
   providers: [],
