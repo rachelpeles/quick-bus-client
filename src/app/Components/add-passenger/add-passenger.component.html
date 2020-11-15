@@ -16,10 +16,10 @@
                         <tr>
                             <td>
                                 <mat-form-field class="demo-full-width">
-                                    <input formControlName="UserName" matInput placeholder="שם משתמש">
+                                    <input formControlName="userName" matInput placeholder="שם משתמש">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span *ngIf="!regiForm.get('UserName').valid && regiForm.get('UserName').touched">
+                                    <span *ngIf="!regiForm.get('userName').valid && regiForm.get('userName').touched">
                                         שדה זה חובה</span>
                                 </mat-error>
                             </td>
@@ -51,7 +51,8 @@
                         </tr>
                         <button type="button" mat-mini-fab color="white" matStepperNext>
                             <!-- <i class="material-icons">keyboard_arrow_left</i> -->
-                            <li class="far fa-arrow-alt-circle-left"></li>
+                            <i class="material-icons">keyboard_arrow_left</i>
+
                         </button>
 
                     </mat-step>
@@ -115,10 +116,10 @@
                         <tr>
                             <td>
                                 <mat-form-field class="demo-full-width">
-                                    <input formControlName="Address" matInput placeholder="כתובת">
+                                    <input formControlName="address" matInput placeholder="כתובת">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span *ngIf="!regiForm.get('Address').valid && regiForm.get('Address').touched"> שדה זה חובה</span>
+                                    <span *ngIf="!regiForm.get('address').valid && regiForm.get('address').touched"> שדה זה חובה</span>
                                 </mat-error>
                             </td>
                         </tr>
@@ -126,36 +127,28 @@
                         <!-- <button type="button" mat-mini-fab color="white" matStepperPrevious>
                             <i class="material-icons">keyboard_arrow_up</i>
                         </button> -->
-                        <button type="button" mat-mini-fab color="white" matStepperNext>
-                            <!-- <i class="material-icons">keyboard_arrow_right</i> -->
-                            <li class="far fa-arrow-alt-circle-left"></li>
-                        </button>
                         <button type="button" mat-mini-fab color="white" matStepperPrevious>
                             <!-- <i class="material-icons">keyboard_arrow_left</i> -->
-                            <li class="far fa-arrow-alt-circle-right"></li>
+                            <i class="material-icons">keyboard_arrow_right</i>
+
                         </button>
+                        <button type="button" mat-mini-fab color="white" matStepperNext>
+                            <!-- <i class="material-icons">keyboard_arrow_right</i> -->
+                            <i class="material-icons">keyboard_arrow_left</i>
+                        </button>
+                        
 
                     </mat-step>
                     <mat-step>
                         <ng-template matStepLabel>פרטי תקשורת</ng-template>
+                        
                         <tr>
                             <td>
                                 <mat-form-field class="demo-full-width">
-                                    <input formControlName="Telephone" matInput placeholder="מספר טלפון">
+                                    <input formControlName="phone" matInput placeholder="פלאפון">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span *ngIf="!regiForm.get('Telephone').valid && regiForm.get('Telephone').touched"> שדה זה חובה</span>
-                                </mat-error>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <mat-form-field class="demo-full-width">
-                                    <input formControlName="Phelephone" matInput placeholder="פלאפון">
-                                </mat-form-field>
-                                <mat-error>
-                                    <span *ngIf="!regiForm.get('Phelephone').valid && regiForm.get('Phelephone').touched"> שדה זה חובה</span>
+                                    <span *ngIf="!regiForm.get('phone').valid && regiForm.get('phone').touched"> שדה זה חובה</span>
                                 </mat-error>
                             </td>
                         </tr>
@@ -175,26 +168,19 @@
                         <tr>
                             <td>
                                 <mat-form-field class="demo-full-width">
-                                    <input formControlName="Email" matInput placeholder="אימייל">
+                                    <input formControlName="email" matInput placeholder="אימייל">
                                 </mat-form-field>
                                 <mat-error>
-                                    <span *ngIf="!regiForm.get('Email').valid && regiForm.get('Email').touched"> שדה זה חובה</span>
+                                    <span *ngIf="!regiForm.get('email').valid && regiForm.get('email').touched"> שדה זה חובה</span>
                                 </mat-error>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
                             </td>
                         </tr>
 
                         <button type="button" mat-mini-fab color="white" matStepperPrevious>
                             <!-- <i class="material-icons">keyboard_arrow_up</i> -->
-                             <li class="far fa-arrow-alt-circle-right"></li>
-                          
+                             <i class="material-icons">keyboard_arrow_right</i>
                         </button>
-                        
-
                     </mat-step>
-
-                    
-
-
 
                 </table>
             </mat-horizontal-stepper>

@@ -56,8 +56,3 @@ mat-toolbar-row {
 .mat-fab.mat-accent, .mat-flat-button.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent{
     background-color: palevioletred
 }
-
-.material-icons
-{
-    cursor: pointer;
-}

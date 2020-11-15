@@ -19,6 +19,6 @@ export class FamilyService {
   }
 
   AddFamily(family: Family): Observable<Family[]> {
-    return this.http.post<Family[]>(this.myurl + "AddFamily", family);
+    return this.http.post<Family[]>(this.myurl + "AddUser", family);
   }
 }

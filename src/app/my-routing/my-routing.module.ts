@@ -11,6 +11,7 @@ import { AddChildComponent } from '../Components/add-child/add-child.component';
 import { MyGridComponent } from '../Components/my-grid/my-grid.component';
 import { PassengersComponent } from '../Components/passengers/passengers.component';
 import { UserMainComponent } from '../Components/user-main/user-main.component';
+import { EditDialogComponent } from '../Components/edit-dialog/edit-dialog.component';
 
 const appRout: Routes =
   [
@@ -24,9 +25,10 @@ const appRout: Routes =
     { path: "AddChild", component: AddChildComponent },
     { path: "NotFound", component: NotFoundComponent },
     { path: "NewManager", component: NewManagerComponent },
-    { path: "MyGrid", component: MyGridComponent },
+    { path: "MyGridComponent", component: MyGridComponent },
     { path: "PassengersComponent", component: PassengersComponent },
-    {path: "UserMain", component: UserMainComponent},
+    { path: "UserMain", component: UserMainComponent },
+    { path: "EditDialog", component: EditDialogComponent },
     { path: "**", redirectTo: "/NotFound" }
 
   ];

@@ -16,25 +16,35 @@
                             <input formControlName="UserName" matInput placeholder="שם משתמש">
                         </mat-form-field>
                         <mat-error>
-                            <span *ngIf="!regiForm.get('UserName').valid && regiForm.get('UserName').touched">שדה זה חובה</span>
+                            <span *ngIf="!regiForm.get('UserName').valid && regiForm.get('UserName').touched">שדה זה
+                                חובה</span>
                         </mat-error>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <i class="mateiral-icons">padlock</i>
+                        <i class="material-icons">lock</i>
+
                         <mat-form-field class="demo-full-width">
-                            <input type="password" formControlName="Password" matInput placeholder="סיסמא">
+                            <input matInput placeholder="סיסמא" [type]="hide ? 'password' : 'text'"
+                                formControlName="Password">
+                            <button class="hide" type="button" matSuffix  mat-icon-button (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" aria-labelledby="hide" [attr.aria-pressed]="hide">
+                                <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+                            </button>
                         </mat-form-field>
+
                         <mat-error>
-                            <span *ngIf="!regiForm.get('Password').valid && regiForm.get('Password').touched">שדה זה חובה</span>
+                            <span *ngIf="!regiForm.get('Password').valid && regiForm.get('Password').touched">שדה זה
+                                חובה</span>
                         </mat-error>
                     </td>
                 </tr>
                 <!-- <router-outlet></router-outlet> -->
                 <tr>
                     <td colspan="2" class="content-center">
-                        <button type="submit" mat-raised-button color="accent" [disabled]="!regiForm.valid || IsAccepted==0">המשך</button>
+                        <button type="submit" mat-raised-button color="accent"
+                            [disabled]="!regiForm.valid || IsAccepted==0">המשך</button>
                     </td>
                 </tr>
                 <mat-form-field class="demo-full-width">

@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   regiForm: FormGroup;
   // UserName: string;
   // password: string;
+  hide=true;
 
   constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService) {
     this.regiForm = this.fb.group({

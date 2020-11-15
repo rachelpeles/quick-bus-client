@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,10 +39,11 @@ import { AddPassengerComponent } from './Components/add-passenger/add-passenger.
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { NewManagerComponent } from './Components/new-manager/new-manager.component';
 import { AddChildComponent } from './Components/add-child/add-child.component'
-import {MyGridComponent} from './Components/my-grid/my-grid.component';
+import { MyGridComponent } from './Components/my-grid/my-grid.component';
 import { RouterModule } from '@angular/router';
 import { formatNumber } from '@angular/common';
 import { UserMainComponent } from './Components/user-main/user-main.component';
+import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.component';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
@@ -62,6 +63,7 @@ import { UserMainComponent } from './Components/user-main/user-main.component';
     AddChildComponent,
     MyGridComponent,
     UserMainComponent,
+    EditDialogComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],

@@ -15,13 +15,12 @@ export class AddPassengerComponent implements OnInit {
   constructor(private familySer: FamilyService, private router: Router, private fb: FormBuilder) {
 
     this.regiForm = this.fb.group({
-      'UserName': [null, Validators.required],
+      'userName': [null, Validators.required],
       'password': [null, [Validators.required, Validators.minLength(6)]],
       'Chekpassword': [null, [chek, Validators.required, Validators.minLength(6)]],
-      'Email': ['', ([Validators.required, Validators.email])],
-      'Address': [null, Validators.required],
-      'Telephone': [null, Validators.required],
-      'Phelephone': [null, Validators.required]
+      'email': ['', ([Validators.required, Validators.email])],
+      'address': [null, Validators.required],
+      'phone': [null, Validators.required]
     })
 
   }
@@ -41,7 +40,8 @@ export class AddPassengerComponent implements OnInit {
   }
 
 
-  UserName: string;
+  userName
+: string;
   flag: boolean = false;
   flag2: boolean = true;
   
@@ -51,7 +51,9 @@ export class AddPassengerComponent implements OnInit {
   ChekPassword() {
 
     for (var i = 0; i < this.FamilyList.length && this.flag2; i++) {
-      if (this.FamilyList[i].userName == this.UserName && this.FamilyList[i].password == this.password.value)
+      if (this.FamilyList[i].userName
+ == this.userName
+ && this.FamilyList[i].password == this.password.value)
         this.flag2 = false;
     }
     if (this.flag2 == false) {
@@ -66,12 +68,12 @@ export class AddPassengerComponent implements OnInit {
 
   onFormSubmit() {
     let newFamily: Family = new Family(
-      this.regiForm.get('UserName').value,
+      "",
+      this.regiForm.get('userName').value,
       this.regiForm.get('password').value,
-      this.regiForm.get('Email').value,
-      this.regiForm.get('Address').value,
-      this.regiForm.get('Telephone').value,
-      this.regiForm.get('Phelephone').value
+      this.regiForm.get('phone').value,
+      this.regiForm.get('address').value,
+      this.regiForm.get('email').value
     );
 
     this.familySer.AddFamily(newFamily).subscribe(
@@ -81,9 +83,9 @@ export class AddPassengerComponent implements OnInit {
 
     if (data => console.log(data)) {
       alert("פרטיכם נקלטו בהצלחה במערכת");
-      this.router.navigate(["/AddChild"]);
+      this.router.navigate(["/UserMain"]);
 
-      this.router.navigate(["/MyTablesComponent"]);
+      //this.router.navigate(["/MyTablesComponent"]);
     }
   }
   getErrorPassword() {
@@ -101,7 +103,7 @@ export function chek(control: AbstractControl): {
   let valid = false;
   if (control.value == null)
     valid = true;
-  else if (control.value == this.regiForm.get('password').value) {
+  else if (control.value == this.regiForm.get("password").value) {
     valid = true;
   }
   return valid ? null : { noletter: { valid: valid, value: control.value } }
