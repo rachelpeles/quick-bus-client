@@ -44,6 +44,7 @@ import { RouterModule } from '@angular/router';
 import { formatNumber } from '@angular/common';
 import { UserMainComponent } from './Components/user-main/user-main.component';
 import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.component';
+import { DelVehicleDialogComponent } from './Components/del-vehicle-dialog/del-vehicle-dialog.component';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
@@ -63,7 +64,8 @@ import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.compon
     AddChildComponent,
     MyGridComponent,
     UserMainComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    DelVehicleDialogComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],

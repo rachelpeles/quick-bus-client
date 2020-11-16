@@ -8,6 +8,7 @@ import { MatTable, MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDial
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormGroup } from '@angular/forms';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { DelVehicleDialogComponent } from '../del-vehicle-dialog/del-vehicle-dialog.component';
 
 
 @Component({
@@ -31,9 +32,9 @@ export class VehicleComponent implements OnInit {
   displayedColumns = ['vehiclesId', 'typeVhicles', 'amountPlaces', 'priceForKM', 'delete', 'edit']
 
   ngOnInit() {
-    this.vehicle = [
-      { amountPlaces: 33333, priceForKM : 12, vehiclesId: 33, typeVhicles: 'ss' }
-    ];
+    // this.vehicle = [
+    //   { amountPlaces: 33333, priceForKM : 12, vehiclesId: 33, typeVhicles: 'ss' }
+    // ];
     this.dataSource = new MatTableDataSource<Vehicles>(this.vehicle);
 
     this.httpSer.getAllVehicles().subscribe((data) => {
@@ -50,15 +51,29 @@ export class VehicleComponent implements OnInit {
   }
 
   action(actionType, thisVehicle): void {
-    const dialogRef = this.dialog.open(EditDialogComponent,
-      {
-        width: '250px',
-        data: { actionType: actionType, thisVehicle: thisVehicle }
-      });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.dataSource.vehicle = result;
-    });
-  }
 
+    if (actionType == 'edit' || actionType == 'add') {
+      const dialogRef = this.dialog.open(EditDialogComponent,
+        {
+          width: '250px',
+          data: { actionType: actionType, thisVehicle: thisVehicle }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.dataSource.vehicle = result;
+      });
+    }
+
+    else if (actionType == 'delete') {
+      const dialogRef = this.dialog.open(DelVehicleDialogComponent,
+        {
+          width: '250px',
+          data: { thisVehicle: thisVehicle }
+        });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.dataSource.vehicle = result;
+      });
+    }
+  }
 }

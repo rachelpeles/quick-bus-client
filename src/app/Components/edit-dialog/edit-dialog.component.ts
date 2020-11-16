@@ -22,6 +22,16 @@ export class EditDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  cancel()
+  {
+    this.dialogRef.close();
+  }
 
+  // save()
+  // {
+  //   // return this.data;
+  //   this.dialogRef.close();
+  //   return this.data;
+  // }
 }
 
