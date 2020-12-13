@@ -40,8 +40,7 @@ export class AddPassengerComponent implements OnInit {
   }
 
 
-  userName
-: string;
+  userName: string;
   flag: boolean = false;
   flag2: boolean = true;
   

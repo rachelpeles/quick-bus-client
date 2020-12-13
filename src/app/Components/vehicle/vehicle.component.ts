@@ -7,7 +7,7 @@ import { ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormGroup } from '@angular/forms';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { EditVehicleDialogComponent } from '../edit-vehicle-dialog/edit-vehicle-dialog.component';
 import { DelVehicleDialogComponent } from '../del-vehicle-dialog/del-vehicle-dialog.component';
 
 
@@ -18,9 +18,6 @@ import { DelVehicleDialogComponent } from '../del-vehicle-dialog/del-vehicle-dia
 })
 
 export class VehicleComponent implements OnInit {
-  //@ViewChild(MatTable) table: MatTable<any>;
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(private httpSer: VehiclesService, private dialog: MatDialog) {
 
   }
@@ -53,7 +50,7 @@ export class VehicleComponent implements OnInit {
   action(actionType, thisVehicle): void {
 
     if (actionType == 'edit' || actionType == 'add') {
-      const dialogRef = this.dialog.open(EditDialogComponent,
+      const dialogRef = this.dialog.open(EditVehicleDialogComponent,
         {
           width: '250px',
           data: { actionType: actionType, thisVehicle: thisVehicle }

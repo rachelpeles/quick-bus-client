@@ -1,13 +1,15 @@
-import { Time } from '@angular/common';
+import { Passenger } from './passenger';
+import { UsersAddress } from './users-address';
 
 export class Transportation {
     constructor(
-        public TransportationId:number=0,
-        public StartTime:string="" ,
-        public SourceStreet:string="" ,
-        public SourceBuilding:string="" ,
-        public Price:number=0 ,
-        public VehicleId:number=0 ,
+        public transportationId:string="",
+        public description: string="",
+        public travels : string[]=null,
+        public usersAndAddress: UsersAddress[]=null,
+        public waitingList: UsersAddress[]=null,
+        public address:string="" ,
+        public schedules:number=0,
         
     ){}
 }

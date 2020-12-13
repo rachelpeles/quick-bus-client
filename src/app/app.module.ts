@@ -24,6 +24,8 @@ import {
   MatSortModule,
   MatGridListModule,
   MatSlideToggleModule,
+  MatSidenavModule,
+  MatCheckboxModule,
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -43,8 +45,13 @@ import { MyGridComponent } from './Components/my-grid/my-grid.component';
 import { RouterModule } from '@angular/router';
 import { formatNumber } from '@angular/common';
 import { UserMainComponent } from './Components/user-main/user-main.component';
-import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.component';
+import { EditVehicleDialogComponent } from './Components/edit-vehicle-dialog/edit-vehicle-dialog.component';
 import { DelVehicleDialogComponent } from './Components/del-vehicle-dialog/del-vehicle-dialog.component';
+import { JoinToTransportComponent } from './Components/join-to-transport/join-to-transport.component';
+import { MyCreateTransportationComponent } from './Components/my-create-transportation/my-create-transportation.component';
+import { EditTransDialogComponent } from './Components/edit-trans-dialog/edit-trans-dialog.component';
+import { DelTransDialogComponent } from './Components/del-trans-dialog/del-trans-dialog.component';
+import { WaiteConfirmComponent } from './Components/waite-confirm/waite-confirm.component';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
@@ -64,8 +71,13 @@ import { DelVehicleDialogComponent } from './Components/del-vehicle-dialog/del-v
     AddChildComponent,
     MyGridComponent,
     UserMainComponent,
-    EditDialogComponent,
-    DelVehicleDialogComponent
+    EditVehicleDialogComponent,
+    DelVehicleDialogComponent,
+    JoinToTransportComponent,
+    MyCreateTransportationComponent,
+    EditTransDialogComponent,
+    DelTransDialogComponent,
+    WaiteConfirmComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],
@@ -99,6 +111,8 @@ import { DelVehicleDialogComponent } from './Components/del-vehicle-dialog/del-v
     MatSelectModule,
     MatOptionModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    MatCheckboxModule
     // MatDialogModule
   ],
   schemas: [

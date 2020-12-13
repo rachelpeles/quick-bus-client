@@ -4,15 +4,15 @@ import { Vehicles } from 'src/app/Classes/vehicles';
 
 @Component({
   selector: 'app-edit-dialog',
-  templateUrl: './edit-dialog.component.html',
-  styleUrls: ['./edit-dialog.component.css']
+  templateUrl: './edit-vehicle-dialog.component.html',
+  styleUrls: ['./edit-vehicle-dialog.component.css']
 })
 @NgModule({
   imports: [MatDialog, MatDialogRef, MatDialogConfig, MatDialogModule]
 })
-export class EditDialogComponent implements OnInit {
+export class EditVehicleDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<EditDialogComponent>,
+  constructor(public dialogRef: MatDialogRef<EditVehicleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Vehicles) { }
 
   onNoClick(): void {
@@ -20,6 +20,8 @@ export class EditDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.data);
+    console.log(this.data.typeVhicles);
   }
 
   cancel()
@@ -34,4 +36,3 @@ export class EditDialogComponent implements OnInit {
   //   return this.data;
   // }
 }
-
