@@ -71,11 +71,11 @@ export class MyCreateTransportationComponent implements OnInit {
     const dialogRef=this.dialog.open(WaiteConfirmComponent,
       {
         width: '500px',
-        data:{thisTrans: thisTrans.waitingList}
+        data:{waitingList: thisTrans.waitingList, thisTrans: thisTrans}
       });
       dialogRef.afterClosed().subscribe(result=>{
         console.log('the dialog was closed');
-        this.dataSource=result;
+        this.dataSource.trans=result;
       });
   }
 }

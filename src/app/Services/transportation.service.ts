@@ -8,7 +8,8 @@ import { FamilyService } from './Family.service';
 export interface wait {
   id: string,
   name: string,
-  address: string
+  address: string,
+  completed: boolean;
 }
 
 @Injectable({
@@ -31,19 +32,20 @@ export class TransportationService {
     return res;
   }
 
-  async getWaiteListDeatails(waitingList: any){
-    // console.log(waitingList);
-    // console.log(waitingList.thisTrans.length);
-    // var newWait = {} as wait;
-    var newWaitList: wait[] = {} as wait[];
-      for (let i = 0; i < waitingList.thisTrans.length; i++) {
-        await this.userSer.getUserById(waitingList.thisTrans[i].user).subscribe(x => {
-          newWaitList[i].id = waitingList.thisTrans[i].user;
-          newWaitList[i].address = waitingList.thisTrans[i].address;
-          newWaitList[i].name = x.userName;
-        });
-      }
-      return newWaitList;
+  async getWaiteListDeatails(waitingList: any) {
+    var newWait = {} as wait;
+    var newWaitList = new Array<wait>();
+    for (let i = 0; i < waitingList.waitingList.length; i++) {
+      await this.userSer.getUserById(waitingList.waitingList[i].user).toPromise().then(x => {
+        newWait.id = waitingList.waitingList[i].user;
+        newWait.address = waitingList.waitingList[i].address;
+        newWait.name = x.userName;
+        newWait.completed=false;
+        newWaitList.push(newWait);
+        newWait = {} as wait;
+      });
+    }
+    return newWaitList;
   }
 
   joinUserToTransport(trans): Observable<Transportation> {

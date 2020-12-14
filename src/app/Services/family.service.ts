@@ -21,10 +21,6 @@ export class FamilyService {
 
   getUserById(id): Observable<Family> {
     var res = this.http.get<Family>(this.myurl + "GetUserByUserId?userId=" + id);
-    // this.http.get<Family>(this.myurl+"GetUserByUserId?userId=", id).subscribe(x=>{
-    //   console.log(x);
-    //   res=x;
-    // });
     return res;
   }
 
