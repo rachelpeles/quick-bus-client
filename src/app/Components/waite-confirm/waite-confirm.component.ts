@@ -59,12 +59,32 @@ export class WaiteConfirmComponent implements OnInit {
         this.emailser.sendEmailToList(email, "בקשתך אושרה", "היי, בקשת להצטרף ל" + this.data.thisTrans.description + ". המנהל אישר את הצטרפותך, פרטים על הנסיעה יתקבלו בהמשך. נסיעה טובה!");
       });
     })
-    this.transSer.joinUserToTransport(this.data.thisTrans).subscribe(async res => {
+    this.transSer.updateTransport(this.data.thisTrans).subscribe(async res => {
       console.log(res);
       var b = await this.transSer.getWaiteListDeatails(this.data);
       this.list = b;
     })
     this.dialogRef.close();
     alert('הנוסעים צורפו בהצלחה ויקבלו הודעה על כך');
+  }
+
+
+  reject()
+  {
+    var email: Array<string> = [];
+    this.list.filter(t => {
+      this.data.thisTrans.waitingList.splice(this.data.thisTrans.waitingList.indexOf({ user: t.id, address: t.address }), 1);
+      this.userSer.getFamilyList().subscribe(x => {
+        email.push(x.find(u => u.userId == t.id).email);
+        this.emailser.sendEmailToList(email, "בקשתך נדחתה", "היי, בקשת להצטרף ל" + this.data.thisTrans.description + ". המנהל דחה את הצטרפותך, לא תוכל להצטרף לנסיעה זו. נפגש בנסיעות אחרות :)!");
+      });
+    })
+    this.transSer.updateTransport(this.data.thisTrans).subscribe(async res => {
+      console.log(res);
+      var b = await this.transSer.getWaiteListDeatails(this.data);
+      this.list = b;
+    })
+    this.dialogRef.close();
+    alert('הנוסעים נדחו ויקבלו הודעה על כך');
   }
 }

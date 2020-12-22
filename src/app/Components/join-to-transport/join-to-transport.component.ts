@@ -1,7 +1,7 @@
 // import { state } from '@angular/animations';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { stat } from 'fs';
 import { Key } from 'protractor';
 import { Family } from 'src/app/Classes/Family';
@@ -59,9 +59,11 @@ export class JoinToTransportComponent implements OnInit {
   card2 = false;
   newDefault = false;
   trans: Transportation;
+  newWait: UsersAddress;
 
-  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService) {
+  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private meSer: MyService) {
     
+    // this.thisUser=this.meSer.family;
     this.thisUser = JSON.parse(localStorage.getItem('user'));
     this.joinTransport = this.fb.group({
       'transportationId': [null, [Validators.required]],
@@ -72,7 +74,7 @@ export class JoinToTransportComponent implements OnInit {
   ngOnInit() {
     this.countAddressUser = this.thisUser.address.length;
     console.log('המשתמש: ' + this.thisUser.userName);
-    localStorage.setItem('address', this.joinTransport.get('address').value);
+    // localStorage.setItem('address', this.joinTransport.get('address').value);
   }
 
 
@@ -99,6 +101,7 @@ export class JoinToTransportComponent implements OnInit {
         this.thisUser.address[i] = this.thisUser.address[0];
         this.thisUser.address[0] = a;
       }
+      // this.meSer.family=this.thisUser;
       localStorage.setItem('user', JSON.stringify(this.thisUser));
     }
     this.userSer.updateUser(this.thisUser).subscribe(
@@ -131,6 +134,8 @@ export class JoinToTransportComponent implements OnInit {
         data => {
           this.transportationList = data;
           this.thisTransportation = data.find(x=>x.transportationId==this.joinTransport.get('transportationId').value);
+          if(!this.thisTransportation)
+          this.getIdError();
         },
         error => {
           alert(error.message);
@@ -142,16 +147,16 @@ export class JoinToTransportComponent implements OnInit {
     this.transSer.getTransportationById(this.joinTransport.get('transportationId').value).subscribe(data => {
       this.trans = data;
       console.log(this.trans);
-      if (this.trans.waitingList.some(x=>x.User==this.thisUser.userId))
+      if (this.trans.waitingList.some(x=>x.user==this.thisUser.userId))
         alert('כבר בקשת להצטרף להסעה זו');
-      else if (this.trans.usersAndAddress.some(x => x.User == this.thisUser.userId))
+      else if (this.trans.usersAndAddress.some(x => x.user == this.thisUser.userId))
         alert('הנך כבר רשום להסעה זו, פרטים מדויקים על ההסעה ישלחו למייל במועד קרוב יותר למועד ההסעה');
       else {
-        var newWait: UsersAddress;
-        newWait.User=this.thisUser.userId;
-        newWait.Address=this.joinTransport.get('address').value;
-        this.trans.waitingList.push(newWait);
-        this.transSer.joinUserToTransport(this.trans).subscribe(x => {
+        this.newWait=new UsersAddress(this.thisUser.userId, this.joinTransport.get('address').value);
+        // newWait.user=this.thisUser.userId;
+        // newWait.address=this.joinTransport.get('address').value;
+        this.trans.waitingList.push(this.newWait);
+        this.transSer.updateTransport(this.trans).subscribe(x => {
           console.log(x);
           if (x)
             alert('בקשתך להצטרף לנסיעה התקבלה וממתינה לאישור המנהל');
@@ -177,6 +182,19 @@ export class JoinToTransportComponent implements OnInit {
     return null;
   }
 
+  async ValidateId( transSer: TransportationService)
+  {
+    var thisTransportation;
+    await transSer.getAlltransport().subscribe(
+      data => {
+        thisTransportation = data.find(x=>x.transportationId==this.joinTransport.get('transportationId').value);
+      });
+    if (this.joinTransport.get('transportationId').value && thisTransportation) {
+      return { 'idInvalid': true };
+    }
+    return null;
+  }
+
 }
 //  export function check() {
 //     for (var i = 0; i < this.transportationList.length && !this.flag; i++) {
@@ -187,3 +205,15 @@ export class JoinToTransportComponent implements OnInit {
 //       return false;
 //     }
 //   }
+
+// function ValidateId(control: AbstractControl, transSer: TransportationService): {[key: string]: any} | null  {
+//   let thisTransportation;
+//   transSer.getAlltransport().subscribe(
+//     data => {
+//       thisTransportation = data.find(x=>x.transportationId==control.value);
+//     });
+//   if (control.value && thisTransportation) {
+//     return { 'idInvalid': true };
+//   }
+//   return null;
+// }

@@ -1,7 +1,7 @@
 export class UsersAddress {
     constructor(
-        public User: string,
-        public Address: string
+        public user: string,
+        public address: string
     ){}
 }
 

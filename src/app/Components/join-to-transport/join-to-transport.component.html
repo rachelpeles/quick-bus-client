@@ -3,12 +3,33 @@
 
 
 <form class="form" [formGroup]="joinTransport" justify-content="center" (ngSubmit)="toConfirm()">
-    <mat-vertical-stepper id="stepper" (selectionChange)="confirmStep($event)">
+    <mat-vertical-stepper [linear]="true" #stepper (selectionChange)="confirmStep($event)">
 
-        <mat-step [stepControl]="transId">
+        <mat-step [completed]="joinTransport.get('transportationId').valid" [stepControl]="transId">
             <ng-template matStepLabel>קוד הסעה</ng-template>
 
             <!-- <mat-card> -->
+            <mat-form-field>
+                <input formControlName="transportationId" matInput placeholder="קוד הסעה">
+            </mat-form-field><br>
+            <mat-error>
+                <span
+                    *ngIf="!joinTransport.get('transportationId').valid && joinTransport.get('transportationId').touched">
+                    שדה זה חובה</span>
+                    <div *ngIf="joinTransport.get('transportationId').ValidateId">
+                        Name cannot be Bob.
+                      </div>
+            </mat-error>
+
+            <button type="button" mat-mini-fab color="white" matStepperNext>
+                <i class="material-icons">keyboard_arrow_down</i>
+            </button>
+
+        </mat-step>
+
+        <!-- <mat-step [stepControl]="transId">
+            <ng-template matStepLabel>קוד הסעה</ng-template>
+
             <mat-form-field>
                 <input formControlName="transportationId" matInput placeholder="קוד הסעה">
             </mat-form-field><br>
@@ -22,7 +43,7 @@
                 <i class="material-icons">keyboard_arrow_down</i>
             </button>
 
-        </mat-step>
+        </mat-step> -->
 
         <mat-step [stepControl]="addresses">
             <ng-template matStepLabel>כתובת</ng-template>

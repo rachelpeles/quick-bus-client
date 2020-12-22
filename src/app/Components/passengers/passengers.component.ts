@@ -3,6 +3,7 @@ import { TransportationService } from 'src/app/Services/transportation.service';
 import { Transportation } from 'src/app/Classes/transportation';
 import { MatTable, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
+import { MyService } from 'src/app/Services/my.service';
 
 @Component({
   selector: 'app-passengers',
@@ -16,13 +17,15 @@ export class PassengersComponent implements OnInit {
   
   isable=false;
   
-  constructor(private httpSer: TransportationService) { }
+  constructor(private httpSer: TransportationService, private meSer: MyService) { }
 
+  a;
   dataSource;
   transport: Transportation[];
   displayedColumns=['transportationId', 'DestinationStreetId'];
 
   ngOnInit() {
+    this.a=this.meSer.family;
     this.httpSer.getAlltransport().subscribe((data)=>
     {
       console.log("getAllPassengertransport data:")

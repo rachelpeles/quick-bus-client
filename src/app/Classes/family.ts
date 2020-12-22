@@ -4,10 +4,10 @@ export class Family {
         public userName: string="",
         public password: string="",
         public phone: string="",
-        public address:string[]=null,
+        public address:string[]=[],
         public email: string="",
         public type: number=0,
-        public transportationCreated: string[]=null,
+        public transportationCreated: string[]=[],
         public organizatioId: string="",
     ){}
 }

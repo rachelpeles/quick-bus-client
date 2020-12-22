@@ -1,1 +1,19 @@
-<p>edit-trans-dialog works!</p>
+
+<p>{{action}}</p>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="localTrans.description" placeholder="שם הסעה">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="localTrans.schedule" placeholder="שעה ותאריך">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [(ngModel)]="localTrans.address" placeholder="יעד/מקור">
+  </mat-form-field>
+  <span *ngIf="data.actionType==='edit'">בלחיצה על {{action}} הנך מאשר שפרטי ההסעה החדשים ישלחו לנוסעים</span><br>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="data.actionType==='edit'? update() : add()" >{{action}}</button>
+    <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>
+</mat-dialog-actions>

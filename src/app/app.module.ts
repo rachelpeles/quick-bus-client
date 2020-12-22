@@ -26,6 +26,7 @@ import {
   MatSlideToggleModule,
   MatSidenavModule,
   MatCheckboxModule,
+  MatExpansionModule
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -52,6 +53,8 @@ import { MyCreateTransportationComponent } from './Components/my-create-transpor
 import { EditTransDialogComponent } from './Components/edit-trans-dialog/edit-trans-dialog.component';
 import { DelTransDialogComponent } from './Components/del-trans-dialog/del-trans-dialog.component';
 import { WaiteConfirmComponent } from './Components/waite-confirm/waite-confirm.component';
+import { ShowAndCalcComponent } from './Components/show-and-calc/show-and-calc.component';
+import { CalcRoutComponent } from './Components/calc-rout/calc-rout.component';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
@@ -77,7 +80,9 @@ import { WaiteConfirmComponent } from './Components/waite-confirm/waite-confirm.
     MyCreateTransportationComponent,
     EditTransDialogComponent,
     DelTransDialogComponent,
-    WaiteConfirmComponent
+    WaiteConfirmComponent,
+    ShowAndCalcComponent,
+    CalcRoutComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],
@@ -112,7 +117,8 @@ import { WaiteConfirmComponent } from './Components/waite-confirm/waite-confirm.
     MatOptionModule,
     MatPaginatorModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
     // MatDialogModule
   ],
   schemas: [

@@ -5,11 +5,11 @@ export class Transportation {
     constructor(
         public transportationId:string="",
         public description: string="",
-        public travels : string[]=null,
-        public usersAndAddress: UsersAddress[]=null,
-        public waitingList: UsersAddress[]=null,
+        public travels : string[]=[],
+        public usersAndAddress: UsersAddress[]=[],
+        public waitingList: UsersAddress[]=[],
         public address:string="" ,
-        public schedules:number=0,
+        public schedules=null,
         
     ){}
 }

@@ -12,12 +12,19 @@ export interface wait {
   completed: boolean;
 }
 
+export interface participant
+{
+  name: string,
+  address: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class TransportationService {
 
+  trans: Transportation;
   myurl: any;
   constructor(private http: HttpClient, private globalService: GlobalService, private userSer: FamilyService) {
     this.myurl = globalService.baseURL;
@@ -48,12 +55,34 @@ export class TransportationService {
     return newWaitList;
   }
 
-  joinUserToTransport(trans): Observable<Transportation> {
+  async gePassengersListDeatails(participants: any)
+  {
+    var part = {} as participant;
+    var partice = new Array<participant>();
+    for (let i = 0; i < participants.usersAndAddress.length; i++) {
+      await this.userSer.getUserById(participants.usersAndAddress[i].user).toPromise().then(x => {
+        part.address = participants.usersAndAddress[i].address;
+        part.name = x.userName;
+        partice.push(part);
+        part = {} as wait;
+      });
+    }
+    return partice;
+  }
+
+  addTransport(transport):Observable<Transportation[]>
+  {
+    var res=this.http.post<Transportation[]>(this.myurl+'AddTransportation', transport);
+    return res;
+  }
+
+  updateTransport(trans): Observable<Transportation> {
     var res = this.http.put<Transportation>(this.myurl + 'PutTransportation', trans);
     return res;
   }
-  delete(id) {
-    this.http.delete(this.myurl + 'DeleteTransportations/{id}', id);
+  delete(id):Observable<any>
+  {
+    return this.http.delete<any>(this.myurl+'DeleteTransportation?id='+ id);
   }
 
 }

@@ -17,6 +17,8 @@ import { MyCreateTransportationComponent } from '../Components/my-create-transpo
 import { DelTransDialogComponent } from '../Components/del-trans-dialog/del-trans-dialog.component';
 import { EditTransDialogComponent } from '../Components/edit-trans-dialog/edit-trans-dialog.component';
 import { WaiteConfirmComponent } from '../Components/waite-confirm/waite-confirm.component';
+import { ShowAndCalcComponent } from '../Components/show-and-calc/show-and-calc.component';
+import { CalcRoutComponent } from '../Components/calc-rout/calc-rout.component';
 
 const appRout: Routes =
   [
@@ -39,6 +41,8 @@ const appRout: Routes =
     { path: "DelTransDialog", component: DelTransDialogComponent },
     { path: "EditTransDialog", component: EditTransDialogComponent },
     { path: "WaiteConfirm", component: WaiteConfirmComponent },
+    { path: "ShowCalc", component: ShowAndCalcComponent },
+    { path: "CalcRoute", component: CalcRoutComponent },
     { path: "**", redirectTo: "/NotFound" }
 
   ];

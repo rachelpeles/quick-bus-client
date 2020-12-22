@@ -1,12 +1,16 @@
 <p class="header">ההסעות שלי</p>
-<span *ngIf="dataSource==null">אין לך הסעות שיצרת</span>
-<mat-progress-spinner *ngIf="!dataSource"
+<div *ngIf="!dataexist" class="notexist">
+    <span>לא יצרת עדיין הסעות</span><br><br>
+    <button mat-raised-button type="button" (click)="action('add')">צור עכשיו</button>
+</div>
+
+<mat-progress-spinner *ngIf="dataexist"
         class="example-margin"
         [color]="accent"
         [mode]="Indeterminate"
         [value]="50">
     </mat-progress-spinner>
-<div *ngIf="dataSource">
+<div *ngIf="dataexist">
     <div class="flexdiv">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -18,6 +22,11 @@
             <ng-container matColumnDef="transportName">
                 <th mat-header-cell *matHeaderCellDef>שם הסעה</th>
                 <td mat-cell *matCellDef="let element">{{element.description}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="transportAddress">
+                <th mat-header-cell *matHeaderCellDef>כתובת</th>
+                <td mat-cell *matCellDef="let element">{{element.address}}</td>
             </ng-container>
 
             <ng-container matColumnDef="Participants">
@@ -48,11 +57,11 @@
             <ng-container matColumnDef="calcRoute">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <th mat-cell *matCellDef="let element">
-                    <button mat-raised-button class="deleteAndEdit" (click)="calcRoute()">חשב מסלול</button>
+                    <button mat-raised-button class="deleteAndEdit" (click)="show(element)" [abc]="abc">הצג וחשב מסלול</button>
                 </th>
             </ng-container>
 
-
+<ShowCalc [hghg]></ShowCalc>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
