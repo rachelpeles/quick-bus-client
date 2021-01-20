@@ -4,6 +4,8 @@ import { Transportation } from '../Classes/transportation';
 import { HttpClient } from '@angular/common/http';
 import { GlobalService } from './global.service';
 import { FamilyService } from './Family.service';
+import { stringify } from '@angular/compiler/src/util';
+import { Location } from '@angular/common';
 
 export interface wait {
   id: string,
@@ -83,6 +85,12 @@ export class TransportationService {
   delete(id):Observable<any>
   {
     return this.http.delete<any>(this.myurl+'DeleteTransportation?id='+ id);
+  }
+
+  calcRoute(id):Observable<any>
+  {
+    var a=this.http.get<any>(this.myurl+'CalcRoute?transportationId=' + id);
+    return a;
   }
 
 }

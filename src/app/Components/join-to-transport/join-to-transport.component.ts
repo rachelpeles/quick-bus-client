@@ -1,6 +1,6 @@
 // import { state } from '@angular/animations';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { stat } from 'fs';
 import { Key } from 'protractor';
@@ -10,12 +10,19 @@ import { UsersAddress } from 'src/app/Classes/users-address';
 import { FamilyService } from 'src/app/Services/Family.service';
 import { MyService } from 'src/app/Services/my.service';
 import { TransportationService, wait } from 'src/app/Services/transportation.service';
-
+/// <reference types="@types/googlemaps" />
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgForm } from '@angular/forms/forms';
+import {Title} from '@angular/platform-browser';
+import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete';
+import PlaceResult = google.maps.places.PlaceResult;
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-join-to-transport',
   templateUrl: './join-to-transport.component.html',
-  styleUrls: ['./join-to-transport.component.css']
+  styleUrls: ['./join-to-transport.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class JoinToTransportComponent implements OnInit {
 
@@ -61,10 +68,10 @@ export class JoinToTransportComponent implements OnInit {
   trans: Transportation;
   newWait: UsersAddress;
 
-  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private meSer: MyService) {
-    
+  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private meSer: MyService, private snackBar: MatSnackBar) {
+
     // this.thisUser=this.meSer.family;
-    this.thisUser = JSON.parse(localStorage.getItem('user'));
+    this.thisUser = JSON.parse(sessionStorage.getItem('user'));
     this.joinTransport = this.fb.group({
       'transportationId': [null, [Validators.required]],
       'address': [this.thisUser.address[0], Validators.required]
@@ -74,18 +81,37 @@ export class JoinToTransportComponent implements OnInit {
   ngOnInit() {
     this.countAddressUser = this.thisUser.address.length;
     console.log('המשתמש: ' + this.thisUser.userName);
-    // localStorage.setItem('address', this.joinTransport.get('address').value);
+    // sessionStorage.setItem('address', this.joinTransport.get('address').value);
   }
 
+  newwww:string;
 
-  addAddress(newAddress) {
+  public appearance = Appearance;
+  public zoom: number;
+  public latitude: number;
+  public longitude: number;
+  public selectedAddress: PlaceResult;
+
+  onAutocompleteSelected(result: PlaceResult) {
+    console.log('onAutocompleteSelected: ', result);
+    this.joinTransport.controls.address.setValue(result.name+result.vicinity);
+  }
+
+  onLocationSelected(location: Location) {
+    console.log('onLocationSelected: ', location);
+    this.latitude = location.latitude;
+    this.longitude = location.longitude;
+  }
+
+  addAddress() {
     let a;
-    if (this.default) {
+    // this.joinTransport.controls.address.setValue(this.newwww);
+    if (this.newDefault) {
       a = this.thisUser.address[0];
-      this.thisUser.address[0] = newAddress;
-      newAddress = a;
+      this.thisUser.address[0] = this.joinTransport.get('address').value;
+      this.thisUser.address.push(a);
     }
-    this.thisUser.address.push(newAddress);
+    sessionStorage.setItem('user', JSON.stringify(this.thisUser));
     this.userSer.updateUser(this.thisUser).subscribe(
       data => {
         console.log(data);
@@ -102,7 +128,8 @@ export class JoinToTransportComponent implements OnInit {
         this.thisUser.address[0] = a;
       }
       // this.meSer.family=this.thisUser;
-      localStorage.setItem('user', JSON.stringify(this.thisUser));
+
+      sessionStorage.setItem('user', JSON.stringify(this.thisUser));
     }
     this.userSer.updateUser(this.thisUser).subscribe(
       data => {
@@ -143,14 +170,21 @@ export class JoinToTransportComponent implements OnInit {
       );
   }
 
+  //open messege
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'אישור',{
+      duration: 2000,
+    });
+  }
+
   toConfirm() {
     this.transSer.getTransportationById(this.joinTransport.get('transportationId').value).subscribe(data => {
       this.trans = data;
       console.log(this.trans);
       if (this.trans.waitingList.some(x=>x.user==this.thisUser.userId))
-        alert('כבר בקשת להצטרף להסעה זו');
+        this.openSnackBar('כבר בקשת להצטרף להסעה זו');
       else if (this.trans.usersAndAddress.some(x => x.user == this.thisUser.userId))
-        alert('הנך כבר רשום להסעה זו, פרטים מדויקים על ההסעה ישלחו למייל במועד קרוב יותר למועד ההסעה');
+        this.openSnackBar('הנך כבר רשום להסעה זו, פרטים מדויקים על ההסעה ישלחו למייל במועד קרוב יותר למועד ההסעה');
       else {
         this.newWait=new UsersAddress(this.thisUser.userId, this.joinTransport.get('address').value);
         // newWait.user=this.thisUser.userId;
@@ -159,7 +193,7 @@ export class JoinToTransportComponent implements OnInit {
         this.transSer.updateTransport(this.trans).subscribe(x => {
           console.log(x);
           if (x)
-            alert('בקשתך להצטרף לנסיעה התקבלה וממתינה לאישור המנהל');
+            this.openSnackBar('בקשתך להצטרף לנסיעה התקבלה וממתינה לאישור המנהל');
         });
       }
 

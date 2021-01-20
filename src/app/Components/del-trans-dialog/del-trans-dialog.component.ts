@@ -39,7 +39,7 @@ export class DelTransDialogComponent implements OnInit {
            , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
       });
       // thisUser=this.meSer.family;
-      thisUser = JSON.parse(localStorage.getItem('user'));
+      thisUser = JSON.parse(sessionStorage.getItem('user'));
       thisUser.transportationCreated.splice(this.data.thisTrans.transportationId);
       this.userSer.updateUser(thisUser).subscribe(z=>console.log(z));
     });

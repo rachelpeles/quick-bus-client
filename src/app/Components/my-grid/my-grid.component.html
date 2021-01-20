@@ -1,6 +1,34 @@
-<form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
-        <input type="text" placeholder="Name" name="name" ngModel required #name="ngModel">
-        <input type="text" placeholder="Email" email name="email" ngModel required #email="ngModel">
-        <textarea placeholder="Messages" name="messages" ngModel required #messages="ngModel"></textarea>
-        <input type="submit" value="Send">
-    </form>
+<!-- <div class="container" fxLayout="column" fxLayoutAlign="center">
+
+  <div fxFlex>
+    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+      <agm-direction
+        [visible] = "done"
+        [origin]="origin"
+        [destination]="destination"></agm-direction>
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+    </agm-map>
+  </div>
+
+  <div fxFlex fxFlexAlign="center"
+       class="autocomplete-container"
+       [ngStyle.xs]="{'min-width.%': 100}"
+       [ngStyle.sm]="{'width.%': 70}">
+    <mat-google-maps-autocomplete country="il"
+                                  (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                  (onLocationSelected)="onLocationSelected($event)">
+    </mat-google-maps-autocomplete>
+  </div>
+
+</div> -->
+
+<agm-map [latitude]="lat" [longitude]="lng">
+    <agm-direction *ngFor="let data of dir" [editable]="true"
+      [origin]="data.origin"
+      [destination]="data.destination"
+      [renderOptions]="data.renderOptions"
+      [waypoints]="data.waypoints"
+      [markerOptions]="data.markerOpts"
+      [optimizeWaypoints]="data.optimizeWaypoints">
+    </agm-direction>
+</agm-map>

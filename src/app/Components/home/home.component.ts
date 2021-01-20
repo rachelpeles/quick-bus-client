@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit {
       if (this.FamilyList[i].userName == this.UserName.value && this.FamilyList[i].password == this.Password.value) {
         flag = true;
         this.mySer.family = this.FamilyList[i];
-        localStorage.setItem('user', JSON.stringify(this.FamilyList[i]));
+        sessionStorage.setItem('user', JSON.stringify(this.FamilyList[i]));
         alert("ברוכים הבאים ל"+this.UserName.value);
         this.router.navigate(["/PassengersComponent"]);
 

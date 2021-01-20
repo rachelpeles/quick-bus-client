@@ -26,7 +26,8 @@ import {
   MatSlideToggleModule,
   MatSidenavModule,
   MatCheckboxModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSnackBarModule
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -55,6 +56,10 @@ import { DelTransDialogComponent } from './Components/del-trans-dialog/del-trans
 import { WaiteConfirmComponent } from './Components/waite-confirm/waite-confirm.component';
 import { ShowAndCalcComponent } from './Components/show-and-calc/show-and-calc.component';
 import { CalcRoutComponent } from './Components/calc-rout/calc-rout.component';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+// import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
@@ -118,7 +123,15 @@ import { CalcRoutComponent } from './Components/calc-rout/calc-rout.component';
     MatPaginatorModule,
     MatSidenavModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAXS8o9R2xBXjDX-_7SGv3xqE8ET_413wg',
+      libraries: ['places'],
+      language: 'iw'
+    }),
+    AgmDirectionModule,
+    MatGoogleMapsAutocompleteModule,
     // MatDialogModule
   ],
   schemas: [

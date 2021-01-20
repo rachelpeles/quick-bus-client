@@ -83,7 +83,7 @@ export class MyCreateTransportationComponent implements OnInit {
     this.transportser.getAlltransport().subscribe(result => {
       this.transData = result;
       // this.data=this.meSer.family;
-      this.data = JSON.parse(localStorage.getItem('user'));
+      this.data = JSON.parse(sessionStorage.getItem('user'));
       this.data.transportationCreated.forEach(element => {
         if(this.transData.find(x => x.transportationId == element))
           this.transUser.push(this.transData.find(x => x.transportationId == element))
@@ -92,13 +92,13 @@ export class MyCreateTransportationComponent implements OnInit {
       this.changeDetectorRefs.detectChanges();
       if(this.dataSource.data.values.length > 0 || this.dataSource._data.value.length > 0)
         this.dataexist = true;
-    }); 
+    });
   }
 
 
   show(thisTrans)
   {
-    
+
     this.transportser.trans=thisTrans;
     this.router.navigate(["/ShowCalc"]);
   }

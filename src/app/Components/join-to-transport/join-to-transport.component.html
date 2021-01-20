@@ -47,7 +47,9 @@
 
         <mat-step [stepControl]="addresses">
             <ng-template matStepLabel>כתובת</ng-template>
-            <!-- <span>כתוב כתובת</span> -->
+
+
+       <!-- כתובת -->
 
 
             <mat-div *ngIf="card1">
@@ -60,14 +62,11 @@
                 </mat-card-content><br><br>
                 <mat-card-actions>
                     <button mat-raised-button type="button" (click)="card1=false">בחירת כתובת אחרת</button>
-                    <!-- <a class="unlink" (click)="card2=true && card1=false">
-                        + הוסיפו כתובת חדשה
-                    </a> -->
                 </mat-card-actions>
             </mat-div><br>
 
             <div *ngIf="!card1 && !card2">
-                <!-- <mat-card-title>בחירת כתובת אחרת</mat-card-title> -->
+    <!-- בחירת כתובת אחרת -->
                 <mat-card-content>
                     <mat-radio-group class="radioGroup">
                         <mat-radio-button class="radioButton" *ngFor="let element of thisUser.address"
@@ -83,17 +82,26 @@
                     </a>
                 </mat-card-actions>
             </div><br>
-
+      <!-- הוספת כתובת חדשה -->
             <mat-div *ngIf="card2 && !card1">
-                <!-- <mat-card-title>הוספת כתובת</mat-card-title><br> -->
                 <mat-card-content>
-                    <mat-form-field>
-                        <input matInput placeholder="כתוב כתובת"  formControlName="address">
-                    </mat-form-field><br>
+                  <div fxFlex fxFlexAlign="center"
+                  class="autocomplete-container"
+                  [ngStyle.xs]="{'min-width.%': 100}"
+                  [ngStyle.sm]="{'width.%': 70}">
+               <mat-google-maps-autocomplete formControlName="address"
+                                             country="il"
+                                             (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                             (onLocationSelected)="onLocationSelected($event)"
+                                             ngDefaultControl >
+               </mat-google-maps-autocomplete>
+             </div>
+               <!-- <input matInput placeholder="כתובת" [(ngModel)]="newwww"> -->
+             <br>
                     <mat-checkbox class="checkbox"(click)="newDefault=true">קבעו כתובת זאת כברירת מחדל</mat-checkbox><br><br>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button type="button" (click)="addAddress(joinTransport.get('address').value)">אישור</button>
+                    <button mat-raised-button type="button" (click)="addAddress()" matStepperNext>אישור</button>
                     <button mat-raised-button type="button" (click)="card2=false">ביטול</button>
                 </mat-card-actions>
             </mat-div><br>
