@@ -106,9 +106,6 @@
                 </mat-card-actions>
             </mat-div><br>
 
-
-
-
             <button type="button" mat-mini-fab color="white" matStepperNext>
                 <i class="material-icons">keyboard_arrow_down</i>
             </button>
@@ -117,12 +114,26 @@
             </button>
         </mat-step>
 
+        <mat-step *ngIf="thisUser.type==0" [stepControl]="upNumber">
+          <ng-template matStepLabel>מספר נוסעים</ng-template>
+          <mat-form-field>
+            <input matInput type="number" formControlName="upNumber" maxlength="2">
+          </mat-form-field><br>
+          <button type="button" mat-mini-fab color="white" matStepperNext>
+            <i class="material-icons">keyboard_arrow_down</i>
+        </button>
+        <button type="button" mat-mini-fab color="white" matStepperPrevious>
+            <i class="material-icons">keyboard_arrow_up</i>
+        </button>
+        </mat-step>
+
         <mat-step [stepControl]="confirm">
             <ng-template matStepLabel>אישור</ng-template>
             <span>בקשת להצטרף ל{{thisTransportation?.description}}</span><br>
             <span>שיוצאת מ/לכתובת {{thisTransportation?.address}}</span><br>
             <!-- <span>:בשעה {{thisTransportation.Schedules.DepartureTime}}</span> -->
             <span>הכתובת לתחנה שלך {{joinTransport.get('address').value}}</span><br>
+            <span *ngIf="thisUser.type==0">מספר נוסעים: {{joinTransport.get('upNumber').value}}</span><br>
             <button class="continue" mat-raised-button [disabled]="!joinTransport.valid || IsAccepted==0">אישור</button>
         </mat-step>
 

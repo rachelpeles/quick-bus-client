@@ -73,13 +73,14 @@ export class MyGridComponent implements OnInit {
   //   this.origin = { lat: 24.799448, lng: 120.979021 };
   //   this.destination = { lat: 24.799524, lng: 120.975017 };
 
-  zoom: Number = 14;
-  dir: Array<any> = new Array<any>();
-  color = ["red", "blue", "orange", "pink"];
+    zoom: Number = 14;
+    dir: Array<any> = new Array<any>();
+    color = ["red", "blue", "orange", "pink"];
 
   public getDirection() {
     for (let i = 0; i < this.waypoints.length; i++) {
       var a = {
+        // origin: "קדושת לוי 64 ביתר עילית",
         origin: this.waypoints[i][0].location,
         destination: "קדושת לוי 64 ביתר עילית",
         // destination: this.waypoints[i][this.waypoints[i].length - 1].location,

@@ -72,10 +72,20 @@ export class JoinToTransportComponent implements OnInit {
 
     // this.thisUser=this.meSer.family;
     this.thisUser = JSON.parse(sessionStorage.getItem('user'));
-    this.joinTransport = this.fb.group({
+    if(this.thisUser.type==0)
+      this.joinTransport = this.fb.group
+      ({
       'transportationId': [null, [Validators.required]],
-      'address': [this.thisUser.address[0], Validators.required]
-    });
+      'address': [this.thisUser.address[0], Validators.required],
+      'upNumber': [1,  [Validators.required, Validators.min(1)]]
+      });
+    else
+      this.joinTransport = this.fb.group
+        ({
+        'transportationId': [null, [Validators.required]],
+        'address': [this.thisUser.address[0], Validators.required]
+        });
+
   }
 
   ngOnInit() {
@@ -176,7 +186,7 @@ export class JoinToTransportComponent implements OnInit {
       duration: 2000,
     });
   }
-
+  //פונקצית הוספת המשתמש לרשימת הממתינים
   toConfirm() {
     this.transSer.getTransportationById(this.joinTransport.get('transportationId').value).subscribe(data => {
       this.trans = data;
@@ -186,10 +196,18 @@ export class JoinToTransportComponent implements OnInit {
       else if (this.trans.usersAndAddress.some(x => x.user == this.thisUser.userId))
         this.openSnackBar('הנך כבר רשום להסעה זו, פרטים מדויקים על ההסעה ישלחו למייל במועד קרוב יותר למועד ההסעה');
       else {
-        this.newWait=new UsersAddress(this.thisUser.userId, this.joinTransport.get('address').value);
-        // newWait.user=this.thisUser.userId;
-        // newWait.address=this.joinTransport.get('address').value;
-        this.trans.waitingList.push(this.newWait);
+        if(this.joinTransport.get('upNumber'))
+        {
+          this.newWait = new UsersAddress(this.thisUser.userId, this.joinTransport.get('address').value);
+          for (let i = 0; i < this.joinTransport.get('upNumber').value; i++)
+            this.trans.waitingList.push(this.newWait);
+
+        }
+        else
+        {
+          this.newWait = new UsersAddress(this.thisUser.userId, this.joinTransport.get('address').value);
+          this.trans.waitingList.push(this.newWait);
+        }
         this.transSer.updateTransport(this.trans).subscribe(x => {
           console.log(x);
           if (x)

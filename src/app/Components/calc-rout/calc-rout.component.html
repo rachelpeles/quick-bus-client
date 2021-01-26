@@ -1,12 +1,38 @@
-<div class="all">
+<!-- <div class="all">
     <div class="class">
         <p class="class">כאן יהיה בקרוב חישוב מסלול!</p>
         <img width=" 52.5%" alt="כאן בונים" src="../../../assets/imag/כאן בונים.png" /><br>
-        <!-- <img
-    width="500"
-    alt="כבישים"
-    src="../../../assets/imag/צומת כבישים.jpg"
-  /><br> -->
 
     </div>
+</div> -->
+
+
+
+<div class="panel">
+<button class="expand" mat-raised-button (click)="drawer.toggle()">
+  <i class="material-icons">double_arrow</i>
+</button>
+<mat-drawer-container class="example-container" [hasBackdrop]="false" autosize>
+  <mat-drawer #drawer [mode]="over" [opened]="true">
+    <div *ngFor="let d of dir">
+      <h3>רכב מספר </h3>
+      <div *ngFor="let v of d.waypoints">
+        <i class="material-icons">place</i>
+        <button mat-raised-button class="list" (click)="onLocationSelected(v.location)">{{v.location}}</button>
+      </div>
+    </div>
+  </mat-drawer>
+</mat-drawer-container>
 </div>
+<agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude">
+  <agm-direction
+    *ngFor="let data of dir"
+    [editable]="true"
+    [origin]="data.origin"
+    [destination]="data.destination"
+    [renderOptions]="data.renderOptions"
+    [waypoints]="data.waypoints"
+    [markerOptions]="data.markerOpts"
+    [optimizeWaypoints]="data.optimizeWaypoints">
+  </agm-direction>
+</agm-map>

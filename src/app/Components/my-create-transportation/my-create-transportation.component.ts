@@ -65,7 +65,6 @@ export class MyCreateTransportationComponent implements OnInit {
 
   waiteConfirm(thisTrans)
   {
-
     const dialogRef=this.dialog.open(WaiteConfirmComponent,
       {
         width: '500px',

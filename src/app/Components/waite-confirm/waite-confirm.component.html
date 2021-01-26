@@ -1,4 +1,5 @@
-<h1>{{data.thisTrans.length}} נוסעים בקשו להצטרף להסעה שלך</h1>
+<button mat-fab id="close" (click)="dialogRef.close()"><i class="material-icons">close</i></button>
+<h2>{{list?.length}} נוסעים בקשו להצטרף להסעה שלך</h2>
 
 <section class="example-section">
     <span class="example-list-section">
@@ -22,4 +23,4 @@
 </section>
 
 <button mat-raised-button [disabled]="updateAllComplete()" (click)="confirm()">אשר הצטרפות</button>
-<button mat-raised-button [disabled]="updateAllComplete()" (click)="reject()">דחה הצטרפות</button>
+<button mat-raised-button id="reject" [disabled]="updateAllComplete()" (click)="reject()">דחה הצטרפות</button>

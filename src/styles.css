@@ -1,6 +1,6 @@
 /*You can add global styles to this file, and also import other style files */
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons';    
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';    
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;  }
@@ -10,51 +10,51 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;  }
 
     text-align: right !important;
 }
-.mat-card {    
-    text-align: -webkit-center;    
-}    
-    
-.demo-toolbar {    
-    display: flex;    
-    align-items: center;    
-    width: 100%;    
-}    
-    
-.demo-form {    
-    min-width: 150px;    
-    max-width: 500px;    
-    width: 100%;    
-}    
-    
-.demo-full-width {    
-    width: 100%;    
-}    
-    
-body {    
-    margin: 0;    
-    font-family: Roboto, sans-serif;    
-}    
-    
-mat-card {    
-    max-width: 80%;    
-    margin: 2em auto;    
-    text-align: center;    
-}    
-    
-mat-toolbar-row {    
-    justify-content: space-between;    
-}    
-    
-.done {    
-    position: fixed;    
-    bottom: 20px;    
-    right: 20px;    
-    color: white;    
-}    
-    
-.content-center {    
-    text-align: -webkit-center;    
-}    
+.mat-card {
+    text-align: -webkit-center;
+}
+
+.demo-toolbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.demo-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.demo-full-width {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+mat-toolbar-row {
+    justify-content: space-between;
+}
+
+.done {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+}
+
+.content-center {
+    text-align: -webkit-center;
+}
 .mat-toolbar.mat-warn{
     background-color: palevioletred
 }
@@ -71,11 +71,16 @@ mat-toolbar-row {
     overflow: hidden !important;
 }
 
-.mat-drawer-container 
+.mat-drawer-container
 {
     background-color: inherit !important;
 }
 .mat-form-field
 {
     width: auto !important;
+}
+
+.mat-drawer-transition .mat-drawer-content
+{
+  transition-property: transform,margin-right,margin-left !important;
 }
