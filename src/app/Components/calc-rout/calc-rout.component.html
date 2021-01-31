@@ -12,15 +12,22 @@
 <button class="expand" mat-raised-button (click)="drawer.toggle()">
   <i class="material-icons">double_arrow</i>
 </button>
-<mat-drawer-container class="example-container" [hasBackdrop]="false" autosize>
+<mat-drawer-container id="visibilityContainer" class="example-container" [hasBackdrop]="false" autosize>
   <mat-drawer #drawer [mode]="over" [opened]="true">
-    <div *ngFor="let d of dir">
-      <h3>רכב מספר </h3>
+    <h2 id="head">{{description}} - {{isDispersion}}</h2>
+    <div *ngFor="let d of dir; let i = index">
+      <h3>רכב מספר {{i+1}}</h3>
       <div *ngFor="let v of d.waypoints">
         <i class="material-icons">place</i>
         <button mat-raised-button class="list" (click)="onLocationSelected(v.location)">{{v.location}}</button>
       </div>
+      <span id="time">משך זמן המסלול: {{times[i]}} דקות</span><br><br>
     </div>
+    <br>
+    <span id="price">מחיר כולל להסעה: {{price}} ש"ח</span><br><br>
+    <button mat-raised-button matTooltip="אישור ומעבר לתשלום" class="end-button">אישור ההסעה</button>
+    <button mat-raised-button matTooltip="הורדת תחנות קרובות לקיצור זמן הנסיעה והפחתת עלויות" class="end-button">איחוד תחנות</button>
+    <br><br>
   </mat-drawer>
 </mat-drawer-container>
 </div>

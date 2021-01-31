@@ -14,7 +14,7 @@ export class ShowAndCalcComponent implements OnInit {
   usersAndAddress;
   abc;
   panelOpenState = false;
-  
+
   constructor(private transSer: TransportationService, private router: Router, private activeRoute: ActivatedRoute) { }
 
   async ngOnInit() {
@@ -22,7 +22,8 @@ export class ShowAndCalcComponent implements OnInit {
     //   this.abc=x;
     //   console.log(this.abc);
     //   });
-    this.trans = this.transSer.trans;
+    // this.trans = this.transSer.trans;
+    this.trans=JSON.parse(localStorage.getItem("transToShow"));
     this.usersAndAddress = await this.transSer.gePassengersListDeatails(this.trans);
   }
 

@@ -97,7 +97,7 @@ export class MyCreateTransportationComponent implements OnInit {
 
   show(thisTrans)
   {
-
+    localStorage.setItem('transToShow', JSON.stringify(thisTrans));
     this.transportser.trans=thisTrans;
     this.router.navigate(["/ShowCalc"]);
   }

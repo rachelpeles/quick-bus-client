@@ -27,7 +27,8 @@ import {
   MatSidenavModule,
   MatCheckboxModule,
   MatExpansionModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -125,6 +126,7 @@ import { AgmDirectionModule } from 'agm-direction';
     MatCheckboxModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAXS8o9R2xBXjDX-_7SGv3xqE8ET_413wg',
       libraries: ['places'],

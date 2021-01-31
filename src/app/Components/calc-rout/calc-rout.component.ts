@@ -16,6 +16,10 @@ export class CalcRoutComponent implements OnInit {
   dir: Array<any> = new Array<any>();
   color = ["red", "blue", "orange", "pink"];
   waypoints = new Array<Array<any>>();
+  times: Array<any>=new Array<any>();
+  price=0;
+  isDispersion=JSON.parse(localStorage.getItem("transToShow")).schedules.routes.isDispersion? 'פיזור': 'איסוף';
+  description=JSON.parse(localStorage.getItem("transToShow")).description;
   public latitude = 31.723342;
   public longitude = 35.013975;
   public zoom = 10;
@@ -24,28 +28,33 @@ export class CalcRoutComponent implements OnInit {
 
   async ngOnInit() {
     await this.transSer
-      .calcRoute(this.transSer.trans.transportationId)
+      .calcRoute(JSON.parse(localStorage.getItem("transToShow")).transportationId)
       .toPromise()
       .then((points) => {
-        for (let i = 0, w = 0; i < points.length; i++) {
-          if (points[i].length > 1) {
-            for (let j = 0; j < points[i].length; j++) {
+        for (let i = 0, w = 0; i < points.way.length; i++) {
+          if (points.way[i].length > 1) {
+            for (let j = 0; j < points.way[i].length; j++) {
               if (j == 0) {
                 this.waypoints[w] = new Array<string>();
               } else if (
-                j + 1 == points[i].length &&
-                points[i + 1] &&
-                points[i + 1].length > 1
+                j + 1 == points.way[i].length &&
+                points.way[i + 1] &&
+                points.way[i + 1].length > 1
               )
                 this.waypoints.push(new Array<string>());
 
               this.waypoints[w].push({
-                location: points[i][j],
+                location: points.way[i][j],
                 stopover: true,
               });
             }
             w++;
           }
+        }
+        for (let i = 0; i < points.time.length; i++)
+        {
+          this.times[i] = points.time[i];
+          this.price+=points.price[i];
         }
       });
     this.getDirection();
@@ -69,20 +78,20 @@ export class CalcRoutComponent implements OnInit {
         },
         optimizeWaypoints: false,
       };
-      if (this.transSer.trans.schedules.routes.isDispersion == true)
+      if (JSON.parse(localStorage.getItem("transToShow")).schedules.routes.isDispersion == true)
       {
-        a.origin = this.transSer.trans.address;
+        a.origin = JSON.parse(localStorage.getItem("transToShow")).address;
         a.destination = this.waypoints[i][this.waypoints[i].length - 1].location;
       } else
       {
         a.origin = this.waypoints[i][0].location;
-        a.destination = this.transSer.trans.address;
+        a.destination = JSON.parse(localStorage.getItem("transToShow")).address;
       }
       this.dir.push(a);
     }
   }
 
-  //פונקציה למ.יקוד בתחנה הנבחרת
+  //פונקציה למיקוד בתחנה הנבחרת
   onLocationSelected(address)
   {
       var geocoder=new google.maps.Geocoder();
