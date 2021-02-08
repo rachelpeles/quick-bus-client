@@ -19,6 +19,7 @@ import { EditTransDialogComponent } from '../Components/edit-trans-dialog/edit-t
 import { WaiteConfirmComponent } from '../Components/waite-confirm/waite-confirm.component';
 import { ShowAndCalcComponent } from '../Components/show-and-calc/show-and-calc.component';
 import { CalcRoutComponent } from '../Components/calc-rout/calc-rout.component';
+import { PaymentComponent } from '../Components/payment/payment.component';
 
 const appRout: Routes =
   [
@@ -43,6 +44,7 @@ const appRout: Routes =
     { path: "WaiteConfirm", component: WaiteConfirmComponent },
     { path: "ShowCalc", component: ShowAndCalcComponent },
     { path: "CalcRoute", component: CalcRoutComponent },
+    {path: "Payment", component: PaymentComponent},
     { path: "**", redirectTo: "/NotFound" }
 
   ];

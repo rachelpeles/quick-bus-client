@@ -42,7 +42,7 @@ mat-drawer-content {
 
 .mat-drawer {
   padding: 3%;
-  width: 350px;
+  width: 360px;
 }
 
 .maps
@@ -100,6 +100,7 @@ mat-drawer-content {
 .end-button
 {
   margin: 10px;
+  font-family: system-ui;
 }
 
 /* לא בשימוש */

@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { TransportationService } from "src/app/Services/transportation.service";
 import { Location } from "@angular-material-extensions/google-maps-autocomplete";
 import { ok } from "assert";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -18,13 +19,13 @@ export class CalcRoutComponent implements OnInit {
   waypoints = new Array<Array<any>>();
   times: Array<any>=new Array<any>();
   price=0;
-  isDispersion=JSON.parse(localStorage.getItem("transToShow")).schedules.routes.isDispersion? 'פיזור': 'איסוף';
+  isDispersion={str: JSON.parse(localStorage.getItem("transToShow")).schedules.routes.isDispersion? 'פיזור': 'איסוף', bool: JSON.parse(localStorage.getItem("transToShow")).schedules.routes.isDispersion};
   description=JSON.parse(localStorage.getItem("transToShow")).description;
   public latitude = 31.723342;
   public longitude = 35.013975;
   public zoom = 10;
 
-  constructor(private transSer: TransportationService) {}
+  constructor(private transSer: TransportationService, private router: Router) {}
 
   async ngOnInit() {
     await this.transSer
@@ -34,19 +35,20 @@ export class CalcRoutComponent implements OnInit {
         for (let i = 0, w = 0; i < points.way.length; i++) {
           if (points.way[i].length > 1) {
             for (let j = 0; j < points.way[i].length; j++) {
-              if (j == 0) {
+              if (j == 0)
                 this.waypoints[w] = new Array<string>();
-              } else if (
+              else if (
                 j + 1 == points.way[i].length &&
                 points.way[i + 1] &&
-                points.way[i + 1].length > 1
+                points.way[i + 1].length > 1 &&
+                points.way[i][j]!=points.way[i][j-1]
               )
                 this.waypoints.push(new Array<string>());
-
-              this.waypoints[w].push({
-                location: points.way[i][j],
-                stopover: true,
-              });
+              if(points.way[i][j]!=points.way[i][j-1])
+                this.waypoints[w].push({
+                  location: points.way[i][j],
+                  stopover: true,
+                });
             }
             w++;
           }
@@ -108,5 +110,10 @@ export class CalcRoutComponent implements OnInit {
             console.log('Error - ', results, ' & Status - ', status);
         }
       });
+  }
+
+  OK()
+  {
+    this.router.navigate(['Payment']);
   }
 }

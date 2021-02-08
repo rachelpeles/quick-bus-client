@@ -1,0 +1,21 @@
+#all
+{
+  padding-left: 30%;
+  padding-right: 30%;
+  padding-top: 5%;
+}
+
+.font
+{
+  font-family: 'system-ui';
+}
+
+#header
+{
+  text-align: center;
+}
+
+#left
+{
+  float: left;
+}

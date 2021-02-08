@@ -1,5 +1,5 @@
 
-<mat-toolbar color="warn" >  
+<mat-toolbar color="white" >
 <!-- primary -->
 <!-- accent -->
 
@@ -7,16 +7,18 @@
     <a routerLink="/Manager">Manager</a>|
     <a routerLink="/GetHours">Get Hours</a>  -->
 <!-- <app-my-form></app-my-form> -->
-    <!-- <button  routerLink="/" mat-button href="/">Home</button> 
-    <button routerLink="/Manager" mat-button href="/Manager">Manager</button>  
+    <!-- <button  routerLink="/" mat-button href="/">Home</button>
+    <button routerLink="/Manager" mat-button href="/Manager">Manager</button>
     <button routerLink="/GetHours" mat-button href="/GetHours">Get Hours</button>-->
   <!-- <app-vehicle></app-vehicle> -->
     <span class="demo-toolbar"></span>
     <!-- <app-home></app-home> -->
-    <span >הסעות</span> 
+
     <!-- <a routerLink="Home">Home</a>| -->
-    <i class="material-icons" [attr.aria-label]="myActionLabel">person</i>
+    <i class="material-icons person">person</i>
+    <img src="../assets/imag/logo.png" id="logo" (click)="route()">
 
+</mat-toolbar>
+<div id="all"></div>
 
-</mat-toolbar> 
 <router-outlet></router-outlet>

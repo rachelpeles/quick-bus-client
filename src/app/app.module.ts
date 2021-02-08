@@ -60,6 +60,7 @@ import { CalcRoutComponent } from './Components/calc-rout/calc-rout.component';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
+import { PaymentComponent } from './Components/payment/payment.component';
 // import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
@@ -88,7 +89,8 @@ import { AgmDirectionModule } from 'agm-direction';
     DelTransDialogComponent,
     WaiteConfirmComponent,
     ShowAndCalcComponent,
-    CalcRoutComponent
+    CalcRoutComponent,
+    PaymentComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],
