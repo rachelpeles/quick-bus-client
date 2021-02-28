@@ -68,7 +68,7 @@ export class JoinToTransportComponent implements OnInit {
   trans: Transportation;
   newWait: UsersAddress;
 
-  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private meSer: MyService, private snackBar: MatSnackBar) {
+  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private meSer: MyService, private snackBar: MatSnackBar, private titleService: Title) {
 
     // this.thisUser=this.meSer.family;
     this.thisUser = JSON.parse(sessionStorage.getItem('user'));
@@ -89,6 +89,7 @@ export class JoinToTransportComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('FastRide | הצטרפות להסעה');
     this.countAddressUser = this.thisUser.address.length;
     console.log('המשתמש: ' + this.thisUser.userName);
     // sessionStorage.setItem('address', this.joinTransport.get('address').value);

@@ -28,7 +28,8 @@ import {
   MatCheckboxModule,
   MatExpansionModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatTabsModule
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -61,6 +62,7 @@ import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/go
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { PaymentComponent } from './Components/payment/payment.component';
+import { MyFormComponent } from './Components/my-form/my-form.component';
 // import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
@@ -90,7 +92,8 @@ import { PaymentComponent } from './Components/payment/payment.component';
     WaiteConfirmComponent,
     ShowAndCalcComponent,
     CalcRoutComponent,
-    PaymentComponent
+    PaymentComponent,
+    MyFormComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],
@@ -129,6 +132,7 @@ import { PaymentComponent } from './Components/payment/payment.component';
     MatExpansionModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatTabsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAXS8o9R2xBXjDX-_7SGv3xqE8ET_413wg',
       libraries: ['places'],

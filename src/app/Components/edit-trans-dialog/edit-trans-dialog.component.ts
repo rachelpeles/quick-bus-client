@@ -36,7 +36,7 @@ export class EditTransDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('Home | @angular-material-extensions/google-maps-autocomplete');
+    this.titleService.setTitle('FastRide | הסעות שיצרתי');
 
     this.zoom = 10;
     this.latitude = 52.520008;
@@ -63,7 +63,7 @@ export class EditTransDialogComponent implements OnInit {
         +". קוד ההסעה: "
         + this.data.thisTrans.transportationId + ". כתובת היעד/ המוצא: "
         + this.data.thisTrans.address + ". זמן"
-        + this.data.thisTrans.schedules + ". נסיעה טובה!");
+        + this.data.thisTrans.schedules.departureTime + ". נסיעה טובה!");
     });
     this.dialogRef.close(this.localTrans);
 
@@ -102,7 +102,7 @@ export class EditTransDialogComponent implements OnInit {
         + " נרשמה בהצלחה. באפשרותך לשתף את קוד ההסעה שבעזרתו יוכלו אנשים נוספים להירשם להסעה. תוכל לאשר או לדחות את הצטרפותם. קוד ההסעה: "
         + this.localTrans.transportationId + "כתובת היעד/ המוצא: "
         + this.localTrans.address + "זמן: "
-        + this.localTrans.schedules + "נסיעה טובה!");
+        + this.localTrans.schedules.departureTime + "נסיעה טובה!");
     });
 
   }
@@ -130,6 +130,7 @@ export class EditTransDialogComponent implements OnInit {
 
   onAutocompleteSelected(result: PlaceResult) {
     console.log('onAutocompleteSelected: ', result);
+    this.localTrans.address=result.formatted_address;
   }
 
   onLocationSelected(location: Location) {

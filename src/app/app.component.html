@@ -1,5 +1,5 @@
 
-<mat-toolbar color="white" >
+<mat-toolbar>
 <!-- primary -->
 <!-- accent -->
 
@@ -14,11 +14,26 @@
     <span class="demo-toolbar"></span>
     <!-- <app-home></app-home> -->
 
+    <div class="right">
+      <nav mat-tab-nav-bar>
+        <a mat-tab-link
+        *ngFor="let link of navLinks"
+        [routerLink]="link.link"
+        routerLinkActive="active"
+        #rla="routerLinkActive"
+        [active]="rla.isActive">
+        {{link.label}}
+        </a>
+      </nav>
+    </div>
+
     <!-- <a routerLink="Home">Home</a>| -->
     <i class="material-icons person">person</i>
-    <img src="../assets/imag/logo.png" id="logo" (click)="route()">
+    <img src="../assets/imag/Logos.png" id="logo" (click)="route()">
 
 </mat-toolbar>
-<div id="all"></div>
+<div id="all">
+
+</div>
 
 <router-outlet></router-outlet>

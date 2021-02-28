@@ -93,4 +93,10 @@ export class TransportationService {
     return a;
   }
 
+  stationUnion(route, distances, id):Observable<any>
+  {
+    var a=this.http.get<any>(this.myurl+'CalcRoute?transportationId=' + id + 'route=' + route + 'distances' + distances);
+    return a;
+  }
+
 }

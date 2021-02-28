@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, Optional, ViewChild } from '@angular/core';
 import { MatDialog, MatTable, MatTableDataSource } from '@angular/material';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Family } from 'src/app/Classes/Family';
@@ -27,11 +28,12 @@ export class MyCreateTransportationComponent implements OnInit {
   dataexist=false;
   dataForShow;
   abc="abc";
-  constructor(private userSer: FamilyService, private transportser: TransportationService, private dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private router: Router, private meSer: MyService) { }
+  constructor(private userSer: FamilyService, private transportser: TransportationService, private dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private router: Router, private meSer: MyService, private titleService: Title) { }
 
 
   displayedColumns = ['transportId', 'transportName', 'transportAddress', 'Participants', 'delete', 'edit', 'calcRoute'];
   ngOnInit() {
+    this.titleService.setTitle('FastRide | הסעות שיצרתי');
     this.refresh();
   }
 

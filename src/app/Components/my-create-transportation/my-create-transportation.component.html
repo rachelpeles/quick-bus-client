@@ -1,73 +1,105 @@
+
 <p class="header">ההסעות שלי</p>
 <div *ngIf="!dataexist" class="notexist">
-    <span>לא יצרת עדיין הסעות</span><br><br>
-    <button mat-raised-button type="button" (click)="action('add')">צור עכשיו</button>
+  <span>לא יצרת עדיין הסעות</span><br /><br />
+  <button mat-raised-button type="button" (click)="action('add')">
+    צור עכשיו
+  </button>
 </div>
 
-<mat-progress-spinner *ngIf="dataexist"
-        class="example-margin"
-        [color]="accent"
-        [mode]="Indeterminate"
-        [value]="50">
-    </mat-progress-spinner>
-<div *ngIf="dataexist">
+  <mat-progress-spinner
+    *ngIf="dataexist"
+    class="example-margin"
+    [color]="accent"
+    [mode]="Indeterminate"
+    [value]="50">
+  </mat-progress-spinner>
+<div class="all">
+  <div id="dataTable" *ngIf="dataexist">
     <div class="flexdiv">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="transportId">
+          <th mat-header-cell *matHeaderCellDef>קוד הסעה</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.transportationId }}
+          </td>
+        </ng-container>
 
-            <ng-container matColumnDef="transportId">
-                <th mat-header-cell *matHeaderCellDef>קוד הסעה</th>
-                <td mat-cell *matCellDef="let element"> {{element.transportationId}} </td>
-            </ng-container>
+        <ng-container matColumnDef="transportName">
+          <th mat-header-cell *matHeaderCellDef>שם הסעה</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
 
-            <ng-container matColumnDef="transportName">
-                <th mat-header-cell *matHeaderCellDef>שם הסעה</th>
-                <td mat-cell *matCellDef="let element">{{element.description}} </td>
-            </ng-container>
+        <ng-container matColumnDef="transportAddress">
+          <th mat-header-cell *matHeaderCellDef>כתובת</th>
+          <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+        </ng-container>
 
-            <ng-container matColumnDef="transportAddress">
-                <th mat-header-cell *matHeaderCellDef>כתובת</th>
-                <td mat-cell *matCellDef="let element">{{element.address}}</td>
-            </ng-container>
+        <ng-container matColumnDef="Participants">
+          <th mat-header-cell *matHeaderCellDef>משתתפים</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.usersAndAddress.length }}
+            <u
+              class="waitJoin"
+              *ngIf="element.waitingList.length != 0"
+              (click)="waiteConfirm(element)"
+              >{{ element.waitingList.length }} ממתינים לאישור הצטרפותם</u>
+          </td>
+        </ng-container>
 
-            <ng-container matColumnDef="Participants">
-                <th mat-header-cell *matHeaderCellDef>משתתפים</th>
-                <td mat-cell *matCellDef="let element">{{element.usersAndAddress.length}}    
-                    <u class="waitJoin" *ngIf="element.waitingList.length!=0" (click)="waiteConfirm(element)">{{element.waitingList.length}}  ממתינים לאישור הצטרפותם</u>
-                </td>
-            </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-cell *matCellDef="let element">
+            <button
+              class="deleteAndEdit"
+              mat-mini-fab
+              color="white"
+              (click)="action('delete', element)">
+              <i class="material-icons">delete</i>
+            </button>
+          </th>
+        </ng-container>
 
-            <ng-container matColumnDef="delete">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <th mat-cell *matCellDef="let element">
-                    <button class="deleteAndEdit" mat-mini-fab color="white" (click)="action('delete', element)">
-                        <i class="material-icons">delete</i>
-                    </button>
-                </th>
-            </ng-container>
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-cell *matCellDef="let element">
+            <button
+              class="deleteAndEdit"
+              mat-mini-fab
+              color="white"
+              (click)="action('edit', element)">
+              <i class="material-icons">edit</i>
+            </button>
+          </th>
+        </ng-container>
 
-            <ng-container matColumnDef="edit">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <th mat-cell *matCellDef="let element">
-                    <button class="deleteAndEdit" mat-mini-fab color="white" (click)="action('edit', element)">
-                        <i class="material-icons">edit</i>
-                    </button>
-                </th>
-            </ng-container>
+        <ng-container matColumnDef="calcRoute">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-cell *matCellDef="let element">
+            <button
+              mat-raised-button
+              class="deleteAndEdit"
+              (click)="show(element)"
+              [abc]="abc">
+              הצג וחשב מסלול
+            </button>
+          </th>
+        </ng-container>
 
-            <ng-container matColumnDef="calcRoute">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <th mat-cell *matCellDef="let element">
-                    <button mat-raised-button class="deleteAndEdit" (click)="show(element)" [abc]="abc">הצג וחשב מסלול</button>
-                </th>
-            </ng-container>
-
-<ShowCalc [hghg]></ShowCalc>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <ShowCalc [hghg]></ShowCalc>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
     </div>
 
     <button class="b" mat-fab color="white" (click)="action('add')">
-        <i class="material-icons add">add</i>
+      <i class="material-icons add">add</i>
     </button>
+  </div>
+  <img src="../../../assets/imag/Colorist.png" class="logo">
+</div>
+
+<div id="twice">
+  <div class="check" id="red"></div>
+  <div class="check" id="blue"></div>
 </div>

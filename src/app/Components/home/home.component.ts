@@ -7,6 +7,7 @@ import { EstablishmentService } from 'src/app/Services/Establishment.service';
 import { MyService } from 'src/app/Services/my.service';
 import { Family } from '../../Classes/Family';
 import { Establishment } from '../../Classes/establishment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   // password: string;
   hide=true;
 
-  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService) {
+  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService, private titleService: Title) {
     this.regiForm = this.fb.group({
       'UserName': [null, Validators.required],
       'Password': [null, [Validators.required, Validators.minLength(6)]],
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('FastRide | ראשי');
     this.FamilySer.getFamilyList().subscribe(
       data => {
         this.FamilyList = data;
@@ -73,12 +75,12 @@ export class HomeComponent implements OnInit {
 
       alert("שם משתמש או הסיסמא שגויים");
       this.regiForm.value.password = "";
-    }      
+    }
   }
 
   New() {
     debugger;
-    
+
     if (this.regiForm.value.Kind == 'manager')
       this.router.navigate(["/NewManager"]);
     else

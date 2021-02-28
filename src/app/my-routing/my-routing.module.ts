@@ -20,6 +20,7 @@ import { WaiteConfirmComponent } from '../Components/waite-confirm/waite-confirm
 import { ShowAndCalcComponent } from '../Components/show-and-calc/show-and-calc.component';
 import { CalcRoutComponent } from '../Components/calc-rout/calc-rout.component';
 import { PaymentComponent } from '../Components/payment/payment.component';
+import { MyFormComponent } from '../Components/my-form/my-form.component';
 
 const appRout: Routes =
   [
@@ -45,6 +46,7 @@ const appRout: Routes =
     { path: "ShowCalc", component: ShowAndCalcComponent },
     { path: "CalcRoute", component: CalcRoutComponent },
     {path: "Payment", component: PaymentComponent},
+    {path: "form", component: MyFormComponent},
     { path: "**", redirectTo: "/NotFound" }
 
   ];

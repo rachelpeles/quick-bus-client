@@ -24,6 +24,7 @@ export class ShowAndCalcComponent implements OnInit {
     //   });
     // this.trans = this.transSer.trans;
     this.trans=JSON.parse(localStorage.getItem("transToShow"));
+    this.abc = this.trans.schedules.departureTime;
     this.usersAndAddress = await this.transSer.gePassengersListDeatails(this.trans);
   }
 

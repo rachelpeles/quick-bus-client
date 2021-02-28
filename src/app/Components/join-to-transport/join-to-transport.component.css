@@ -5,6 +5,7 @@
     margin-right: 200px;
     margin-top: 30px;
     width: -webkit-fill-available;
+    font-family: system-ui;
 }
 
 .center
@@ -35,7 +36,7 @@
     flex-direction: column;
     display: flex;
     margin: 15px 0;
-}   
+}
 .radioButton
 {
     margin: 5px;

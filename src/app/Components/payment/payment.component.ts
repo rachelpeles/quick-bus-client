@@ -14,4 +14,17 @@ export class PaymentComponent implements OnInit {
   ngOnInit() {
   }
 
+  byPassengers()
+  {
+    var list = JSON.parse(localStorage.getItem('dir'));
+    for (let i = 0; i < list.length; i++)
+    {
+      for (let j = 0; j < list[i].length; j++)
+      {
+
+
+      }
+
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <div id="all">
   <h1 id="header" class="font">תשלום נסיעה</h1><br><br>
-  <p class="font">הנך מבקש לאשר את {{ local }}</p>
+  <p class="font">הנך מבקש לאשר את {{ local }}.</p>
   <p class="font">
     באפשרותך לשלם בעצמך את ההסעה או לשלוח הודעה לנוסעים שעליהם לשלם.
   </p>
@@ -13,5 +13,5 @@
   </p>
   <br /><br />
   <button mat-raised-button>מעבר לתשלום המלא</button>
-  <button mat-raised-button id="left">תשלום על ידי הנוסעים</button>
+  <button mat-raised-button id="left" (click)="byPassengers()">תשלום על ידי הנוסעים</button>
 </div>

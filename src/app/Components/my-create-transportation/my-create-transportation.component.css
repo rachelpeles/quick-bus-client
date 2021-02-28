@@ -5,13 +5,18 @@
   color: teal;
 }
 
-.flexdiv 
+#dataTable
+{
+  z-index: 1;
+}
+
+.flexdiv
 {
   display: flex;
   justify-content: center;
 }
 
-table 
+table
 {
   width: 70em;
   margin: 10px;
@@ -29,7 +34,7 @@ table
   text-align: center;
 }
 
-.mat-form-field 
+.mat-form-field
 {
     text-align: right;
     margin-top: 16px;
@@ -70,3 +75,41 @@ table
 {
   text-align: center;
 }
+
+.all
+{
+  display: flex;
+  justify-content: center;
+}
+.logo
+{
+  filter: grayscale(100%);
+  margin-right: 40%;
+  position: absolute;
+}
+.logo:hover
+{
+  filter: none;
+}
+
+/* #twice
+{
+  display: flex;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.check
+{
+  width: 50px;
+  height: 50px;
+}
+#red
+{
+  background-color: red;
+  position: absolute;
+  z-index: -1;
+}
+#blue
+{
+  background-color: blue;
+} */
