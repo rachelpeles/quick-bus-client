@@ -1,0 +1,50 @@
+<div class="all">
+    <h1>פרטי הסעה</h1>
+    <div class="row">
+        <span class="right">קוד הסעה</span>
+        <span class="left">{{trans.transportationId}}</span>
+    </div>
+    <div class="row">
+        <span class="right">תאור</span>
+        <span class="left">{{trans.description}}</span>
+    </div>
+    <div class="row">
+        <span class="right">כתובת</span>
+        <span class="left">{{trans.address}}</span>
+    </div>
+    <div class="row">
+        <span class="right">תדירות</span>
+        <!-- <span class="left">{{trans.schedule.frequency}}</span> -->
+    </div>
+    <div class="row">
+        <span class="right">שעה משוערת</span>
+        <span class="left">{{abc}}</span>
+    </div>
+    <div class="row">
+        <span class="right">משתתפים</span>
+
+        <mat-accordion class="left">
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{usersAndAddress?.length}} משתתפים
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <table>
+                    <tr>
+                        <th>שם</th>
+                        <th>כתובת</th>
+                    </tr>
+                    <tr *ngFor="let element of usersAndAddress">
+                        <td>{{element.name}}</td>
+                        <td>{{element.address}}</td>
+                    </tr>
+                </table>
+            </mat-expansion-panel>
+        </mat-accordion><br>
+        <button mat-raised-button id="button" class="row left" (click)="calc()">חישוב מסלול</button>
+
+    </div><br>
+
+
+</div>

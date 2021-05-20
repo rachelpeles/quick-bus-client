@@ -1,0 +1,48 @@
+#stepper
+{
+    direction: rtl;
+    position: absolute;
+    margin-right: 200px;
+    margin-top: 30px;
+    width: -webkit-fill-available;
+    font-family: system-ui;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.continue
+{
+    margin: 30px;
+}
+
+.form
+{
+    width: min-content;
+    margin: 70px;
+    width: 500px;
+}
+
+.card
+{
+    width: 1000px;
+    height: 1000px;
+    text-align: right;
+}
+.radioGroup
+{
+    flex-direction: column;
+    display: flex;
+    margin: 15px 0;
+}
+.radioButton
+{
+    margin: 5px;
+}
+.unlink
+{
+    text-decoration: underline;
+    cursor: pointer;
+}

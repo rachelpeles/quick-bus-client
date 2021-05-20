@@ -1,5 +1,5 @@
 
-<mat-toolbar color="warn" >  
+<mat-toolbar>
 <!-- primary -->
 <!-- accent -->
 
@@ -7,17 +7,33 @@
     <a routerLink="/Manager">Manager</a>|
     <a routerLink="/GetHours">Get Hours</a>  -->
 <!-- <app-my-form></app-my-form> -->
-    <!-- <button  routerLink="/" mat-button href="/">Home</button> 
-    <button routerLink="/Manager" mat-button href="/Manager">Manager</button>  
+    <!-- <button  routerLink="/" mat-button href="/">Home</button>
+    <button routerLink="/Manager" mat-button href="/Manager">Manager</button>
     <button routerLink="/GetHours" mat-button href="/GetHours">Get Hours</button>-->
   <!-- <app-vehicle></app-vehicle> -->
     <span class="demo-toolbar"></span>
     <!-- <app-home></app-home> -->
-    <span >הסעות</span> 
+
+    <div class="right">
+      <nav mat-tab-nav-bar>
+        <a mat-tab-link
+        *ngFor="let link of navLinks"
+        [routerLink]="link.link"
+        routerLinkActive="active"
+        #rla="routerLinkActive"
+        [active]="rla.isActive">
+        {{link.label}}
+        </a>
+      </nav>
+    </div>
+
     <!-- <a routerLink="Home">Home</a>| -->
-    <i class="material-icons" [attr.aria-label]="myActionLabel">person</i>
+    <i class="material-icons person">person</i>
+    <img src="../assets/imag/Logos.png" id="logo" (click)="route()">
 
+</mat-toolbar>
+<div id="all">
 
-</mat-toolbar> 
-<router-outlet></router-outlet> 
+</div>
 
+<router-outlet></router-outlet>

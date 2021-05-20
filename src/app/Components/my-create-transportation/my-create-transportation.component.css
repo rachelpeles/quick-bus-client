@@ -1,0 +1,115 @@
+.header
+{
+  font-size: larger;
+  text-align: center;
+  color: teal;
+}
+
+#dataTable
+{
+  z-index: 1;
+}
+
+.flexdiv
+{
+  display: flex;
+  justify-content: center;
+}
+
+table
+{
+  width: 70em;
+  margin: 10px;
+}
+
+.mat-raised-button
+{
+  font-size: medium;
+  font-family:Tahoma;
+  margin-right: 8px;
+}
+
+.buttons
+{
+  text-align: center;
+}
+
+.mat-form-field
+{
+    text-align: right;
+    margin-top: 16px;
+}
+
+.form
+{
+  text-align: center;
+  font-size: large;
+}
+
+.add
+{
+  color: #821f17;
+  font-weight: bolder;
+}
+
+.b
+{
+  margin-top: 5px;
+  margin-left: 30px;
+
+}
+
+.deleteAndEdit
+{
+  box-shadow: none;
+}
+
+.waitJoin
+{
+    font-size: x-small;
+    color: blue;
+    cursor: pointer;
+}
+
+.notexist
+{
+  text-align: center;
+}
+
+.all
+{
+  display: flex;
+  justify-content: center;
+}
+.logo
+{
+  filter: grayscale(100%);
+  margin-right: 40%;
+  position: absolute;
+}
+.logo:hover
+{
+  filter: none;
+}
+
+/* #twice
+{
+  display: flex;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.check
+{
+  width: 50px;
+  height: 50px;
+}
+#red
+{
+  background-color: red;
+  position: absolute;
+  z-index: -1;
+}
+#blue
+{
+  background-color: blue;
+} */

@@ -1,0 +1,47 @@
+<!-- <div class="all">
+    <div class="class">
+        <p class="class">כאן יהיה בקרוב חישוב מסלול!</p>
+        <img width=" 52.5%" alt="כאן בונים" src="../../../assets/imag/כאן בונים.png" /><br>
+
+    </div>
+</div> -->
+
+
+
+<div class="panel">
+<button class="expand" mat-raised-button (click)="drawer.toggle()">
+  <i class="material-icons">double_arrow</i>
+</button>
+<mat-drawer-container id="visibilityContainer" class="example-container" [hasBackdrop]="false" autosize>
+  <mat-drawer #drawer [mode]="over" [opened]="true">
+    <h2 id="head">{{description}} - {{isDispersion.str}}</h2>
+    <div *ngFor="let d of dir; let i = index">
+      <h3>רכב מספר {{i+1}}</h3>
+      <!-- <span *ngIf="isDispersion==false">שעת יציאה: {{(JSON.parse(localStorage.getItem("transToShow")).schedules.DepartureTime)- time[i]}}</span> -->
+      <div *ngFor="let v of d.waypoints; let j = index">
+        <i class="material-icons">place</i>
+        <button mat-raised-button *ngIf="j == 0 && !isDispersion.bool" class="list" (click)="onLocationSelected(v.location)">{{v.location.location}} - נהג</button>
+        <button mat-raised-button *ngIf="j != 0 || isDispersion.bool" class="list" (click)="onLocationSelected(v.location)">{{v.location.location}}</button>
+      </div>
+      <span id="time">משך זמן המסלול: {{times[i]}} דקות</span><br><br>
+    </div>
+    <br>
+    <span id="price">מחיר כולל להסעה: {{price}} ש"ח</span><br><br>
+    <button mat-raised-button matTooltip="אישור ומעבר לתשלום" class="end-button" (click)="OK()">אישור ההסעה</button>
+    <button mat-raised-button matTooltip="הורדת תחנות קרובות לקיצור זמן הנסיעה והפחתת עלויות" class="end-button" (click)="stationUnion()">איחוד תחנות</button>
+    <br><br>
+  </mat-drawer>
+</mat-drawer-container>
+</div>
+<agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude">
+  <agm-direction
+    *ngFor="let data of dir"
+    [editable]="true"
+    [origin]="data.origin"
+    [destination]="data.destination"
+    [renderOptions]="data.renderOptions"
+    [waypoints]="data.waypoints.location"
+    [markerOptions]="data.markerOpts"
+    [optimizeWaypoints]="data.optimizeWaypoints">
+  </agm-direction>
+</agm-map>

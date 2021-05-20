@@ -7,8 +7,12 @@ import { EstablishmentService } from 'src/app/Services/Establishment.service';
 import { MyService } from 'src/app/Services/my.service';
 import { Family } from '../../Classes/Family';
 import { Establishment } from '../../Classes/establishment';
+<<<<<<< HEAD
 import { NewPassengerDialogComponent } from '../new-passenger-dialog/new-passenger-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material';
+=======
+import { Title } from '@angular/platform-browser';
+>>>>>>> 78027eb561c17420ca355fd904a755ab46bc02cd
 
 @Component({
   selector: 'app-home',
@@ -24,7 +28,11 @@ export class HomeComponent implements OnInit {
   // password: string;
   hide=true;
 
+<<<<<<< HEAD
   constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService,private dialog:MatDialog) {
+=======
+  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService, private titleService: Title) {
+>>>>>>> 78027eb561c17420ca355fd904a755ab46bc02cd
     this.regiForm = this.fb.group({
       'UserName': [null, Validators.required],
       'Password': [null, [Validators.required, Validators.minLength(6)]],
@@ -34,6 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('FastRide | ראשי');
     this.FamilySer.getFamilyList().subscribe(
       data => {
         this.FamilyList = data;
@@ -64,6 +73,7 @@ export class HomeComponent implements OnInit {
       if (this.FamilyList[i].userName == this.UserName.value && this.FamilyList[i].password == this.Password.value) {
         flag = true;
         this.mySer.family = this.FamilyList[i];
+        sessionStorage.setItem('user', JSON.stringify(this.FamilyList[i]));
         alert("ברוכים הבאים ל"+this.UserName.value);
         this.router.navigate(["/PassengersComponent"]);
 
@@ -74,10 +84,11 @@ export class HomeComponent implements OnInit {
 
       alert("שם משתמש או הסיסמא שגויים");
       this.regiForm.value.password = "";
-    }      
+    }
   }
 
   New() {
+<<<<<<< HEAD
     // debugger;
     
     // if (this.regiForm.value.Kind == 'manager')
@@ -106,6 +117,14 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`);
     });
+=======
+    debugger;
+
+    if (this.regiForm.value.Kind == 'manager')
+      this.router.navigate(["/NewManager"]);
+    else
+      this.router.navigate(["/AddPassenger"]);
+>>>>>>> 78027eb561c17420ca355fd904a755ab46bc02cd
   }
 }
 
