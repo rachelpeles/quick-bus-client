@@ -24,7 +24,12 @@ import {
   MatSortModule,
   MatGridListModule,
   MatSlideToggleModule,
-  MatDialogModule
+  MatSidenavModule,
+  MatCheckboxModule,
+  MatExpansionModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatTabsModule
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -44,15 +49,28 @@ import { MyGridComponent } from './Components/my-grid/my-grid.component';
 import { RouterModule } from '@angular/router';
 import { formatNumber } from '@angular/common';
 import { UserMainComponent } from './Components/user-main/user-main.component';
-import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.component';
-import { NewPassengerDialogComponent } from './Components/new-passenger-dialog/new-passenger-dialog.component';
+import { EditVehicleDialogComponent } from './Components/edit-vehicle-dialog/edit-vehicle-dialog.component';
+import { DelVehicleDialogComponent } from './Components/del-vehicle-dialog/del-vehicle-dialog.component';
+import { JoinToTransportComponent } from './Components/join-to-transport/join-to-transport.component';
+import { MyCreateTransportationComponent } from './Components/my-create-transportation/my-create-transportation.component';
+import { EditTransDialogComponent } from './Components/edit-trans-dialog/edit-trans-dialog.component';
+import { DelTransDialogComponent } from './Components/del-trans-dialog/del-trans-dialog.component';
+import { WaiteConfirmComponent } from './Components/waite-confirm/waite-confirm.component';
+import { ShowAndCalcComponent } from './Components/show-and-calc/show-and-calc.component';
+import { CalcRoutComponent } from './Components/calc-rout/calc-rout.component';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { PaymentComponent } from './Components/payment/payment.component';
+import { MyFormComponent } from './Components/my-form/my-form.component';
+// import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 
 
 @NgModule({
-  entryComponents: [ NewPassengerDialogComponent ],
+  // entryComponents: [ MsgDialogComponent ],
   declarations: [
     AppComponent,
     UpdateComponent,
@@ -65,8 +83,17 @@ import { NewPassengerDialogComponent } from './Components/new-passenger-dialog/n
     AddChildComponent,
     MyGridComponent,
     UserMainComponent,
-    EditDialogComponent,
-    NewPassengerDialogComponent
+    EditVehicleDialogComponent,
+    DelVehicleDialogComponent,
+    JoinToTransportComponent,
+    MyCreateTransportationComponent,
+    EditTransDialogComponent,
+    DelTransDialogComponent,
+    WaiteConfirmComponent,
+    ShowAndCalcComponent,
+    CalcRoutComponent,
+    PaymentComponent,
+    MyFormComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],
@@ -88,7 +115,6 @@ import { NewPassengerDialogComponent } from './Components/new-passenger-dialog/n
     HttpClientModule,
     MatTableModule,
     MatSlideToggleModule,
-    MatDialogModule,
     //ErrorStateMatcher,
     //ShowOnDirtyErrorStateMatcher,
     MatMenuModule,
@@ -101,6 +127,19 @@ import { NewPassengerDialogComponent } from './Components/new-passenger-dialog/n
     MatSelectModule,
     MatOptionModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatTabsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAXS8o9R2xBXjDX-_7SGv3xqE8ET_413wg',
+      libraries: ['places'],
+      language: 'iw'
+    }),
+    AgmDirectionModule,
+    MatGoogleMapsAutocompleteModule,
     // MatDialogModule
   ],
   schemas: [
