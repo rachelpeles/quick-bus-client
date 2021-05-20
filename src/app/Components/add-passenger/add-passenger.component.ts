@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { MatDialog} from '@angular/material';
 import { Router } from '@angular/router';
 import { Family } from 'src/app/Classes/Family';
 import { FamilyService } from '../../Services/Family.service';
+import { NewPassengerDialogComponent } from '../new-passenger-dialog/new-passenger-dialog.component';
 
 @Component({
   selector: 'app-add-passenger',
@@ -12,7 +14,7 @@ import { FamilyService } from '../../Services/Family.service';
 export class AddPassengerComponent implements OnInit {
 
   regiForm: FormGroup;
-  constructor(private familySer: FamilyService, private router: Router, private fb: FormBuilder) {
+  constructor(private familySer: FamilyService, private router: Router, private fb: FormBuilder ,private dialog:MatDialog) {
 
     this.regiForm = this.fb.group({
       'userName': [null, Validators.required],
@@ -95,6 +97,18 @@ export class AddPassengerComponent implements OnInit {
     else if (this.regiForm.get('Chekpassword').value != this.regiForm.get('password').value)
       return 'אימות סיסמא אינו תואם לסיסמא'
 
+  }
+  dataSource;
+  action(actionType, thisPassenger): void {
+    const dialogRef = this.dialog.open(NewPassengerDialogComponent,
+      {
+        width: '250px',
+        data: { actionType: actionType, thisPassenger: thisPassenger }
+      });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.dataSource.passenger = result;
+    });
   }
 }
 export function chek(control: AbstractControl): {

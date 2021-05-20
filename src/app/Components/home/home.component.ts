@@ -7,6 +7,8 @@ import { EstablishmentService } from 'src/app/Services/Establishment.service';
 import { MyService } from 'src/app/Services/my.service';
 import { Family } from '../../Classes/Family';
 import { Establishment } from '../../Classes/establishment';
+import { NewPassengerDialogComponent } from '../new-passenger-dialog/new-passenger-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
   // password: string;
   hide=true;
 
-  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService) {
+  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService,private dialog:MatDialog) {
     this.regiForm = this.fb.group({
       'UserName': [null, Validators.required],
       'Password': [null, [Validators.required, Validators.minLength(6)]],
@@ -76,13 +78,35 @@ export class HomeComponent implements OnInit {
   }
 
   New() {
-    debugger;
+    // debugger;
     
-    if (this.regiForm.value.Kind == 'manager')
-      this.router.navigate(["/NewManager"]);
-    else
-      this.router.navigate(["/AddPassenger"]);
+    // if (this.regiForm.value.Kind == 'manager')
+    //   this.router.navigate(["/NewManager"]);
+    // else
+    //   this.router.navigate(["/AddPassenger"]);
+    // this.router.navigate(["/AddPassenger"]);
+    
   }
+  dataSource;
+  // action(): void {
+  //   const dialogRef = this.dialog.open(NewPassengerDialogComponent,
+  //     {
+  //       width: '250px'
+       
+  //     });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     this.dataSource.passenger = result;
+  //   });
+  // }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(NewPassengerDialogComponent);
 
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
+

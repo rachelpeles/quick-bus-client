@@ -24,6 +24,7 @@ import {
   MatSortModule,
   MatGridListModule,
   MatSlideToggleModule,
+  MatDialogModule
   // MatDialogModule
   //ErrorStateMatcher,
   //ShowOnDirtyErrorStateMatcher
@@ -44,13 +45,14 @@ import { RouterModule } from '@angular/router';
 import { formatNumber } from '@angular/common';
 import { UserMainComponent } from './Components/user-main/user-main.component';
 import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.component';
+import { NewPassengerDialogComponent } from './Components/new-passenger-dialog/new-passenger-dialog.component';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
 // import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 
 
 @NgModule({
-  // entryComponents: [ MsgDialogComponent ],
+  entryComponents: [ NewPassengerDialogComponent ],
   declarations: [
     AppComponent,
     UpdateComponent,
@@ -63,7 +65,8 @@ import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.compon
     AddChildComponent,
     MyGridComponent,
     UserMainComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    NewPassengerDialogComponent
     // AddVehicleComponent,
     // MsgDialogComponent
   ],
@@ -85,6 +88,7 @@ import { EditDialogComponent } from './Components/edit-dialog/edit-dialog.compon
     HttpClientModule,
     MatTableModule,
     MatSlideToggleModule,
+    MatDialogModule,
     //ErrorStateMatcher,
     //ShowOnDirtyErrorStateMatcher,
     MatMenuModule,

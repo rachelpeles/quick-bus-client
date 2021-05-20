@@ -47,15 +47,18 @@
                             [disabled]="!regiForm.valid || IsAccepted==0">המשך</button>
                     </td>
                 </tr>
-                <mat-form-field class="demo-full-width">
+                <!-- <mat-form-field class="demo-full-width">
                     <mat-select (SelectionChanged)="New()" formControlName="Kind">
                         <mat-option value="manager">מנהל חדש</mat-option>
                         <mat-option value="passenger">נוסע חדש</mat-option>
-                    </mat-select>
+                    </mat-select> 
 
-                </mat-form-field>
-                <a routerLink (click)="New()">הרשם כעת</a>
-
+                </mat-form-field>-->
+                
+                ?אינך רשום<button  (click)="openDialog()">  הרשם כעת </button>
+                <!-- <button class="b" mat-fab color="white" (click)="action()">
+                    <i class="material-icons add">add</i>
+                  </button> -->
 
             </table>
         </form>
