@@ -28,37 +28,48 @@ agm-map {
 }
 
 .example-container {
-  width: 100%;
-  height: 91.6%;
+  width: 500px;
+  height: 91.5%;
   position: absolute;
-  opacity: 0.9;
+  opacity: 0.85;
   visibility: hidden;
 }
 
-mat-drawer-content {
-  flex-direction: column;
-  align-items: flex-end;
+.example-sidenav-content {
+  display: flex;
+  background-color: #FACA44;
+  width: 5px !important;
+  min-width: unset!important;
+  visibility: visible;
 }
 
-.mat-drawer {
-  padding: 3%;
-  width: 360px;
+.example-sidenav {
+  padding: 20px;
+}
+
+.double_arrow
+{
+  color: white;
+  transition: transform .5s;
+}
+
+.invertedArrow
+{
+  color: white;
+  transition: transform .5s;
+  transform: rotate(180deg);
 }
 
 .maps
 {
   overflow: unset !important;
 }
-.expand
-{
-  z-index: 2;
-  position: absolute;
-}
 
 .list
 {
   box-shadow: none;
   font-family: system-ui;
+  background-color: white;
 }
 
 #time
@@ -78,31 +89,16 @@ mat-drawer-content {
   font-family: system-ui;
 }
 
-
-#visibilityContainer ::ng-deep ::-webkit-scrollbar {
-  height: 4px;
-  width: 4px;
-  display: none;
-}
-
-#visibilityContainer ::ng-deep ::-webkit-scrollbar-track {
-  background-color:  rgb(76 75 75 / 26%) !important;;
-}
-
-#visibilityContainer ::ng-deep ::-webkit-scrollbar-thumb {
-  background: #999595;
-}
-
-#visibilityContainer :hover ::ng-deep ::-webkit-scrollbar{
-  display: block;
-}
-
 .end-button
 {
   margin: 10px;
   font-family: system-ui;
 }
-
+.place
+{
+  vertical-align: middle;
+  
+}
 /* לא בשימוש */
 .rotate180 {
   display: inline-block;

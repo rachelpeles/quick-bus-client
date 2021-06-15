@@ -1,13 +1,37 @@
 #stepper
 {
     direction: rtl;
-    position: absolute;
+    /* position: absolute; */
     margin-right: 200px;
-    margin-top: 30px;
-    width: -webkit-fill-available;
+    /* margin-top: 30px; */
+    width: 100%;
     font-family: system-ui;
+    /* margin-top: -10%; */
+    width: 100%;
+
+}
+#stepper::before{
+    content: "";
+    background-image: url('../../../assets/imag/yellocar.png');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-size: cover;
+    position: absolute;
 }
 
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, 
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: #FF4B60   !important;
+}
+
+.page
+{
+    text-align: right;
+}
 .center
 {
     text-align: center;
@@ -23,6 +47,7 @@
     width: min-content;
     margin: 70px;
     width: 500px;
+    
 }
 
 .card
@@ -30,6 +55,7 @@
     width: 1000px;
     height: 1000px;
     text-align: right;
+    
 }
 .radioGroup
 {

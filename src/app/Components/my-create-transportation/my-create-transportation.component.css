@@ -4,6 +4,13 @@
   text-align: center;
   color: teal;
 }
+tr.mat-header-row {
+  height: 80px;
+}
+th.mat-header-cell {
+  text-align: right;
+  font-size: medium;
+}
 
 #dataTable
 {

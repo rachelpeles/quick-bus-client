@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FamilyService } from 'src/app/Services/Family.service';
@@ -7,12 +7,13 @@ import { EstablishmentService } from 'src/app/Services/Establishment.service';
 import { MyService } from 'src/app/Services/my.service';
 import { Family } from '../../Classes/Family';
 import { Establishment } from '../../Classes/establishment';
-<<<<<<< HEAD
 import { NewPassengerDialogComponent } from '../new-passenger-dialog/new-passenger-dialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material';
-=======
 import { Title } from '@angular/platform-browser';
->>>>>>> 78027eb561c17420ca355fd904a755ab46bc02cd
+import { AppComponent } from 'src/app/app.component';
+import { GlobalService } from 'src/app/Services/global.service';
+import { EventEmitter } from '@angular/core';
+// import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-home',
@@ -20,19 +21,16 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  @Output() signInUser = new EventEmitter();
   FamilyList: Array<Family> = [];
   EstablishmentList: Array<Establishment> = [];
   regiForm: FormGroup;
   // UserName: string;
   // password: string;
   hide=true;
+  connect = true;
 
-<<<<<<< HEAD
-  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService,private dialog:MatDialog) {
-=======
-  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService, private titleService: Title) {
->>>>>>> 78027eb561c17420ca355fd904a755ab46bc02cd
+  constructor(private router: Router, private fb: FormBuilder, private mySer: MyService, private FamilySer: FamilyService, private EstablishmentSer: EstablishmentService,private dialog:MatDialog, private titleService: Title, private globalService: GlobalService) {
     this.regiForm = this.fb.group({
       'UserName': [null, Validators.required],
       'Password': [null, [Validators.required, Validators.minLength(6)]],
@@ -42,6 +40,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.globalService.isHome = true;
+
     this.titleService.setTitle('FastRide | ראשי');
     this.FamilySer.getFamilyList().subscribe(
       data => {
@@ -73,10 +73,12 @@ export class HomeComponent implements OnInit {
       if (this.FamilyList[i].userName == this.UserName.value && this.FamilyList[i].password == this.Password.value) {
         flag = true;
         this.mySer.family = this.FamilyList[i];
-        sessionStorage.setItem('user', JSON.stringify(this.FamilyList[i]));
-        alert("ברוכים הבאים ל"+this.UserName.value);
-        this.router.navigate(["/PassengersComponent"]);
-
+        localStorage.setItem('user', JSON.stringify(this.FamilyList[i]));
+        // alert("ברוכים הבאים ל"+this.UserName.value);
+        this.router.navigate(["/UserMain"]);
+        var thisUser = JSON.stringify(this.FamilyList[i]);
+        this.signInUser.emit(thisUser);
+        
       }
     }
 
@@ -88,7 +90,6 @@ export class HomeComponent implements OnInit {
   }
 
   New() {
-<<<<<<< HEAD
     // debugger;
     
     // if (this.regiForm.value.Kind == 'manager')
@@ -112,19 +113,19 @@ export class HomeComponent implements OnInit {
   // }
 
   openDialog() {
-    const dialogRef = this.dialog.open(NewPassengerDialogComponent);
+    // const dialogRef = this.dialog.open(NewPassengerDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log(`Dialog result: ${result}`);
-    });
-=======
-    debugger;
+    // dialogRef.afterClosed().subscribe(result => {
+    //   // console.log(`Dialog result: ${result}`);
+    // });
+    this.connect = false;
+    // this.router.navigate(['/newPassenger'])
+  }
 
-    if (this.regiForm.value.Kind == 'manager')
-      this.router.navigate(["/NewManager"]);
-    else
-      this.router.navigate(["/AddPassenger"]);
->>>>>>> 78027eb561c17420ca355fd904a755ab46bc02cd
+  toSignIn()
+  {
+    this.connect = true;
+    this.router.navigate(['/Home']);
   }
 }
 

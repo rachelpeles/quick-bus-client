@@ -1,11 +1,11 @@
-<!-- <mat-card>
+<mat-card>
 
     <mat-card-title>
         ברוכים הבאים מלא את פרטיך
-    </mat-card-title> @-->
+    </mat-card-title>
 
     <!-- Actual content starts from here -->
-   <!--@ <mat-card-content>
+   <mat-card-content>
 
         <form [formGroup]="regiForm"  justify-content="center" (ngSubmit)="onFormSubmit()">
             <mat-horizontal-stepper _ngcontent-aih-c0="" class="mat-stepper-horizontal ng-tns-c2-1" [linear]=false #stepper aria-orientation="horizontal"
@@ -29,10 +29,10 @@
                                 <mat-form-field class="demo-full-width">
                                     <input type="password" formControlName="password" matInput placeholder="סיסמא">
                                 </mat-form-field>
-                                <mat-error> @-->
-                                    <!-- <span *ngIf="!regiForm.get('password').valid && regiForm.get('password').touched">
-                                        שדה זה חובה</span> -->
-                                   <!-- @ <span *ngIf="password.invalid">{{ChekPassword()}}</span>
+                                <mat-error> 
+                                    <span *ngIf="!regiForm.get('password').valid && regiForm.get('password').touched">
+                                        שדה זה חובה</span>
+                                  <span *ngIf="password.invalid">{{ChekPassword()}}</span>
                                 </mat-error>
                             </td>
                         </tr>
@@ -42,22 +42,22 @@
                                 <mat-form-field class="demo-full-width">
                                     <input type="password" formControlName="Chekpassword" matInput placeholder="אימות סיסמא">
                                 </mat-form-field>
-                                <mat-error> @-->
-                                    <!-- <span *ngIf="!regiForm.get('Chekpassword').valid && regiForm.get('Chekpassword').touched">
-                                            שדה זה חובה</span> -->
-                                  <!--@  <span *ngIf="Chekpassword.invalid">{{getErrorPassword()}}</span>
+                                <mat-error>
+                                   <span *ngIf="!regiForm.get('Chekpassword').valid && regiForm.get('Chekpassword').touched">
+                                            שדה זה חובה</span>
+                                  <span *ngIf="Chekpassword.invalid">{{getErrorPassword()}}</span>
                                 </mat-error>
                             </td>
                         </tr>
-                        <button type="button" mat-mini-fab color="white" matStepperNext> @-->
-                            <!-- <i class="material-icons">keyboard_arrow_left</i> -->
-                           <!--@ <i class="material-icons">keyboard_arrow_left</i>
+                        <button type="button" mat-mini-fab color="white" matStepperNext>
+                        <i class="material-icons">keyboard_arrow_left</i>
+                           <i class="material-icons">keyboard_arrow_left</i>
 
                         </button>
 
-                    </mat-step> @-->
+                    </mat-step>
 
-                    <!-- <mat-step>
+                   <mat-step>
                         <ng-template matStepLabel>פרטי נוסע</ng-template>
                         <tr>
                             <td>
@@ -101,16 +101,16 @@
                                 </mat-error>
                             </td>
                         </tr>
-                        <! <button type="button" mat-mini-fab color="white" matStepperPrevious>
+                       <button type="button" mat-mini-fab color="white" matStepperPrevious>
                             <i class="material-icons">keyboard_arrow_up</i>
                         </button>
                         <button type="button" mat-mini-fab color="white" matStepperNext>
                             <i class="material-icons">keyboard_arrow_down</i>
                         </button>
 
-                    </mat-step>  -->
+                    </mat-step>
 
-                   <!--@ <mat-step>
+                  <mat-step>
                         <ng-template matStepLabel>כתובת</ng-template>
                         
                         <tr>
@@ -122,19 +122,19 @@
                                     <span *ngIf="!regiForm.get('address').valid && regiForm.get('address').touched"> שדה זה חובה</span>
                                 </mat-error>
                             </td>
-                        </tr> @-->
+                        </tr>
                         
-                        <!-- <button type="button" mat-mini-fab color="white" matStepperPrevious>
+                        <button type="button" mat-mini-fab color="white" matStepperPrevious>
                             <i class="material-icons">keyboard_arrow_up</i>
-                        </button> -->
-                       <!-- @<button type="button" mat-mini-fab color="white" matStepperPrevious>@-->
-                            <!-- <i class="material-icons">keyboard_arrow_left</i> -->
-                            <!-- @ <i class="material-icons">keyboard_arrow_right</i>
+                        </button>
+                       <button type="button" mat-mini-fab color="white" matStepperPrevious>
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            <i class="material-icons">keyboard_arrow_right</i>
 
                         </button>
-                        <button type="button" mat-mini-fab color="white" matStepperNext>@-->
-                            <!-- <i class="material-icons">keyboard_arrow_right</i> -->
-                           <!-- @ <i class="material-icons">keyboard_arrow_left</i>
+                        <button type="button" mat-mini-fab color="white" matStepperNext>
+                            <i class="material-icons">keyboard_arrow_right</i>
+                            <i class="material-icons">keyboard_arrow_left</i>
                         </button>
                         
 
@@ -151,10 +151,10 @@
                                     <span *ngIf="!regiForm.get('phone').valid && regiForm.get('phone').touched"> שדה זה חובה</span>
                                 </mat-error>
                             </td>
-                        </tr> @-->
+                        </tr> 
 
 
-                        <!-- <tr>
+                        <tr>
                             <td>
                                 <mat-form-field class="demo-full-width">
                                     <input formControlName="MotherCell" matInput placeholder="נייד אמא">
@@ -163,9 +163,9 @@
                                     <span *ngIf="!regiForm.get('MotherCell').valid && regiForm.get('MotherCell').touched"> שדה זה חובה</span>
                                 </mat-error>
                             </td>
-                        </tr> -->
+                        </tr>
 
-                       <!--@ <tr>
+                       <tr>
                             <td>
                                 <mat-form-field class="demo-full-width">
                                     <input formControlName="email" matInput placeholder="אימייל">
@@ -176,9 +176,9 @@
                             </td>
                         </tr>
 
-                        <button type="button" mat-mini-fab color="white" matStepperPrevious> @-->
-                            <!-- <i class="material-icons">keyboard_arrow_up</i> -->
-                           <!--@  <i class="material-icons">keyboard_arrow_right</i>
+                        <button type="button" mat-mini-fab color="white" matStepperPrevious> 
+                            <i class="material-icons">keyboard_arrow_up</i> 
+                          <i class="material-icons">keyboard_arrow_right</i>
                         </button>
                     </mat-step>
 
@@ -191,9 +191,9 @@
             </tr>
         </form>
     </mat-card-content>
-</mat-card> -->
+</mat-card>
 
-<p class="header">טבלת כלי רכב</p>
+<!-- <p class="header">טבלת כלי רכב</p>
 
  <div class="flexdiv">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -249,7 +249,7 @@
 
  <button class="b" mat-fab color="white" (click)="action('add', element)">
   <i class="material-icons add">add</i>
-</button>
+</button> -->
 
 
 <!-- <form class="form" [formGroup]="addVehicle" (ngSubmit)="update()">

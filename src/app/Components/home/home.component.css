@@ -1,9 +1,159 @@
+.page
+{
+    /* justify-content: center;
+    position: relative;
+    height: -webkit-fill-available;
+    text-align: center;*/
+     
+    box-shadow: 0 17px 40px 0 rgb(17 43 85 / 10%);
+    background-color: #ffffff;
+    width: 1000px;
+    height: 600px;
+    border-radius: 60px;
+    margin: 120px 0 0 0;
+    position: relative;
+    display: contents;
+}
+
+.page::before
+{
+    content: "";
+    background-image: url('../../../assets/imag/taxi-cut.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.4;
+    background-size: cover;
+    position: absolute;
+}
+
+.hello
+{
+    font-size: larger;
+}
+
 .mat-card
 {
-    justify-content: center;
+    width: 30%;
+    /* margin-top: 10%; */
+
+}
+
+.form-control {
+    border-radius: 10px;
+    font-size: 16px;
+    height: 45px;
+    border: solid 1px #ddd8d8;
+    background-color: #f5f2f2;
 }
 
 .hide
 {
-    float: right;
+    float: left;
+}
+
+.icons
+{
+    color: #ebad00;
+    vertical-align: middle;
+}
+
+.input
+{
+    margin-top: 4%;
+}
+
+.mat-raised-button
+{
+    background-color: #03E7D7;
+    /* width: 100px;
+    height: 100px;
+    font-size: x-large; */
+}
+
+.form
+{
+    display: inline-block;
+    text-align: right;
+    margin-right: 10%;
+}
+
+#sign
+{
+    margin-right: 25%;
+}
+
+.toRegister
+{
+    margin-right: 60%;
+    margin-top: -17%;
+    position: absolute;
+    /* margin-right: 40%;
+    margin-top: -24%;
+    position: absolute; */
+}
+
+.toConnect
+{
+    margin-right: 32%;
+    margin-top: 20%;
+    position: absolute;
+}
+
+
+
+.main
+{
+    width: 419px;
+    /* height: 600px; */
+    height: auto;
+    border-radius: 60px;
+    position: relative;
+    top: 20px;
+    margin-right: 20%;
+    display: inline-block;
+    z-index: 100;
+    box-shadow: 0 17px 40px 0 rgb(0 0 0 / 40%);
+    border: solid #faca44 2px;
+    background-color: #ffffff;
+    overflow: hidden;
+    text-align: center;
+    opacity: 85%;
+    display: block;
+}
+
+
+.showLogin {
+    animation: showLogin 0.2s forwards;
+}
+
+@keyframes showLogin
+{
+    0%
+    {
+        transform: translateX(-103%);
+    }
+    100%
+    {
+        transform: translateX(0%);
+    }
+}
+
+
+.showRegister {
+    animation: showRegister 0.2s forwards;
+}
+
+@keyframes showRegister
+{
+    0% {
+        transform: translateX(0%);
+    }
+    
+    100% {
+        transform: translateX(-103%);
+    }
 }

@@ -32,7 +32,7 @@ body { margin: 0; font-family: "system-ui", "Helvetica Neue", sans-serif;  }
 
 body {
     margin: 0;
-    font-family: Roboto, sans-serif;
+    font-family: Assistant;
 }
 
 mat-card {
@@ -84,3 +84,19 @@ mat-toolbar-row {
 {
   transition-property: transform,margin-right,margin-left !important;
 }
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:#FACA44; 
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#FACA44;
+    background-color:#FACA44 ;
+  }
+  
+  .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+      background-color:#FACA44;
+  }
+  .mat-raised-button
+  {
+      background-color: #03E7D7;
+  }

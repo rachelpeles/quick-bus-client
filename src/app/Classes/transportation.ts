@@ -1,4 +1,5 @@
 import { Passenger } from './passenger';
+import { Schedules } from './schedules';
 import { UsersAddress } from './users-address';
 
 export class Transportation {
@@ -9,7 +10,7 @@ export class Transportation {
         public usersAndAddress: UsersAddress[]=[],
         public waitingList: UsersAddress[]=[],
         public address:string="" ,
-        public schedules=null,
+        public schedules: Schedules = new Schedules(),
         
     ){}
 }

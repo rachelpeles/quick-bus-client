@@ -1,9 +1,9 @@
 <p class="center">הצטרפות להסעה</p>
 
 
-
+<div class="page">
 <form class="form" [formGroup]="joinTransport" justify-content="center" (ngSubmit)="toConfirm()">
-    <mat-vertical-stepper [linear]="true" #stepper (selectionChange)="confirmStep($event)">
+    <mat-vertical-stepper [linear]="true" id="stepper" (selectionChange)="confirmStep($event)">
 
         <mat-step [completed]="joinTransport.get('transportationId').valid" [stepControl]="transId">
             <ng-template matStepLabel>קוד הסעה</ng-template>
@@ -141,3 +141,4 @@
     <!-- </mat-card> -->
 
 </form>
+</div>

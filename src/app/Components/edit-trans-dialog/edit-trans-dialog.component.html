@@ -1,24 +1,30 @@
 
 <p>{{action}}</p>
-
-  <mat-form-field>
+<h3 *ngIf="!data.created">הנך מבקש להחליף את כתובתך להסעה '{{localTrans.description}}' בכתובת הבאה</h3>
+<div *ngIf="data.created">
+<mat-form-field>
     <input matInput [(ngModel)]="localTrans.description" placeholder="שם הסעה">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [(ngModel)]="localTrans.schedule" placeholder="שעה ותאריך">
+    <input matInput [(ngModel)]="localTrans.schedules.departureTime" placeholder="שעה ותאריך">
   </mat-form-field>
+</div>
+  
+  <!-- <mat-label>בחרו סוג ההסעה</mat-label><br> -->
+  <mat-radio-group *ngIf="data.created" [(ngModel)]="localTrans.schedules.routes.isDispersion" required>
+      <mat-radio-button value=false>איסוף</mat-radio-button><br>
+      <mat-radio-button value=true>פיזור</mat-radio-button>
+  </mat-radio-group>
 
-  <!-- <mat-form-field>
-    <input matInput [(ngModel)]="localTrans.address" placeholder="יעד/מקור">
-  </mat-form-field> -->
-
+<!-- [types]="['address']"
+[types]="['(cities)']" -->
+<!-- TODO -->
   <div fxFlex fxFlexAlign="center"
                   class="autocomplete-container"
                   [ngStyle.xs]="{'min-width.%': 100}"
                   [ngStyle.sm]="{'width.%': 70}">
-               <mat-google-maps-autocomplete [(ngModel)]="localTrans.address"
-                                             placeholderText=""
+               <mat-google-maps-autocomplete placeholderText=""
                                              addressLabelText="כתובת"
                                              country="il"
                                              (onAutocompleteSelected)="onAutocompleteSelected($event)"
@@ -27,8 +33,9 @@
                </mat-google-maps-autocomplete>
   </div>
 
+  <mat-checkbox *ngIf="!data.created" class="checkbox"(click)="addAddressToUser=true">להוספת כתובת זאת לרשימת הכתובות שלי</mat-checkbox><br><br>
 
-  <span *ngIf="data.actionType==='edit'">בלחיצה על {{action}} הנך מאשר שפרטי ההסעה החדשים ישלחו לנוסעים</span><br>
+  <span *ngIf="data.actionType==='edit' && data.created">בלחיצה על {{action}} הנך מאשר שפרטי ההסעה החדשים ישלחו לנוסעים</span><br>
 <mat-dialog-actions>
     <button mat-raised-button (click)="data.actionType==='edit'? update() : add()" >{{action}}</button>
     <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>

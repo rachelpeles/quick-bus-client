@@ -1,8 +1,235 @@
-.main
+.page
 {
     display: flex;
-    font-family: system-ui;
+    margin-top: 5%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+}
+.page::before
+{
+    content: "";
+    background-image: url('../../../assets/imag/car.jpg');
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.4;
+    background-size: cover;
+    position: absolute;
+}
+.main
+{
+    /* font-family: system-ui;
     margin-left: auto;
     margin-right: auto;
-    justify-content: center;
+    text-align: right;
+    margin: 5%; */
+    text-align: right;
+    margin: 5%;
+    margin-right: 25%;
+    margin-top: 6%;
+}
+
+.mainButton
+{
+    width: 10%;
+    text-align: right;
+    cursor: pointer;
+    margin: 5%;
+}
+
+.mat-mini-fab
+{
+    background-color: white;
+    margin-left: .1%;
+    margin-bottom: 2%;
+    border: solid 0.1px;
+    box-shadow: 0 2px 5px 0 #564848;
+}
+
+.join
+{
+    color: #FF4B60;
+}
+
+.route
+{
+    color: #FACA44;
+}
+
+.directions
+{
+    color: #03E7D7;
+}
+
+.center
+{
+    /* width: 20%;
+    background-color: #faca44;
+    z-index: 1;
+    border-radius: 10%; */
+    width: 300px;
+    height: 300px;
+    background-color: #ffffff;
+    border: solid #faca44 20px;
+    z-index: 1;
+    border-radius: 50%;
+}
+
+.aaa
+{
+    
+    width: 60px;
+    height: 500px;
+    background-color: #b8b8b8;
+    z-index: 1;
+    margin-right: 37%;
+    margin-top: 23%;
+
+}
+tr.mat-header-row {
+    height: 25px;
+}
+
+.left
+{
+    /* border-right: inset;
+    min-width: 350px;
+    z-index: 5;
+    background-color: #faca44;
+    font-size: larger;
+    border-radius: 10%; */
+    width: 300px;
+    height: 300px;
+    background-color: #ffffff;
+    border: solid #faca44 20px;
+    z-index: 1;
+    border-radius: 50%;
+}
+h1
+{
+    text-align: center;
+    margin-top: 18%;
+}
+.notexist
+{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.flexdiv
+{
+  display: flex;
+  justify-content: center;
+}
+table
+{
+    width: 90%;
+}
+
+.deleteAndEdit
+{
+  box-shadow: none;
+}   
+
+.mat-raised-button
+{
+    background-color: #03E7D7;
+}
+
+
+
+
+
+
+
+
+
+#logo
+{
+  width: 4%;
+}
+
+.person
+{
+  align-self: flex-end;
+  font-size: xx-large;
+  cursor: pointer;
+}
+
+.right
+{
+  float: right;
+  align-self: flex-end;
+  margin-left: 30%;
+}
+.mat-toolbar {
+    position: relative;
+}
+
+.mat-toolbar::before
+{
+  content: "";
+  background-image: url('../../../assets/imag/back.png');
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.4;
+  background-size: cover;
+  position: absolute;
+}
+
+.mat-tab-link
+{
+  font-weight: bolder;
+  font-family: system-ui;
+  font-size: 100%;
+  /* color: #ffffff; */
+  opacity: 1;
+}
+.mat-tab-link.mat-tab-link-active {
+  background-color: rgb(0, 0, 0);
+}
+.mat-tab-nav-bar.mat-primary .mat-ink-bar
+{
+  background-color:#673ab7;
+  display: none;
+}
+/* #all
+{
+  width: 100%;
+  height: 100vh;
+  background: url('favicon.ico') no-repeat;
+  background-size: cover;
+  color: white;
+  text-align: center;
+} */
+
+.menuIcons
+{
+  vertical-align: middle;
+  padding-left: 10%;
+}
+::ng-deep .mat-menu-panel {
+  min-width: 140px !important;
+}
+
+.finger
+{
+  color: #FF4B60;
+}
+.logOut
+{
+  color: #03E7D7;
+}
+.update
+{
+  color: #FACA44;
 }

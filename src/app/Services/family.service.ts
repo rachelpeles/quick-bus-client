@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Family } from '../Classes/Family';
 import { GlobalService } from './global.service';
@@ -24,8 +24,9 @@ export class FamilyService {
     return res;
   }
 
-  AddFamily(family: Family): Observable<Family[]> {
-    return this.http.post<Family[]>(this.myurl + "AddUser", family);
+  AddFamily(user): Observable<Family[]> {
+    // const header = new HttpHeaders().set( 'Content-Type', 'application/json');
+    return this.http.post<Family[]>(this.myurl + "AddUser", user);
   }
 
   updateUser(user: Family): Observable<Family[]> {

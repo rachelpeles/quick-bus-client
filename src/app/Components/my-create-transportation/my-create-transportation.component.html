@@ -19,24 +19,24 @@
     <div class="flexdiv">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="transportId">
-          <th mat-header-cell *matHeaderCellDef>קוד הסעה</th>
+          <th mat-header-cell *matHeaderCellDef>קוד הסעה</th><br>
           <td mat-cell *matCellDef="let element">
             {{ element.transportationId }}
           </td>
         </ng-container>
 
         <ng-container matColumnDef="transportName">
-          <th mat-header-cell *matHeaderCellDef>שם הסעה</th>
+          <th mat-header-cell *matHeaderCellDef>שם הסעה</th><br>
           <td mat-cell *matCellDef="let element">{{ element.description }}</td>
         </ng-container>
 
         <ng-container matColumnDef="transportAddress">
-          <th mat-header-cell *matHeaderCellDef>כתובת</th>
+          <th mat-header-cell *matHeaderCellDef>כתובת</th><br>
           <td mat-cell *matCellDef="let element">{{ element.address }}</td>
         </ng-container>
 
         <ng-container matColumnDef="Participants">
-          <th mat-header-cell *matHeaderCellDef>משתתפים</th>
+          <th mat-header-cell *matHeaderCellDef>משתתפים</th><br>
           <td mat-cell *matCellDef="let element">
             {{ element.usersAndAddress.length }}
             <u
@@ -48,20 +48,20 @@
         </ng-container>
 
         <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef></th><br>
           <th mat-cell *matCellDef="let element">
             <button
               class="deleteAndEdit"
               mat-mini-fab
               color="white"
               (click)="action('delete', element)">
-              <i class="material-icons">delete</i>
+              <i class="material-icons">delete_outline</i>
             </button>
           </th>
         </ng-container>
 
         <ng-container matColumnDef="edit">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef></th><br>
           <th mat-cell *matCellDef="let element">
             <button
               class="deleteAndEdit"
@@ -74,7 +74,7 @@
         </ng-container>
 
         <ng-container matColumnDef="calcRoute">
-          <th mat-header-cell *matHeaderCellDef></th>
+          <th mat-header-cell *matHeaderCellDef></th><br>
           <th mat-cell *matCellDef="let element">
             <button
               mat-raised-button
@@ -96,7 +96,7 @@
       <i class="material-icons add">add</i>
     </button>
   </div>
-  <img src="../../../assets/imag/Colorist.png" class="logo">
+  <!-- <img src="../../../assets/imag/Colorist.png" class="logo"> -->
 </div>
 
 <div id="twice">

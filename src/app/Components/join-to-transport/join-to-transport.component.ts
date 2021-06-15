@@ -17,6 +17,7 @@ import {Title} from '@angular/platform-browser';
 import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete';
 import PlaceResult = google.maps.places.PlaceResult;
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-join-to-transport',
@@ -68,10 +69,10 @@ export class JoinToTransportComponent implements OnInit {
   trans: Transportation;
   newWait: UsersAddress;
 
-  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private meSer: MyService, private snackBar: MatSnackBar, private titleService: Title) {
+  constructor(private transSer: TransportationService, private fb: FormBuilder, private userSer: FamilyService, private snackBar: MatSnackBar, private titleService: Title, private router: Router) {
 
     // this.thisUser=this.meSer.family;
-    this.thisUser = JSON.parse(sessionStorage.getItem('user'));
+    this.thisUser = JSON.parse(localStorage.getItem('user'));
     if(this.thisUser.type==0)
       this.joinTransport = this.fb.group
       ({
@@ -122,7 +123,9 @@ export class JoinToTransportComponent implements OnInit {
       this.thisUser.address[0] = this.joinTransport.get('address').value;
       this.thisUser.address.push(a);
     }
-    sessionStorage.setItem('user', JSON.stringify(this.thisUser));
+    else
+      this.thisUser.address.push(this.joinTransport.get('address').value);
+    localStorage.setItem('user', JSON.stringify(this.thisUser));
     this.userSer.updateUser(this.thisUser).subscribe(
       data => {
         console.log(data);
@@ -140,7 +143,7 @@ export class JoinToTransportComponent implements OnInit {
       }
       // this.meSer.family=this.thisUser;
 
-      sessionStorage.setItem('user', JSON.stringify(this.thisUser));
+      localStorage.setItem('user', JSON.stringify(this.thisUser));
     }
     this.userSer.updateUser(this.thisUser).subscribe(
       data => {
@@ -217,7 +220,7 @@ export class JoinToTransportComponent implements OnInit {
       }
 
     });
-
+    this.router.navigate(['/UserMain']);
   }
   getErrorPassword() {
 

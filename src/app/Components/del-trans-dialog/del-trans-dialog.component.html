@@ -1,8 +1,17 @@
-<h1>מחיקת הסעה</h1>
-<h4 [control]="control">הנכם מבקשים לבטל את ההסעה: {{data.thisTrans.description}}</h4>
-<h4>בתאריך: {{data.thisTrans.schedules}}</h4>
-<h3>שימו לב: בעת מחיקת ההסעה הינכם מאשרים שההסעה מבוטלת ותשלח על כך הודעה לכל הנוסעים.</h3>
-<mat-dialog-actions>
+<div *ngIf="data.created">
+    <h1>מחיקת הסעה</h1>
+    <h4 [control]="control">הנכם מבקשים לבטל את ההסעה: {{data.thisTrans.description}}</h4>
+    <h4>בתאריך: {{departureTime}}</h4>
+    <h3>שימו לב: בעת מחיקת ההסעה הינכם מאשרים שההסעה מבוטלת ותשלח על כך הודעה לכל הנוסעים.</h3>
+    <mat-dialog-actions>
+        <button mat-raised-button class="delete" (click)="del()">מחיקה</button>
+        <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>
+    </mat-dialog-actions>
+</div>
+<div *ngIf="!data.created">
+    <h2>ביטול השתתפות בהסעה</h2>
+    <h3>שימו לב: הנכם מבקשים לבטל השתתפות בהסעה '{{data.thisTrans.description}}'</h3>
+    <h4>בתאריך: {{departureTime}}</h4>
     <button mat-raised-button class="delete" (click)="del()">מחיקה</button>
     <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>
-</mat-dialog-actions>
+</div>

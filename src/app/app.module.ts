@@ -42,6 +42,7 @@ import { VehicleComponent } from './Components/vehicle/vehicle.component';
 import { MyRoutingModule } from './my-routing/my-routing.module'
 import { HomeComponent } from './Components/home/home.component';
 import { AddPassengerComponent } from './Components/add-passenger/add-passenger.component';
+import { NewPassengerDialogComponent} from './Components/new-passenger-dialog/new-passenger-dialog.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { NewManagerComponent } from './Components/new-manager/new-manager.component';
 import { AddChildComponent } from './Components/add-child/add-child.component'
@@ -63,6 +64,8 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { PaymentComponent } from './Components/payment/payment.component';
 import { MyFormComponent } from './Components/my-form/my-form.component';
+import { EditPassengerComponent } from './edit-passenger/edit-passenger.component';
+import { NewPassengerComponent } from './Components/new-passenger/new-passenger.component';
 // import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
@@ -70,7 +73,7 @@ import { MyFormComponent } from './Components/my-form/my-form.component';
 
 
 @NgModule({
-  // entryComponents: [ MsgDialogComponent ],
+  entryComponents: [ NewPassengerDialogComponent ],
   declarations: [
     AppComponent,
     UpdateComponent,
@@ -78,6 +81,7 @@ import { MyFormComponent } from './Components/my-form/my-form.component';
     VehicleComponent,
     HomeComponent,
     AddPassengerComponent,
+    NewPassengerDialogComponent,  
     NotFoundComponent,
     NewManagerComponent,
     AddChildComponent,
@@ -93,7 +97,9 @@ import { MyFormComponent } from './Components/my-form/my-form.component';
     ShowAndCalcComponent,
     CalcRoutComponent,
     PaymentComponent,
-    MyFormComponent
+    MyFormComponent,
+    EditPassengerComponent,
+    NewPassengerComponent,
     // AddVehicleComponent,
     // MsgDialogComponent
   ],

@@ -1,10 +1,11 @@
 import { Component, Inject, NgModule, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher, MatDialog, MatDialogConfig, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ErrorStateMatcher, MatDialog, MatDialogConfig, MatDialogModule, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { Passenger } from 'src/app/Classes/passenger';
 import { FamilyService } from 'src/app/Services/Family.service';
 import PlaceResult = google.maps.places.PlaceResult;
-import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete';
+import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete'
+import { Router } from '@angular/router';
 
 
 
@@ -31,8 +32,9 @@ export class NewPassengerDialogComponent implements OnInit {
   newPassengerForm: FormGroup;
   passwordsGroup: FormGroup;
   matcher = new MyErrorStateMatcher();
+  hide=true;
 
-  constructor(private fb: FormBuilder, private userService: FamilyService)
+  constructor(private fb: FormBuilder, private userService: FamilyService, private dialogRef: MatDialogRef<NewPassengerDialogComponent>, private snackBar: MatSnackBar, private router: Router)
   {
     this.passwordsGroup = this.fb.group({
       'password': [null, [Validators.required, Validators.minLength(6)]],
@@ -42,8 +44,9 @@ export class NewPassengerDialogComponent implements OnInit {
     this.newPassengerForm=this.fb.group(
       {
         'userName': [null, Validators.required],
+        'type': [null, Validators.required],
         'phone': [null, [Validators.required, Validators.minLength(9), Validators.maxLength(10)]],
-        'address': [null, Validators.required],
+        'address':[ [null, Validators.required]],
         'email': [null, [Validators.required, Validators.email]]
       });
   }
@@ -59,17 +62,41 @@ export class NewPassengerDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  cancel()
+  {
+    this.dialogRef.close();
+  }
+
   save()
   {
     var newUser={
       ...this.newPassengerForm.value,
-      ...this.passwordsGroup.value
+      type: parseInt(this.newPassengerForm.get('type').value),
+      address: [this.newPassengerForm.get('address').value],
+      password: this.passwordsGroup.get('password').value
     }
-    this.userService.AddFamily(newUser).subscribe(x=>console.log(x));
+    this.userService.AddFamily(newUser).subscribe(x=>
+    {
+      console.log(x);
+      if(x)
+      {
+        this.openSnackBar('נרשמת בהצלחה! הנך מועבר לאזור האישי');
+        this.cancel();
+        this.router.navigate(["/UserMain"]);
+      }
+    });
   }
+
+  //General snackBar message
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'אישור',{
+      duration: 2000,
+    });
+  }
+
   onAutocompleteSelected(result: PlaceResult) {
     console.log('onAutocompleteSelected: ', result);
-    this.newPassengerForm.controls.address.setValue(result.name+result.vicinity);
+    this.newPassengerForm.controls.address.setValue(result.formatted_address);
   }
 }
 

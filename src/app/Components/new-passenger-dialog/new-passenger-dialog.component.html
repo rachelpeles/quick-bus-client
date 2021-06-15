@@ -1,15 +1,28 @@
 <!-- <h1 *ngIf="data.actionType=='edit'" mat-dialog-title>עדכון כלי רכב {{data.vehicleId}}</h1> -->
-<div mat-dialog-content>
+<!-- <div mat-dialog-content> -->
+    <div>
     <form [formGroup]="newPassengerForm" (ngSubmit)="save()">
         <mat-form-field>
             <mat-label>שם משתמש</mat-label>
             <input matInput formControlName="userName" required>
             <mat-error *ngIf="newPassengerForm.hasError('required', 'userName')">שדה זה חובה</mat-error>
         </mat-form-field>
+
+        <!-- <mat-form-field> --><br>
+            <mat-label>בחרו סוג משתמש</mat-label><br>
+            <mat-radio-group formControlName="type" required>
+                <mat-radio-button value='0'>קבוצה</mat-radio-button><br>
+                <mat-radio-button value='1'>יחיד</mat-radio-button>
+            </mat-radio-group>
+        <!-- </mat-form-field> -->
         
         <form [formGroup]="passwordsGroup">
             <mat-form-field>
-                <input matInput placeholder="סיסמא" formControlName="password" required>
+                <input matInput type="password" placeholder="סיסמא" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                <button class="hide" type="button" matSuffix  mat-icon-button (click)="hide = !hide"
+                            [attr.aria-label]="'Hide password'" aria-labelledby="hide" [attr.aria-pressed]="hide">
+                            <i class="material-icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+                </button>
                 <mat-error *ngIf="passwordsGroup.hasError('required', 'password')">
                     נא הקלד סיסמה
                   </mat-error>
@@ -17,7 +30,7 @@
     
             <mat-form-field>
                 <mat-label>אימות סיסמא</mat-label>
-                <input matInput formControlName="verifiedPassword" [errorStateMatcher]="matcher" required>
+                <input matInput type="password" formControlName="verifiedPassword" [errorStateMatcher]="matcher" required>
                  <mat-error *ngIf="passwordsGroup.hasError('notSame')">
                     הסיסמה לא תואמת
                   </mat-error> 
@@ -45,8 +58,10 @@
             <mat-label>כתובת</mat-label>
             <input matInput formControlName="address"
                    matGoogleMapsAutocomplete
+                   placeholder="הזן כתובת כולל מס' בנין"
                    [country]="il"
-                   (onAutocompleteSelected)="onAutocompleteSelected($event)">
+                   (onAutocompleteSelected)="onAutocompleteSelected($event)" required>
+            <mat-error *ngIf="newPassengerForm.hasError('required', 'address')">שדה זה חובה</mat-error>
           </mat-form-field>
 
 
@@ -58,10 +73,11 @@
             </mat-error>
         </mat-form-field>
     </form>
-</div>
+<!-- </div> -->
 
 
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]>ביטול</button>
-    <button mat-raised-button mat-dialog-close [disabled]="!(newPassengerForm.valid && passwordsGroup.valid)">שמירה</button>
+    <button mat-button [mat-dialog-close] (click)="cancel()">ביטול</button>
+    <button mat-raised-button (click)="save()" [disabled]="!(newPassengerForm.valid && passwordsGroup.valid)">שמירה</button>
+</div>
 </div>

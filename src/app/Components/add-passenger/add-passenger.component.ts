@@ -52,9 +52,7 @@ export class AddPassengerComponent implements OnInit {
   ChekPassword() {
 
     for (var i = 0; i < this.FamilyList.length && this.flag2; i++) {
-      if (this.FamilyList[i].userName
- == this.userName
- && this.FamilyList[i].password == this.password.value)
+      if (this.FamilyList[i].userName == this.userName && this.FamilyList[i].password == this.password.value)
         this.flag2 = false;
     }
     if (this.flag2 == false) {

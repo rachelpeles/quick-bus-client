@@ -1,9 +1,9 @@
 export class Station {
     constructor(
-        public StationId:number=0 ,
-        public City:string="",
-        public Street:string="",
-        public Building:number=0
+        public stationId: string = "",
+        public address: string = "",
+        public oridinalNumber: number = 0,
+        public users: string[]=[],
 
     ){}
 }

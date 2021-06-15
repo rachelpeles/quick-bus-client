@@ -44,7 +44,7 @@ export class MyCreateTransportationComponent implements OnInit {
       const dialogRef = this.dialog.open(EditTransDialogComponent,
         {
           width: '250px',
-          data: { actionType: action, thisTrans: thisTrans }
+          data: { actionType: action, thisTrans: thisTrans, created: true }
         });
       dialogRef.afterClosed().subscribe(result => {
         this.refresh();
@@ -55,7 +55,7 @@ export class MyCreateTransportationComponent implements OnInit {
       const dialogRef = this.dialog.open(DelTransDialogComponent,
         {
           width: '400px',
-          data: { thisTrans: this.thisTrans }
+          data: { thisTrans: this.thisTrans, created: true }
         });
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
@@ -78,22 +78,26 @@ export class MyCreateTransportationComponent implements OnInit {
       });
   }
 
-  refresh()
+  async refresh()
   {
+    this.data = JSON.parse(localStorage.getItem('user'));
     this.transUser=new Array<Transportation>();
-    this.transportser.getAlltransport().subscribe(result => {
-      this.transData = result;
-      // this.data=this.meSer.family;
-      this.data = JSON.parse(sessionStorage.getItem('user'));
-      this.data.transportationCreated.forEach(element => {
-        if(this.transData.find(x => x.transportationId == element))
-          this.transUser.push(this.transData.find(x => x.transportationId == element))
-      });
+    await this.transportser.getUserTransportationCreated(this.data.transportationCreated).then(x=>{
+      this.transUser = x;
       this.dataSource= new MatTableDataSource<Transportation>(this.transUser);
       this.changeDetectorRefs.detectChanges();
       if(this.dataSource.data.values.length > 0 || this.dataSource._data.value.length > 0)
         this.dataexist = true;
     });
+    // this.transportser.getAlltransport().subscribe(result => {
+    //   this.transData = result;
+      // this.data = JSON.parse(localStorage.getItem('user'));
+    //   this.data.transportationCreated.forEach(element => {
+    //     if(this.transData.find(x => x.transportationId == element))
+    //       this.transUser.push(this.transData.find(x => x.transportationId == element))
+    //   });
+      
+    // });
   }
 
 

@@ -1,39 +1,49 @@
-
 <mat-toolbar>
-<!-- primary -->
-<!-- accent -->
+  <span class="demo-toolbar"></span>
 
-    <!-- <a routerLink="/">Home</a>|
-    <a routerLink="/Manager">Manager</a>|
-    <a routerLink="/GetHours">Get Hours</a>  -->
-<!-- <app-my-form></app-my-form> -->
-    <!-- <button  routerLink="/" mat-button href="/">Home</button>
-    <button routerLink="/Manager" mat-button href="/Manager">Manager</button>
-    <button routerLink="/GetHours" mat-button href="/GetHours">Get Hours</button>-->
-  <!-- <app-vehicle></app-vehicle> -->
-    <span class="demo-toolbar"></span>
-    <!-- <app-home></app-home> -->
-
-    <div class="right">
-      <nav mat-tab-nav-bar>
-        <a mat-tab-link
-        *ngFor="let link of navLinks"
-        [routerLink]="link.link"
-        routerLinkActive="active"
-        #rla="routerLinkActive"
-        [active]="rla.isActive">
+  <div class="right">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link *ngFor="let link of navLinks"
+                      [routerLink]="link.link"
+                      routerLinkActive="active"
+                      #rla="routerLinkActive"
+                      [active]="rla.isActive">
         {{link.label}}
-        </a>
-      </nav>
-    </div>
+      </a>
+    </nav>
+  </div>
 
-    <!-- <a routerLink="Home">Home</a>| -->
-    <i class="material-icons person">person</i>
-    <img src="../assets/imag/Logos.png" id="logo" (click)="route()">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <i class="material-icons person" matTooltip="{{thisUser}}">person</i>
+    </button>
+
+  <!-- menu for user sign in -->
+  <mat-menu #menu="matMenu" xPosition="before">
+    <div *ngIf="thisUser!='הכנס'">
+    <button mat-menu-item (click)="toUserMain()">
+      <i class="material-icons menuIcons finger">fingerprint</i>
+      <span>אזור אישי</span>
+    </button>
+    <button mat-menu-item (click)="toEditPassenger()">
+      <i class="material-icons menuIcons update">manage_accounts</i>
+      <span>עדכון פרטים</span>
+    </button>
+    <button mat-menu-item (click)="logInOut()">
+      <i class="material-icons menuIcons logOut">
+        power_settings_new</i>
+      <span>יציאה</span>
+    </button>
+  </div>
+  <button mat-menu-item (click)="logInOut()" *ngIf="thisUser==='הכנס'">
+    <i class="material-icons menuIcons">login</i>
+    <span>כניסה</span>
+  </button>
+  </mat-menu>
+  <img src="../assets/imag/arrowlogo.png" id="logo" (click)="route()">
 
 </mat-toolbar>
 <div id="all">
 
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> 

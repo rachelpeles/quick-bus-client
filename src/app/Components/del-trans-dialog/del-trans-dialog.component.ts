@@ -17,34 +17,53 @@ import { TransportationService } from 'src/app/Services/transportation.service';
 })
 export class DelTransDialogComponent implements OnInit {
 
-
+  departureTime;
   constructor(public dialogRef: MatDialogRef<DelTransDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data, private transSer: TransportationService, private userSer: FamilyService, private emailSer: EmailService, private meSer: MyService) { }
 
 
   ngOnInit() {
     console.log(this.data);
-    console.log(this.data.description);
+    console.log(this.data.thisTrans.description);
+    this.departureTime = this.data.thisTrans.schedules.departureTime;
   }
 
   del() {
-    var thisUser:Family;
-    var email: Array<string> = [];
-    this.transSer.delete(this.data.thisTrans.transportationId).subscribe(x=>console.log(x));
-    this.userSer.getFamilyList().subscribe(x => {
-      this.data.thisTrans.usersAndAddress.forEach(element => {
-        email.push(x.find(u => u.userId == element.user).email);
-        this.emailSer.sendEmailToList(email,
-           "ביטול הסעה"
-           , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
+    var thisUser;
+    thisUser = JSON.parse(localStorage.getItem('user'));
+    if (this.data.created) {
+
+      var email: Array<string> = [];
+      this.transSer.delete(this.data.thisTrans.transportationId).subscribe(x => console.log(x));
+      this.userSer.getFamilyList().subscribe(x => {
+        thisUser.transportationCreated.forEach((element, index) => {
+          if(element===this.data.thisTrans.transportationId)
+            thisUser.transportationCreated.splice(index, 1);
+        });
+        // thisUser.transportationCreated.splice(this.data.thisTrans.transportationId);
+        this.userSer.updateUser(thisUser).subscribe(z => console.log(z));
+        this.data.thisTrans.usersAndAddress.forEach(element => {
+          email.push(x.find(u => u.userId == element.user).email);
+          this.emailSer.sendEmailToList(email,
+            "ביטול הסעה"
+            , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
+        });
+        alert('!ההסעה בוטלה! הודעה נשלחת לנוסעים');
+        this.dialogRef.close();
       });
-      // thisUser=this.meSer.family;
-      thisUser = JSON.parse(sessionStorage.getItem('user'));
-      thisUser.transportationCreated.splice(this.data.thisTrans.transportationId);
-      this.userSer.updateUser(thisUser).subscribe(z=>console.log(z));
-    });
-    alert('!ההסעה בוטלה! הודעה נשלחת לנוסעים');
-    this.dialogRef.close();
+
+    }
+
+    else {
+      var thisTrans: Transportation = this.data.thisTrans;
+      thisTrans.usersAndAddress.forEach((element, index)=>{
+        if(element.user==thisUser.userId)
+          thisTrans.usersAndAddress.splice(index, 1);
+      })
+      this.transSer.updateTransport(thisTrans).subscribe(x => {
+        this.cancel();
+      });
+    }
   }
 
   cancel() {

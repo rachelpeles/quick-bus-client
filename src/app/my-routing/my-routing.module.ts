@@ -21,6 +21,8 @@ import { ShowAndCalcComponent } from '../Components/show-and-calc/show-and-calc.
 import { CalcRoutComponent } from '../Components/calc-rout/calc-rout.component';
 import { PaymentComponent } from '../Components/payment/payment.component';
 import { MyFormComponent } from '../Components/my-form/my-form.component';
+import { EditPassengerComponent } from '../edit-passenger/edit-passenger.component';
+import { NewPassengerComponent } from '../Components/new-passenger/new-passenger.component';
 
 const appRout: Routes =
   [
@@ -47,6 +49,8 @@ const appRout: Routes =
     { path: "CalcRoute", component: CalcRoutComponent },
     {path: "Payment", component: PaymentComponent},
     {path: "form", component: MyFormComponent},
+    {path: "EditPassenger", component: EditPassengerComponent},
+    {path: "newPassenger", component: NewPassengerComponent},
     { path: "**", redirectTo: "/NotFound" }
 
   ];

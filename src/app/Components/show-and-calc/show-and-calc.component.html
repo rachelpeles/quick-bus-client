@@ -1,50 +1,62 @@
 <div class="all">
-    <h1>פרטי הסעה</h1>
-    <div class="row">
-        <span class="right">קוד הסעה</span>
-        <span class="left">{{trans.transportationId}}</span>
-    </div>
-    <div class="row">
-        <span class="right">תאור</span>
-        <span class="left">{{trans.description}}</span>
-    </div>
-    <div class="row">
-        <span class="right">כתובת</span>
-        <span class="left">{{trans.address}}</span>
-    </div>
-    <div class="row">
-        <span class="right">תדירות</span>
-        <!-- <span class="left">{{trans.schedule.frequency}}</span> -->
-    </div>
-    <div class="row">
-        <span class="right">שעה משוערת</span>
-        <span class="left">{{abc}}</span>
-    </div>
-    <div class="row">
-        <span class="right">משתתפים</span>
+    <mat-card>
+        <mat-card-title>
+            <h1>פרטי הסעה</h1>
+        </mat-card-title>
+        <mat-card-content>
+            <div class="row">
+                <i class="material-icons icons">vpn_key</i>
+                <span class="right">קוד הסעה</span>
+                <span class="left">{{trans.transportationId}}</span>
+            </div>
+            <div class="row">
+                <i class="material-icons icons">description</i>
+                <span class="right">תאור</span>
+                <span class="left">{{trans.description}}</span>
+            </div>
+            <div class="row">
+                <i class="material-icons icons">place</i>
+                <span class="right">כתובת</span>
+                <span class="left">{{trans.address}}</span>
+            </div>
+            <div class="row">
+                <i class="material-icons icons">history_toggle_off</i>
+                <span class="right">תדירות</span>
+                <!-- <span class="left">{{trans.schedule.frequency}}</span> -->
+            </div>
+            <div class="row">
+                <i class="material-icons icons">departure_board</i>
+                <span class="right">שעה משוערת</span>
+                <span class="left">{{abc}}</span>
+            </div>
+            <div class="row">
+                <i class="material-icons icons">groups</i>
+                <span class="right">משתתפים</span>
 
-        <mat-accordion class="left">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>{{usersAndAddress?.length}} משתתפים
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <table>
-                    <tr>
-                        <th>שם</th>
-                        <th>כתובת</th>
-                    </tr>
-                    <tr *ngFor="let element of usersAndAddress">
-                        <td>{{element.name}}</td>
-                        <td>{{element.address}}</td>
-                    </tr>
-                </table>
-            </mat-expansion-panel>
-        </mat-accordion><br>
-        <button mat-raised-button id="button" class="row left" (click)="calc()">חישוב מסלול</button>
-
-    </div><br>
-
+                <mat-accordion class="left">
+                    <mat-expansion-panel [disabled]="usersAndAddress?.length===0" (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>{{usersAndAddress?.length}} משתתפים
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <table *ngIf="usersAndAddress?.length > 0">
+                            <tr>
+                                <th>שם</th>
+                                <th>כתובת</th>
+                            </tr>
+                            <tr *ngFor="let element of usersAndAddress">
+                                <td>{{element.name}}</td>
+                                <td>{{element.address}}</td>
+                            </tr>
+                        </table>
+                    </mat-expansion-panel>
+                </mat-accordion><br>
+                <button mat-raised-button id="button" class="row left" (click)="calc()"
+                    [disabled]="usersAndAddress?.length===0">חישוב מסלול</button>
+            </div>
+            <br>
+        </mat-card-content>
+    </mat-card>
 
 </div>
