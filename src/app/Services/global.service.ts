@@ -9,5 +9,5 @@ export class GlobalService {
   isHome = true;
   public waypoints = new Array<Array<any>>();
   public vehicles = new Array<string>();
-  public duration = new Array<string>();
+  public duration = new Array<any>();
 }

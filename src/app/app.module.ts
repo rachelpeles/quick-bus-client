@@ -66,6 +66,7 @@ import { PaymentComponent } from './Components/payment/payment.component';
 import { MyFormComponent } from './Components/my-form/my-form.component';
 import { EditPassengerComponent } from './edit-passenger/edit-passenger.component';
 import { NewPassengerComponent } from './Components/new-passenger/new-passenger.component';
+import { PreviewDialogComponent } from './Components/preview-dialog/preview-dialog.component';
 // import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
@@ -100,6 +101,7 @@ import { NewPassengerComponent } from './Components/new-passenger/new-passenger.
     MyFormComponent,
     EditPassengerComponent,
     NewPassengerComponent,
+    PreviewDialogComponent,
     // AddVehicleComponent,
     // MsgDialogComponent
   ],

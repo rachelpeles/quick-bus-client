@@ -7,6 +7,7 @@ import { GlobalService } from 'src/app/Services/global.service';
 import { TransportationService } from 'src/app/Services/transportation.service';
 import { DelTransDialogComponent } from '../del-trans-dialog/del-trans-dialog.component';
 import { EditTransDialogComponent } from '../edit-trans-dialog/edit-trans-dialog.component';
+import { PreviewDialogComponent } from '../preview-dialog/preview-dialog.component';
 
 @Component({
   selector: 'app-user-main',
@@ -22,7 +23,7 @@ export class UserMainComponent implements OnInit {
   userWait;
   constructor(private router: Router, private globalService: GlobalService, private titleService: Title, private transService: TransportationService, private changeDetectorRefs: ChangeDetectorRef, private dialog: MatDialog) { }
 
-  displayedColumns=['transportName', 'schedule', 'delete', 'edit'];
+  displayedColumns=['preview', 'transportName', 'schedule', 'delete', 'edit'];
   ngOnInit() {
     this.globalService.isHome = false;
     this.titleService.setTitle('FastRide | אזור אישי');
@@ -59,6 +60,16 @@ export class UserMainComponent implements OnInit {
   {
     this.router.navigate(['/MyCreateTransportation']);
   }
+
+  preview(thisTrans)
+  {
+    const dialogRef = this.dialog.open(PreviewDialogComponent,
+      {
+        width: '350px',
+        data: {thisTrans: thisTrans, thisUser: this.thisUser}
+      });
+      dialogRef.afterClosed();
+  }
   
   action(action, thisTrans?)
   {
@@ -66,7 +77,7 @@ export class UserMainComponent implements OnInit {
     if (action == 'edit') {
       const dialogRef = this.dialog.open(EditTransDialogComponent,
         {
-          width: '250px',
+          width: '300px',
           data: { actionType: action, thisTrans: thisTrans, created: false }
         });
       dialogRef.afterClosed().subscribe(result => {

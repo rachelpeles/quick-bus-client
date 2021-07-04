@@ -14,10 +14,11 @@
           <button mat-raised-button *ngIf="j != 0 || isDispersion.bool" class="list"
             (click)="onLocationSelected(v.location)">{{v.location}}</button>
         </div>
-        <span id="time">משך זמן המסלול: {{times[i]}} דקות</span><br><br>
+        <span id="time">משך זמן המסלול: {{times[i].duration}} דקות</span><br><br>
       </div>
       <br>
       <span id="price">מחיר כולל להסעה: {{price}} ש"ח</span><br><br>
+        <img *ngIf="load === true" src="../../../assets/imag/טוען.gif" width="100%">
       <button mat-raised-button matTooltip="אישור ומעבר לתשלום" class="end-button" (click)="OK()">אישור ההסעה</button>
       <button mat-raised-button matTooltip="הורדת תחנות סמוכות לקיצור זמן הנסיעה והפחתת עלויות" class="end-button"
         (click)="stationUnion()" [disabled]="isunion">איחוד תחנות</button>

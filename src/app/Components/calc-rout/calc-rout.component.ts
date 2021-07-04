@@ -15,6 +15,7 @@ import { GlobalService } from "src/app/Services/global.service";
 })
 export class CalcRoutComponent implements OnInit {
 
+  load = true;
   dir: Array<any> = new Array<any>();
   color = ["#FACA44", "#03E7D7", "#FF4B60", "black"];
   thisTrans = JSON.parse(localStorage.getItem("transToShow"));
@@ -105,6 +106,7 @@ export class CalcRoutComponent implements OnInit {
           route.push(this.waypoints[i][j].location);
       }
     }
+    this.load = true;
     this.price = 0;
     this.isunion = true;
     this.refresh(route, this.thisTrans.transportationId);
@@ -143,9 +145,10 @@ export class CalcRoutComponent implements OnInit {
               w++;
             }
           }
-          for (let i = 0; i < points.time.length; i++) {
-            this.times[i] = points.time[i];
+          for (let i = 0; i < points.timeDis.length; i++) {
+            this.times[i] = points.timeDis[i];
             this.price += points.price[i];
+            this.load = false;
           }
           this.thisTrans.schedules.price = this.price;
           this.global.vehicles = points.vehicleId;
@@ -178,9 +181,10 @@ export class CalcRoutComponent implements OnInit {
               w++;
             }
           }
-          for (let i = 0; i < points.time.length; i++) {
-            this.times[i] = points.time[i];
+          for (let i = 0; i < points.timeDis.length; i++) {
+            this.times[i] = points.timeDis[i];
             this.price += points.price[i];
+            this.load = false;
           }
           this.thisTrans.schedules.price = this.price;
           this.global.vehicles = points.vehicleId;

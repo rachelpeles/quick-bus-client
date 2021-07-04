@@ -1,0 +1,11 @@
+<agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude">
+    <agm-direction *ngFor="let data of dir"
+      [editable]="true"
+      [origin]="data.origin"
+      [destination]="data.destination"
+      [renderOptions]="data.renderOptions"
+      [waypoints]="data.waypoints"
+      [markerOptions]="data.markerOpts"
+      [optimizeWaypoints]="data.optimizeWaypoints">
+    </agm-direction>
+  </agm-map>

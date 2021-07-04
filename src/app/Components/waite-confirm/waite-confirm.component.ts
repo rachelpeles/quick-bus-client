@@ -56,7 +56,23 @@ export class WaiteConfirmComponent implements OnInit {
       this.data.thisTrans.waitingList.splice(this.data.thisTrans.waitingList.indexOf({ user: t.id, address: t.address }), 1);
       this.userSer.getFamilyList().subscribe(x => {
         email.push(x.find(u => u.userId == t.id).email);
-        this.emailser.sendEmailToList(email, "בקשתך אושרה", "היי, בקשת להצטרף ל" + this.data.thisTrans.description + ". המנהל אישר את הצטרפותך, פרטים על הנסיעה יתקבלו בהמשך. נסיעה טובה!");
+        var htmlBody = 
+        `<html>
+          <head>
+            <style>
+              h1, p
+              {
+                font-family: system-ui
+              }
+            </style>
+          </head>
+          <body>
+            <h1>בשורה משמחת!</h1> <p>היי,</p> <p>בקשת להצטרף ל` + this.data.thisTrans.description+`.</p>
+            <p>המנהל אישר את הצטרפותך, פרטים על הנסיעה יתקבלו מאוחר יותר.</p>
+            <p>נסיעה טובה!</p>
+          </body>
+        </html>`
+        this.emailser.sendEmailToList(email, "בקשתך אושרה", htmlBody);
       });
     })
     this.transSer.updateTransport(this.data.thisTrans).subscribe(async res => {

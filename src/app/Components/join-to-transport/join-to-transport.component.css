@@ -12,7 +12,7 @@
 }
 #stepper::before{
     content: "";
-    background-image: url('../../../assets/imag/yellocar.png');
+    /* background-image: url('../../../assets/imag/yellocar.png'); */
     background-size: cover;
     position: absolute;
     top: 0px;

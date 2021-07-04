@@ -66,7 +66,7 @@ export class EditTransDialogComponent implements OnInit {
       this.data.thisTrans = this.localTrans;
       await this.transSer.updateTransport(this.localTrans).subscribe(x => {
         console.log(x);
-        this.localTrans = x;
+        // this.localTrans = x;
         var email: Array<string> = [];
         email[0] = JSON.parse(localStorage.getItem('user')).email;
         this.emailSer.sendEmailToList(email,

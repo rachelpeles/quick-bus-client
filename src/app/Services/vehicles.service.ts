@@ -19,6 +19,12 @@ export class VehiclesService {
     return res;
   }
 
+  getVehicleById(id: string)
+  {
+    var res = this.http.get<Vehicles>(this.myurl + 'GetVehicleById');
+    return res;
+  }
+
   add(vehicle)
   {
     this.http.post(this.myurl+'AddVehicles', vehicle).subscribe(x=> console.log(x));

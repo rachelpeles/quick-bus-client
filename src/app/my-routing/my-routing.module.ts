@@ -23,6 +23,7 @@ import { PaymentComponent } from '../Components/payment/payment.component';
 import { MyFormComponent } from '../Components/my-form/my-form.component';
 import { EditPassengerComponent } from '../edit-passenger/edit-passenger.component';
 import { NewPassengerComponent } from '../Components/new-passenger/new-passenger.component';
+import { PreviewDialogComponent } from '../Components/preview-dialog/preview-dialog.component';
 
 const appRout: Routes =
   [
@@ -51,6 +52,7 @@ const appRout: Routes =
     {path: "form", component: MyFormComponent},
     {path: "EditPassenger", component: EditPassengerComponent},
     {path: "newPassenger", component: NewPassengerComponent},
+    {path: "preview", component: PreviewDialogComponent},
     { path: "**", redirectTo: "/NotFound" }
 
   ];
