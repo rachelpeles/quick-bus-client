@@ -103,13 +103,13 @@ export class TransportationService {
     return transUser;
   }
 
-  addTransport(transport): Observable<Transportation[]> {
-    var res = this.http.post<Transportation[]>(this.myurl + 'AddTransportation', transport);
+  addTransport(transportation): Observable<Transportation[]> {
+    var res = this.http.post<Transportation[]>(this.myurl + 'AddTransportation', transportation);
     return res;
   }
 
-  updateTransport(trans): Observable<Transportation[]> {
-    var res = this.http.put<Transportation[]>(this.myurl + 'PutTransportation', trans);
+  updateTransport(transportation): Observable<Transportation[]> {
+    var res = this.http.put<Transportation[]>(this.myurl + 'PutTransportation', transportation);
     return res;
   }
   delete(id): Observable<any> {

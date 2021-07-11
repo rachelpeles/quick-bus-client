@@ -26,6 +26,7 @@ export class MyCreateTransportationComponent implements OnInit {
   transData: Array<Transportation>;
   thisTrans: Transportation;
   dataexist=false;
+  isWait = true;
   dataForShow;
   abc="abc";
   constructor(private userSer: FamilyService, private transportser: TransportationService, private dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private router: Router, private meSer: MyService, private titleService: Title) { }
@@ -60,6 +61,7 @@ export class MyCreateTransportationComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         this.dataexist=false;
+        this.isWait = true;
         this.refresh();
       });
     }
@@ -88,6 +90,7 @@ export class MyCreateTransportationComponent implements OnInit {
       this.changeDetectorRefs.detectChanges();
       if(this.dataSource.data.values.length > 0 || this.dataSource._data.value.length > 0)
         this.dataexist = true;
+        this.isWait = false;
     });
     // this.transportser.getAlltransport().subscribe(result => {
     //   this.transData = result;

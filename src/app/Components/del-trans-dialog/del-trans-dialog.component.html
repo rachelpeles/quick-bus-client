@@ -11,7 +11,8 @@
 <div *ngIf="!data.created">
     <h2>ביטול השתתפות בהסעה</h2>
     <h3>שימו לב: הנכם מבקשים לבטל השתתפות בהסעה '{{data.thisTrans.description}}'</h3>
-    <h4>בתאריך: {{departureTime}}</h4>
+    <h4>בתאריך: {{data.thisTrans.schedules.date.slice(0,10)}}</h4>
+    <h4>בשעה: {{departureTime}}</h4>
     <button mat-raised-button class="delete" (click)="del()">מחיקה</button>
     <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>
 </div>

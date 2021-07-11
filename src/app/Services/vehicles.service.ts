@@ -19,9 +19,9 @@ export class VehiclesService {
     return res;
   }
 
-  getVehicleById(id: string)
+  getVehicleById(id: string):Observable<Vehicles>
   {
-    var res = this.http.get<Vehicles>(this.myurl + 'GetVehicleById');
+    var res = this.http.get<Vehicles>(this.myurl + 'GetVehicleById?id=' + id);
     return res;
   }
 

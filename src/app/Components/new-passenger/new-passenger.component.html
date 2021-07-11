@@ -65,7 +65,7 @@
                 <mat-label>כתובת</mat-label><br>
                 <input class="form-control" formControlName="address" matGoogleMapsAutocomplete
                     placeholder="הזן כתובת כולל מס' בנין" [country]="il"
-                    (onAutocompleteSelected)="onAutocompleteSelected($event)" required><br>
+                    (onAutocompleteSelected)="onAutocompleteSelected($event)" ><br>
                 <mat-error *ngIf="newPassengerForm.hasError('required', 'address') && newPassengerForm.get('address').touched">שדה זה חובה</mat-error>
             </form-field><br>
 

@@ -142,7 +142,11 @@ table
     background-color: #03E7D7;
 }
 
-
+.preview
+{
+  border-color: beige;
+  box-shadow: none;
+}
 
 
 

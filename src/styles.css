@@ -61,6 +61,18 @@ mat-toolbar-row {
 .mat-fab.mat-accent, .mat-flat-button.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent{
     background-color: palevioletred
 }
+.mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 1;
+    line-height: 50px;
+    border-radius: 50%;
+    z-index: 1;
+    margin-right: 0% !important;
+    margin-left: 170px !important;
+}
 /* .mat-stepper-vertical
 {
     direction: rtl;

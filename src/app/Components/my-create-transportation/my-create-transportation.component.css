@@ -83,6 +83,11 @@ table
   text-align: center;
 }
 
+.loader
+{
+  margin-right: 30%;
+}
+
 .all
 {
   display: flex;

@@ -1,6 +1,7 @@
 
 <p class="header">ההסעות שלי</p>
-<div *ngIf="!dataexist" class="notexist">
+  <img *ngIf="isWait" src="../../../assets/imag/טוען.gif" class="loader">
+  <div *ngIf="!dataexist && !isWait" class="notexist">
   <span>לא יצרת עדיין הסעות</span><br /><br />
   <button mat-raised-button type="button" (click)="action('add')">
     צור עכשיו

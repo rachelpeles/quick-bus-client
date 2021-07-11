@@ -83,10 +83,10 @@ export class EditTransDialogComponent implements OnInit {
       var email: Array<string> = [];
       this.userSer.getFamilyList().subscribe(x => {
         this.data.thisTrans.usersAndAddress.forEach(element => {
-          email.push(x.find(u => u.userId == element.user).email);
-          this.emailSer.sendEmailToList(email,
-            "ביטול הסעה"
-            , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
+          // email.push(x.find(u => u.userId == element.user).email);
+          // this.emailSer.sendEmailToList(email,
+          //   "ביטול הסעה"
+          //   , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
         });
       });
     }
@@ -128,13 +128,10 @@ export class EditTransDialogComponent implements OnInit {
       var email: Array<string> = [];
       // email[0]=this.meSer.family.email;
       email[0] = JSON.parse(localStorage.getItem('user')).email;
-      this.emailSer.sendEmailToList(email,
-        "יצירת ההסעה בוצעה בהצלחה",
-        "שלום, ה" + this.localTrans.description
-        + " נרשמה בהצלחה. באפשרותך לשתף את קוד ההסעה שבעזרתו יוכלו אנשים נוספים להירשם להסעה. תוכל לאשר או לדחות את הצטרפותם. קוד ההסעה: "
-        + this.localTrans.transportationId + "כתובת היעד/ המוצא: "
-        + this.localTrans.address + "זמן: "
-        + this.localTrans.schedules.departureTime + "נסיעה טובה!");
+      var htmlBody = 
+      `<html>        <head><style>h1, p{font-family: system-ui}</style>        </head>        <body>          <h3>` + this.thisUser.userName  + `! יצירת ההסעה בוצעה בהצלחה!</h3>          <p>שלום, ה</p>` + this.localTrans.description+          `<p>נרשמה בהצלחה.</p>     <p>באפשרותך לשתף את קוד ההסעה שבעזרתו יוכלו אנשים נוספים להירשם להסעה. תוכל לאשר או לדחות את הצטרפותם.</p> <p></p>   <p>קוד הסעה: `+this.localTrans.transportationId+`</p> <p>כתובת היעד / המוצא: `+this.localTrans.address+ `</p> <p>תאריך: `+ this.localTrans.schedules.date.toString().slice(0,10)+`</p>      <p>שעה:`+ this.localTrans.schedules.departureTime+`</p> <p>נסיעה טובה!!</p></p>        </body>      </html>`;
+      this.emailSer.sendEmailToList(email, "יצירת הסעה בוצעה בהצלחה!",
+       htmlBody);
     });
 
   }

@@ -19,10 +19,16 @@
                 <span class="right">כתובת</span>
                 <span class="left">{{trans.address}}</span>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <i class="material-icons icons">history_toggle_off</i>
                 <span class="right">תדירות</span>
-                <!-- <span class="left">{{trans.schedule.frequency}}</span> -->
+                <span class="left">{{trans.schedule.frequency}}</span>
+            </div> -->
+            <div class="row">
+                <span class="material-icons icons">event</span>
+                    
+                <span class="right">תאריך</span>
+                <span class="left">{{trans?.schedules.date.slice(0,10)}}</span>
             </div>
             <div class="row">
                 <i class="material-icons icons">departure_board</i>

@@ -53,6 +53,7 @@
 .hide
 {
     float: left;
+    margin-left: 0% !important;
 }
 
 .icons

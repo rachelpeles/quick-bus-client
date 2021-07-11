@@ -1,44 +1,46 @@
-
 <p>{{action}}</p>
 <h3 *ngIf="!data.created">הנך מבקש להחליף את כתובתך להסעה '{{localTrans.description}}' בכתובת הבאה</h3>
 <div *ngIf="data.created">
-<mat-form-field>
+  <mat-form-field>
     <input matInput [(ngModel)]="localTrans.description" placeholder="שם הסעה">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput [(ngModel)]="localTrans.schedules.departureTime" placeholder="שעה ותאריך">
+    <input matInput [(ngModel)]="localTrans.schedules.departureTime" placeholder="שעה">
   </mat-form-field>
-</div>
-  
+
+  <mat-form-field>
+    <input matInput type="date" [(ngModel)]="localTrans.schedules.date" placeholder="תאריך">
+  </mat-form-field>
+
   <!-- <mat-label>בחרו סוג ההסעה</mat-label><br> -->
-  <mat-radio-group *ngIf="data.created" [(ngModel)]="localTrans.schedules.routes.isDispersion" required>
-      <mat-radio-button value=false>איסוף</mat-radio-button><br>
-      <mat-radio-button value=true>פיזור</mat-radio-button>
+  <mat-radio-group [(ngModel)]="localTrans.schedules.routes.isDispersion" required>
+    <mat-radio-button value=false>איסוף</mat-radio-button><br>
+    <mat-radio-button value=true>פיזור</mat-radio-button>
   </mat-radio-group>
+
+</div>
+
 
 <!-- [types]="['address']"
 [types]="['(cities)']" -->
 <!-- TODO -->
-  <div fxFlex fxFlexAlign="center"
-                  class="autocomplete-container"
-                  [ngStyle.xs]="{'min-width.%': 100}"
-                  [ngStyle.sm]="{'width.%': 70}">
-               <mat-google-maps-autocomplete placeholderText=""
-                                             addressLabelText="כתובת"
-                                             country="il"
-                                             (onAutocompleteSelected)="onAutocompleteSelected($event)"
-                                             (onLocationSelected)="onLocationSelected($event)"
-                                             ngDefaultControl>
-               </mat-google-maps-autocomplete>
-  </div>
+<div fxFlex fxFlexAlign="center" class="autocomplete-container" [ngStyle.xs]="{'min-width.%': 100}"
+  [ngStyle.sm]="{'width.%': 70}">
+  <mat-google-maps-autocomplete placeholderText=""
+                                addressLabelText="כתובת" country="il"
+                                (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                (onLocationSelected)="onLocationSelected($event)"
+                                ngDefaultControl>
+  </mat-google-maps-autocomplete>
+</div>
 
-  <mat-checkbox *ngIf="!data.created" class="checkbox"(click)="addAddressToUser=true">להוספת כתובת זאת לרשימת הכתובות שלי</mat-checkbox><br><br>
+<mat-checkbox *ngIf="!data.created" class="checkbox" (click)="addAddressToUser=true">להוספת כתובת זאת לרשימת הכתובות שלי
+</mat-checkbox><br><br>
 
-  <span *ngIf="data.actionType==='edit' && data.created">בלחיצה על {{action}} הנך מאשר שפרטי ההסעה החדשים ישלחו לנוסעים</span><br>
+<span *ngIf="data.actionType==='edit' && data.created">בלחיצה על {{action}} הנך מאשר שפרטי ההסעה החדשים ישלחו
+  לנוסעים</span><br>
 <mat-dialog-actions>
-    <button mat-raised-button (click)="data.actionType==='edit'? update() : add()" >{{action}}</button>
-    <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>
+  <button mat-raised-button (click)="data.actionType==='edit'? update() : add()">{{action}}</button>
+  <button mat-raised-button class="cancel" [mat-dialog-close] (click)="cancel()" cdkFocusInitial>ביטול</button>
 </mat-dialog-actions>
-
-

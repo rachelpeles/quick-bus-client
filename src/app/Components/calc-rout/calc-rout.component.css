@@ -99,6 +99,23 @@ agm-map {
   vertical-align: middle;
   
 }
+
+.toColor:nth-child(2)
+{
+  color: #FACA44;
+}
+ .toColor:nth-child(3)
+{
+  color: #03E7D7;
+}
+.toColor:nth-child(4)
+{
+  color: #FF4B60;
+}
+.toColor:nth-child(5)
+{
+  color: black;
+}
 /* לא בשימוש */
 .rotate180 {
   display: inline-block;

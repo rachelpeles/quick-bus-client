@@ -4,7 +4,7 @@
   <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="true" (opened)="status=true" (closed)="status=false">
     <h2 id="head">{{description}} - {{isDispersion.str}}</h2>
-      <div *ngFor="let d of dir; let i = index">
+      <div class="toColor" *ngFor="let d of dir; let i = index">
         <h3>רכב מספר {{i+1}}</h3>
         <!-- <span *ngIf="isDispersion==false">שעת יציאה: {{(JSON.parse(localStorage.getItem("transToShow")).schedules.DepartureTime)- time[i]}}</span> -->
         <div *ngFor="let v of d.waypoints; let j = index">

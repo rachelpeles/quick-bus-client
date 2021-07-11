@@ -1,11 +1,14 @@
-<agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude">
+<img *ngIf="isLoaded === false" src="../../../assets/imag/טוען.gif">
+
+<!-- <div *ngIf="isLoaded === true"> -->
+  <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude">
     <agm-direction *ngFor="let data of dir"
-      [editable]="true"
-      [origin]="data.origin"
-      [destination]="data.destination"
-      [renderOptions]="data.renderOptions"
-      [waypoints]="data.waypoints"
-      [markerOptions]="data.markerOpts"
-      [optimizeWaypoints]="data.optimizeWaypoints">
-    </agm-direction>
+        [editable]="true"
+        [origin]="data.origin"
+        [destination]="data.destination"
+        [renderOptions]="data.renderOptions"
+        [waypoints]="data.waypoints"
+        [optimizeWaypoints]="data.optimizeWaypoints">
+  </agm-direction>
   </agm-map>
+<!-- </div> -->

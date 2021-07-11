@@ -53,7 +53,14 @@ export class UserMainComponent implements OnInit {
 
   createNew()
   {
-    this.router.navigate(['/MyCreateTransportation']);//TODO
+    const dialogRef = this.dialog.open(EditTransDialogComponent,
+      {
+        width: '250px',
+        data: { actionType: 'add', thisTrans: null, created: true }
+      });
+    dialogRef.afterClosed().subscribe(x=>{
+      this.router.navigate(['/MyCreateTransportation']);
+    });
   }
 
   myTransport()
@@ -77,7 +84,6 @@ export class UserMainComponent implements OnInit {
     if (action == 'edit') {
       const dialogRef = this.dialog.open(EditTransDialogComponent,
         {
-          width: '300px',
           data: { actionType: action, thisTrans: thisTrans, created: false }
         });
       dialogRef.afterClosed().subscribe(result => {
@@ -88,7 +94,6 @@ export class UserMainComponent implements OnInit {
     else if (action == 'delete') {
       const dialogRef = this.dialog.open(DelTransDialogComponent,
         {
-          width: '400px',
           data: { thisTrans: thisTrans, created: false }
         });
       dialogRef.afterClosed().subscribe(result => {
