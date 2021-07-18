@@ -142,7 +142,7 @@ import { PreviewDialogComponent } from './Components/preview-dialog/preview-dial
     MatTooltipModule,
     MatTabsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAXS8o9R2xBXjDX-_7SGv3xqE8ET_413wg',
+      apiKey: 'Your API Key',
       libraries: ['places'],
       language: 'iw'
     }),
