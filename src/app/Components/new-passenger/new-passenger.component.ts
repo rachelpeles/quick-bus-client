@@ -87,4 +87,8 @@ export class NewPassengerComponent implements OnInit {
     console.log('onAutocompleteSelected: ', result);
     this.newPassengerForm.controls.address.setValue(result.formatted_address);
   }
+  toSignIn()
+  {
+    this.router.navigate(['/Home']);
+  }
 }

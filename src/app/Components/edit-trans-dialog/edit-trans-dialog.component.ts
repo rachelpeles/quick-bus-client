@@ -50,7 +50,7 @@ export class EditTransDialogComponent implements OnInit {
   ngOnInit() {
     this.thisUser = JSON.parse(localStorage.getItem('user'));
     
-    this.titleService.setTitle('FastRide | הסעות שיצרתי');
+    this.titleService.setTitle('Quick bus | הסעות שיצרתי');
     this.userAddress = this.localTrans.usersAndAddress.find(x=>x.user==this.thisUser.address);
     this.zoom = 10;
     this.latitude = 52.520008;

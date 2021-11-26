@@ -26,7 +26,7 @@ export class UserMainComponent implements OnInit {
   displayedColumns=['preview', 'transportName', 'schedule', 'delete', 'edit'];
   ngOnInit() {
     this.globalService.isHome = false;
-    this.titleService.setTitle('FastRide | אזור אישי');
+    this.titleService.setTitle('Quick bus | אזור אישי');
     this.refresh();
     
   }

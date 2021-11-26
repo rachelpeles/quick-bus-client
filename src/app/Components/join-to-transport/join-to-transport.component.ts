@@ -90,7 +90,7 @@ export class JoinToTransportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle('FastRide | הצטרפות להסעה');
+    this.titleService.setTitle('Quick bus | הצטרפות להסעה');
     this.countAddressUser = this.thisUser.address.length;
     console.log('המשתמש: ' + this.thisUser.userName);
     // sessionStorage.setItem('address', this.joinTransport.get('address').value);

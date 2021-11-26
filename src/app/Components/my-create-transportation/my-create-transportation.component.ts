@@ -34,7 +34,7 @@ export class MyCreateTransportationComponent implements OnInit {
 
   displayedColumns = ['transportId', 'transportName', 'transportAddress', 'Participants', 'delete', 'edit', 'calcRoute'];
   ngOnInit() {
-    this.titleService.setTitle('FastRide | הסעות שיצרתי');
+    this.titleService.setTitle('Quick bus | הסעות שיצרתי');
     this.refresh();
   }
 

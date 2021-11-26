@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.globalService.isHome = true;
 
-    this.titleService.setTitle('FastRide | ראשי');
+    this.titleService.setTitle('Quick bus');
     this.FamilySer.getFamilyList().subscribe(
       data => {
         this.FamilyList = data;
@@ -122,11 +122,7 @@ export class HomeComponent implements OnInit {
     // this.router.navigate(['/newPassenger'])
   }
 
-  toSignIn()
-  {
-    this.connect = true;
-    this.router.navigate(['/Home']);
-  }
+ 
 }
 
 

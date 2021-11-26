@@ -6,12 +6,12 @@
 
     <!-- </mat-card-title> -->
     <div class="main showLogin" *ngIf="connect">
-        <img src="../../../assets/imag/Logo+Slogen.png" width="20%">
+        <img src="../../../assets/imag/quick-bus-logo.gif" width="20%">
         <div class="hello">
             <p> שלום!</p>
             <p>הגעת למקום הנכון</p>
-            <p>אתר ההסעות- fastride</p>
-            <p>בואו ונכיר:</p>
+            <p>אתר ההסעות לילדים- quick bus- </p>
+            <p>בואו לסוע איתנו במהירות:</p>
         </div>
         <!-- <mat-card-content> -->
 
@@ -43,22 +43,15 @@
                 <span *ngIf="!regiForm.get('Password').valid && regiForm.get('Password').touched">שדה זה
                     חובה</span>
             </mat-error><br>
-            <button type="submit" id="sign" mat-raised-button [disabled]="!regiForm.valid || IsAccepted==0">התחבר</button>
-            
-
+            <button type="submit" id="sign" mat-raised-button
+                [disabled]="!regiForm.valid || IsAccepted==0">התחבר</button>
+            <br>
+            <a (click)="openDialog()" link-to-login>הרשם כעת</a>
             <!-- <button class="b" mat-fab color="white" (click)="action()">
                     <i class="material-icons add">add</i>
                   </button> -->
         </form>
         <!-- </mat-card-content> -->
     </div>
-<div class="toRegister">
-                <button type="button" mat-raised-button (click)="openDialog()"> הרשם כעת </button>
-            </div>
-    <div class="toConnect" *ngIf="!connect">
-        <button type="button" mat-raised-button (click)="toSignIn()"> הכנס </button>
-    </div>
-    
-
     <app-new-passenger class="main showRegister" *ngIf="!connect"></app-new-passenger>
 </div>

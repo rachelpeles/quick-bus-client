@@ -67,6 +67,7 @@ import { MyFormComponent } from './Components/my-form/my-form.component';
 import { EditPassengerComponent } from './edit-passenger/edit-passenger.component';
 import { NewPassengerComponent } from './Components/new-passenger/new-passenger.component';
 import { PreviewDialogComponent } from './Components/preview-dialog/preview-dialog.component';
+import { LogInComponent } from './Components/log-in/log-in.component';
 // import { AgmDirectionModule } from 'agm-direction';
 // import { MsgDialogComponent } from './Components/msg-dialog/msg-dialog.component';
 
@@ -76,6 +77,7 @@ import { PreviewDialogComponent } from './Components/preview-dialog/preview-dial
 @NgModule({
   entryComponents: [ NewPassengerDialogComponent ],
   declarations: [
+    LogInComponent,
     AppComponent,
     UpdateComponent,
     PassengersComponent,
@@ -142,7 +144,7 @@ import { PreviewDialogComponent } from './Components/preview-dialog/preview-dial
     MatTooltipModule,
     MatTabsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'Your API Key',
+      apiKey: 'AIzaSyDKfj87zL1wKaRq_2mkKIUETGeq939XyLM',
       libraries: ['places'],
       language: 'iw'
     }),
