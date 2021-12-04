@@ -7,7 +7,8 @@
                       [routerLink]="link.link"
                       routerLinkActive="active"
                       #rla="routerLinkActive"
-                      [active]="rla.isActive">
+                      [ngClass]="{'borderButton':'#rla.isActive === active'}"
+                      >
         {{link.label}}
       </a>
     </nav>
@@ -20,19 +21,23 @@
   <!-- menu for user sign in -->
   <mat-menu #menu="matMenu" xPosition="before">
     <div *ngIf="thisUser!='הכנס'">
+
     <button mat-menu-item (click)="toUserMain()">
       <i class="material-icons menuIcons finger">fingerprint</i>
       <span>אזור אישי</span>
     </button>
+
     <button mat-menu-item (click)="toEditPassenger()">
       <i class="material-icons menuIcons update">manage_accounts</i>
       <span>עדכון פרטים</span>
     </button>
+
     <button mat-menu-item (click)="logInOut()">
       <i class="material-icons menuIcons logOut">
         power_settings_new</i>
       <span>יציאה</span>
     </button>
+
   </div>
   <button mat-menu-item (click)="logInOut()" *ngIf="thisUser==='הכנס'">
     <i class="material-icons menuIcons">login</i>

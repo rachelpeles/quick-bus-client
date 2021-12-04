@@ -17,21 +17,29 @@
 
  .form
 {
-    display: inline-block;
     text-align: right;
-    display: inline-block;
-    text-align: right;
-    margin-right: 22.5%;
+    margin-right: 10%;
 }
 
+.group {
+    display: flex;
+}
 
-  .form-control {
+.form-control {
     border-radius: 10px;
     font-size: 16px;
-    height: 35px;
+    height: 25px;
     border: solid 1px #ddd8d8;
     background-color: #f5f2f2;
+    margin-right: 10px;
+    width: 160px;
 }
+
+
+.red-button{
+    background-color: #fd5959;
+}
+
 .input
 {
     margin-top: 4%;
@@ -39,38 +47,10 @@
 
 .icons
 {
-    color: #ebad00;
+    color: #fd5959;
     vertical-align: middle;
+    padding-left: 10px;
 }
-  /* .main
-{
-    width: 419px;
-    height: 747px;
-    border-radius: 60px;
-    position: absolute;
-    top: -47px;
-    right: 60px;
-    display: inline-block;
-    z-index: 100;
-    box-shadow: 0 17px 40px 0 rgb(17 43 85 / 10%);
-    background-color: #ffffff;
-    overflow: hidden;
-}
-
-.showRegister {
-    animation: showRegister 0.2s forwards;
-}
-
-@keyframes showRegister
-{
-    0% {
-        transform: translateX(0%);
-    }
-    
-    100% {
-        transform: translateX(-103%);
-    }
-} */
 
 .mat-radio-button
 {

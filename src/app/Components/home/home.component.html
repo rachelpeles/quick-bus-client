@@ -43,15 +43,19 @@
                 <span *ngIf="!regiForm.get('Password').valid && regiForm.get('Password').touched">שדה זה
                     חובה</span>
             </mat-error><br>
-            <button type="submit" id="sign" mat-raised-button
+            <button type="submit" id="sign" mat-raised-button class="red-button"
                 [disabled]="!regiForm.valid || IsAccepted==0">התחבר</button>
             <br>
-            <a (click)="openDialog()" link-to-login>הרשם כעת</a>
+            <a (click)="openDialog()" class="link-to-login">הרשם כעת</a>
             <!-- <button class="b" mat-fab color="white" (click)="action()">
                     <i class="material-icons add">add</i>
                   </button> -->
         </form>
         <!-- </mat-card-content> -->
     </div>
-    <app-new-passenger class="main showRegister" *ngIf="!connect"></app-new-passenger>
+    <div class="main showRegister" *ngIf="!connect">
+        <app-new-passenger></app-new-passenger>
+        <a  class="link-to-login" (click)="toSignIn()">להתחברות</a>
+    </div>
+    
 </div>

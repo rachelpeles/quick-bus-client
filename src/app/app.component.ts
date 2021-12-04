@@ -20,61 +20,59 @@ export class AppComponent {
         label: 'דף הבית',
         link: '',
         index: 0
-    },
-    {
-      label: 'אזור אישי',
-      link: './UserMain',
-      index: 1
-  }, {
+      },
+      {
+        label: 'אזור אישי',
+        link: './UserMain',
+        index: 1
+      }, {
         label: 'ההסעות שלי',
         link: './MyCreateTransportation',
-        index: 1
-    },
-    
-     {
+        index: 2
+      },
+
+      {
         label: 'הצטרפות להסעה',
         link: './JoinToTransport',
-        index: 2
-    },
-  ];
+        index: 3
+      },
+    ];
   }
 
-  resetThisUser(thisUser)
-  {
-    this.thisUser = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')).userName : 'הכנס';
+  resetThisUser(thisUser) {
+    this.thisUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).userName : 'הכנס';
   }
 
-  route()
-  {
+  route() {
     this.router.navigate([""]);
   }
 
   ngOnInit(): void {
     this.toolBar = this.globalService.isHome;
     this.router.events.subscribe((res) => {
-        this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
+      this.activeLinkIndex = this.navLinks.indexOf(this.navLinks.find(tab => tab.link === '.' + this.router.url));
     });
-  this.resetThisUser(JSON.parse(localStorage.getItem('user')));
+    this.resetThisUser(JSON.parse(localStorage.getItem('user')));
 
   }
 
-  toUserMain()
-  {
+  toUserMain() {
     this.router.navigate(['/UserMain']);
   }
 
-  toEditPassernger()
-  {
+  toEditPassernger() {
     this.router.navigate(['/EditPassenger']);
   }
 
-  logInOut()
-  {
-    if(localStorage.getItem('user'))
-    {
+  logInOut() {
+    if (localStorage.getItem('user')) {
       localStorage.removeItem('user');
       this.resetThisUser('הכנס');
     }
     this.router.navigate(['/Home']);
+  }
+
+  CahngeRoute(link){
+    
   }
 }
