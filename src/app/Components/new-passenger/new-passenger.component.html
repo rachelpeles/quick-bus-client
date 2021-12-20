@@ -1,49 +1,58 @@
 <div class="main">
-    <img id="logo" src="../../../assets/imag/Logo+Slogen.png" width="20%">
+    <img id="logo" src="../../../assets/imag/quick-bus-logo.gif" width="20%">
     <h3 id="head">הרשמה</h3><br>
     <div class="theForm">
         <form [formGroup]="newPassengerForm" (ngSubmit)="save()" class="form">
-
-            <!-- <mat-form-field> -->
-            <i class="material-icons icons">people</i>
-            <mat-label>בחרו סוג משתמש</mat-label><br>
-            <mat-radio-group formControlName="type" required>
-                <mat-radio-button value='0'>קבוצה</mat-radio-button>
-                <mat-radio-button value='1'>יחיד</mat-radio-button>
-            </mat-radio-group><br>
-            <!-- </mat-form-field> -->
-
-            <i class="material-icons icons">person</i>
-            <mat-label>השם שלך</mat-label><br>
-            <form-field>
-                <input class="form-control" formControlName="userName" required>
-            </form-field><br>
-            <mat-error *ngIf="newPassengerForm.hasError('required', 'userName') && newPassengerForm.get('userName').touched">שדה זה חובה</mat-error>
-
-            <form [formGroup]="passwordsGroup">
+            <div class="group">
+                <i class="material-icons icons">people</i>
+                <mat-label>בחרו סוג משתמש</mat-label>
+                <mat-radio-group formControlName="type" required>
+                    <mat-radio-button value='0'>קבוצה</mat-radio-button>
+                    <mat-radio-button value='1'>יחיד</mat-radio-button>
+                </mat-radio-group><br>
+            </div>
+            <div class="group">
+                <i class="material-icons icons">person</i>
+                <mat-label>השם שלך</mat-label><br>
                 <form-field>
-                    <div class="input">
-                        <i class="material-icons icons">vpn_key</i>
-                        <mat-label>סיסמה</mat-label><br>
-                        <input class="form-control" type="password" placeholder="סיסמא"
-                            [type]="hide ? 'password' : 'text'" formControlName="password" required>
-                        <button class="hide" type="button" matSuffix mat-icon-button (click)="hide = !hide"
-                            [attr.aria-label]="'Hide password'" aria-labelledby="hide" [attr.aria-pressed]="hide">
-                            <i class="material-icons icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
-                        </button>
-
-                    </div>
-                    <mat-error *ngIf="passwordsGroup.hasError('required', 'password') && passwordsGroup.get('password').touched">
-                    נא הקלד סיסמה
-                </mat-error>
-                </form-field>
-                <br>
-
-                <form-field>
-                    <mat-label>אימות סיסמה</mat-label><br>
-                    <input class="form-control" type="password" formControlName="verifiedPassword"
-                        [errorStateMatcher]="matcher" required>
+                    <input class="form-control" formControlName="userName" required>
                 </form-field><br>
+                <mat-error *ngIf="newPassengerForm.hasError('required', 'userName') && newPassengerForm.get('userName').touched">שדה זה חובה</mat-error>
+            </div>
+
+           
+            <form [formGroup]="passwordsGroup">
+
+                 <div class="group">
+                    <form-field>
+                        <div class="input">
+                            <i class="material-icons icons">vpn_key</i>
+                            <mat-label>סיסמה</mat-label>
+                            <input class="form-control" type="password" placeholder="סיסמא"
+                                [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                            <!-- <button class="hide" type="button" matSuffix mat-icon-button (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'" aria-labelledby="hide" [attr.aria-pressed]="hide">
+                                <i class="material-icons icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
+                            </button> -->
+
+                        </div>
+                        <mat-error *ngIf="passwordsGroup.hasError('required', 'password') && passwordsGroup.get('password').touched">
+                        נא הקלד סיסמה
+                    </mat-error>
+                    </form-field>
+                </div>
+
+                <br>
+                <div class="group">
+                    <form-field>
+                        <mat-label>אימות סיסמה</mat-label>
+                        <input class="form-control" type="password" formControlName="verifiedPassword"
+                            [errorStateMatcher]="matcher" required>
+                    </form-field>
+
+                </div>
+                    
+                <br>
                 <mat-error *ngIf="passwordsGroup.hasError('notSame') && passwordsGroup.get('verifiedPassword').touched">
                     הסיסמה לא תואמת
                 </mat-error>
@@ -52,38 +61,48 @@
                 </mat-error>
             </form>
 
-            <form-field>
-                <i class="material-icons icons">settings_phone</i>
-                <mat-label>טלפון</mat-label><br>
-                <input class="form-control" formControlName="phone" required><br>
-                <mat-error *ngIf="newPassengerForm.hasError('required', 'phone') && newPassengerForm.get('phone').touched">שדה זה חובה</mat-error>
-                <mat-error *ngIf="newPassengerForm.hasError('minlength', 'phone') && newPassengerForm.get('phone').touched">מספר לא תקין</mat-error>
-            </form-field><br>
+            <div class="group">
+                <form-field>
+                    <i class="material-icons icons">settings_phone</i>
+                    <mat-label>טלפון</mat-label>
+                    <input class="form-control" formControlName="phone" required><br>
+                    <mat-error *ngIf="newPassengerForm.hasError('required', 'phone') && newPassengerForm.get('phone').touched">שדה זה חובה</mat-error>
+                    <mat-error *ngIf="newPassengerForm.hasError('minlength', 'phone') && newPassengerForm.get('phone').touched">מספר לא תקין</mat-error>
+                </form-field>
+            </div>
 
-            <form-field>
-                <i class="material-icons icons">home</i>
-                <mat-label>כתובת</mat-label><br>
-                <input class="form-control" formControlName="address" matGoogleMapsAutocomplete
-                    placeholder="הזן כתובת כולל מס' בנין" [country]="il"
-                    (onAutocompleteSelected)="onAutocompleteSelected($event)" ><br>
-                <mat-error *ngIf="newPassengerForm.hasError('required', 'address') && newPassengerForm.get('address').touched">שדה זה חובה</mat-error>
-            </form-field><br>
+            <br>
+            <div class="group">
+                <form-field>
+                    <i class="material-icons icons">home</i>
+                    <mat-label>כתובת</mat-label>
+                    <input class="form-control" formControlName="address" matGoogleMapsAutocomplete
+                        placeholder="הזן כתובת כולל מס' בנין" [country]="il"
+                        (onAutocompleteSelected)="onAutocompleteSelected($event)" ><br>
+                    <mat-error *ngIf="newPassengerForm.hasError('required', 'address') && newPassengerForm.get('address').touched">שדה זה חובה</mat-error>
+                </form-field>
+            </div>
 
+            <br>
 
-            <form-field>
-                <i class="material-icons icons">alternate_email</i>
-                <mat-label>אימייל</mat-label><br>
-                <input class="form-control" formControlName="email" required><br>
-                <mat-error>
-                    <span *ngIf="newPassengerForm.hasError('required', 'email') && newPassengerForm.get('email').touched">שדה זה חובה</span>
-                </mat-error>
-            </form-field><br>
+            <div class="group">
+                <form-field>
+                    <i class="material-icons icons">alternate_email</i>
+                    <mat-label>אימייל</mat-label>
+                    <input class="form-control" formControlName="email" required>
+                    <mat-error>
+                        <span *ngIf="newPassengerForm.hasError('required', 'email') && newPassengerForm.get('email').touched">שדה זה חובה</span>
+                    </mat-error>
+                </form-field>
+            </div>
+            
+            <br>   
         </form>
         <!-- </div> -->
 
 
         <div mat-dialog-actions>
-            <button mat-raised-button (click)="save()"
+            <button class="red-button" mat-raised-button (click)="save()"
                 [disabled]="!(newPassengerForm.valid && passwordsGroup.valid)">שמירה</button>
         </div><br>
     </div>

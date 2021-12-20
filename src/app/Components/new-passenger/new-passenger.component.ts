@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -55,6 +55,7 @@ export class NewPassengerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.newPassengerForm.controls.address.setValue(null);
   }
 
   save()
@@ -86,5 +87,9 @@ export class NewPassengerComponent implements OnInit {
   onAutocompleteSelected(result: PlaceResult) {
     console.log('onAutocompleteSelected: ', result);
     this.newPassengerForm.controls.address.setValue(result.formatted_address);
+  }
+  toSignIn()
+  {
+    this.router.navigate(['/Home']);
   }
 }

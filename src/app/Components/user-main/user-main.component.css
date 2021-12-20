@@ -11,7 +11,7 @@
 .page::before
 {
     content: "";
-    background-image: url('../../../assets/imag/car.jpg');
+    background-image: url('../../../assets/imag/background-schoolbus.jpg');
     background-size: cover;
     position: absolute;
     top: 0px;
@@ -179,7 +179,7 @@ table
 .mat-toolbar::before
 {
   content: "";
-  background-image: url('../../../assets/imag/back.png');
+  background-image: url('../../../assets/imag/quick-bus-logo.gif');
   position: absolute;
   top: 0px;
   right: 0px;
