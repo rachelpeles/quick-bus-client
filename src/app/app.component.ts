@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'p';
   navLinks: any[];
   activeLinkIndex = 0;
+  activeLink;
   thisUser: string;
   toolBar;
   constructor(private router: Router, private globalService: GlobalService) {
@@ -37,6 +38,7 @@ export class AppComponent {
         index: 3
       },
     ];
+    this.activeLink = this.navLinks[0].link;
   }
 
   resetThisUser(thisUser) {

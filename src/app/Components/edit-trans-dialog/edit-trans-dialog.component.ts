@@ -15,6 +15,7 @@ import { Location, Appearance } from '@angular-material-extensions/google-maps-a
 import PlaceResult = google.maps.places.PlaceResult;
 import { Schedules } from 'src/app/Classes/schedules';
 import { stringify } from '@angular/compiler/src/util';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -35,15 +36,20 @@ export class EditTransDialogComponent implements OnInit {
   public zoom: number;
   public latitude: number;
   public longitude: number;
+  public scheduleDate:FormControl;
+  time = `${new Date().getHours()}:${(new Date().getMinutes()<10?'0':'') + new Date().getMinutes()}`;
 
   constructor(public dialogRef: MatDialogRef<EditTransDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private transSer: TransportationService, private userSer: FamilyService, private emailSer: EmailService, private meSer: MyService, private titleService: Title, private snackBar: MatSnackBar) {
     if (this.data.actionType == 'edit') {
       this.action = 'עדכון הסעה';
       this.localTrans = Object.assign({}, this.data.thisTrans);
+      this.scheduleDate = new FormControl(this.localTrans.schedules.date);
     }
-    else if (this.data.actionType == 'add')
+    else if (this.data.actionType == 'add'){
       this.action = 'הוספת הסעה';
+      this.scheduleDate = new FormControl();
+    }
     // this.transSchedule.departureTime = this.localTrans.schedules? this.localTrans.schedules.departureTime : '';
   }
 
@@ -61,7 +67,8 @@ export class EditTransDialogComponent implements OnInit {
 
 
   async update() {
-    
+    this.localTrans.schedules.date = this.scheduleDate.value;
+    this.localTrans.schedules.routes.isDispersion = JSON.parse(stringify(this.localTrans.schedules.routes.isDispersion));
     if (this.data.created) {
       this.data.thisTrans = this.localTrans;
       await this.transSer.updateTransport(this.localTrans).subscribe(x => {
@@ -114,6 +121,7 @@ export class EditTransDialogComponent implements OnInit {
   async add() {
     var addCreate: Family;
     this.localTrans.schedules.routes.isDispersion = JSON.parse(stringify(this.localTrans.schedules.routes.isDispersion));
+    this.localTrans.schedules.date = this.scheduleDate.value;
     await this.transSer.addTransport(this.localTrans).subscribe(x => {
       this.localTrans = x[x.length - 1];
       this.dialogRef.close(this.localTrans);

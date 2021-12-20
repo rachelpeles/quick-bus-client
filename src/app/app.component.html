@@ -3,15 +3,22 @@
 
   <div class="right">
     <nav mat-tab-nav-bar>
-      <a mat-tab-link *ngFor="let link of navLinks"
+      <!-- <a mat-tab-link *ngFor="let link of navLinks"
                       [routerLink]="link.link"
                       routerLinkActive="active"
                       #rla="routerLinkActive"
                       [ngClass]="{'borderButton':'#rla.isActive === active'}"
                       >
         {{link.label}}
+      </a> -->
+      <a mat-tab-link *ngFor="let link of navLinks"
+      [routerLink]="link.link"
+      (click)="activeLink = link.link"
+      [active]="activeLink == link.link">
+        {{link.label}}
       </a>
     </nav>
+    <span>{{thisUser}}</span>
   </div>
 
     <button mat-icon-button [matMenuTriggerFor]="menu">

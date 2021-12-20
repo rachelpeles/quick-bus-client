@@ -144,7 +144,7 @@ import { LogInComponent } from './Components/log-in/log-in.component';
     MatTooltipModule,
     MatTabsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDKfj87zL1wKaRq_2mkKIUETGeq939XyLM',
+      apiKey: 'AIzaSyCSq2aa_F47srCWvFnBksqeRF-HOhOxgQw',
       libraries: ['places'],
       language: 'iw'
     }),
