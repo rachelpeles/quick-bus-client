@@ -95,10 +95,15 @@ export class TransportationService {
   }
 
   async getUserTransportation(userId) {
-    var transUser = new Array<Transportation>();
+    var transUser = [];
     await this.getAlltransport().toPromise().then(result => {
       // if(result.find(x=>x.usersAndAddress.find(id=>id.user==userId)))
-      transUser.push(result.find(trans => trans.usersAndAddress.find(id => id.user == userId)));
+      result.forEach(trans => {
+        if (trans.usersAndAddress.find(id => id.user == userId)){
+          transUser.push(trans)
+        }
+      });
+      //transUser.concat(result.filter(trans => trans.usersAndAddress.find(id => id.user == userId)));
     });
     return transUser;
   }

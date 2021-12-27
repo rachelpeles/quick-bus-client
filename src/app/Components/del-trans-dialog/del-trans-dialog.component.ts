@@ -44,10 +44,13 @@ export class DelTransDialogComponent implements OnInit {
         this.userSer.updateUser(thisUser).subscribe(z => console.log(z));
         this.data.thisTrans.usersAndAddress.forEach(element => {
           email.push(x.find(u => u.userId == element.user).email);
-          this.emailSer.sendEmailToList(email,
-            "ביטול הסעה"
-            , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
         });
+        var uniqueEmail = email.filter(function(elem, index, self) {
+          return index === self.indexOf(elem);
+        })
+        this.emailSer.sendEmailToList(uniqueEmail,
+          "ביטול הסעה"
+          , "שלום רב, ההסעה: " + this.data.thisTrans.description + " בוטלה. היא לא תתקיים. בהצלחה ויום טוב");
         alert('!ההסעה בוטלה! הודעה נשלחת לנוסעים');
         this.dialogRef.close();
       });

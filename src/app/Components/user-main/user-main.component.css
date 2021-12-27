@@ -131,7 +131,9 @@ table
 {
     width: 90%;
 }
-
+.mat-elevation-z8 {
+  box-shadow: 0 0 0 , 0 0 0 0, 0 0 0 0 ;
+}
 .deleteAndEdit
 {
   box-shadow: none;
@@ -224,6 +226,36 @@ table
 ::ng-deep .mat-menu-panel {
   min-width: 140px !important;
 }
+
+.table{
+  height: 73px;
+  overflow-y: auto;
+}
+
+/* scrollBar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fd5959; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fd5959; 
+}
+
+/*  */
 
 .finger
 {

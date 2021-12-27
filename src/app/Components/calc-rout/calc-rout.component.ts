@@ -29,8 +29,11 @@ export class CalcRoutComponent implements OnInit {
   public zoom = 10;
   isunion = false;
   status = true;
-
-  constructor(private transSer: TransportationService, private router: Router, private global: GlobalService) { }
+  editOrShow:boolean;
+  constructor(private transSer: TransportationService, private router: Router, private global: GlobalService) {
+    this.editOrShow = (router.url=='/CalcRoute');
+    console.log(this.editOrShow)
+   }
 
   async ngOnInit() {
     this.refresh();

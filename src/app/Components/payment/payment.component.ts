@@ -1,61 +1,83 @@
-import { stringify } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
-import { RouteForVehicle } from 'src/app/Classes/route-for-vehicle';
-import { Station } from 'src/app/Classes/station';
-import { EmailService } from 'src/app/Services/email.service';
-import { FamilyService } from 'src/app/Services/Family.service';
-import { GlobalService } from 'src/app/Services/global.service';
-import { TransportationService } from 'src/app/Services/transportation.service';
+import { stringify } from "@angular/compiler/src/util";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { RouteForVehicle } from "src/app/Classes/route-for-vehicle";
+import { Station } from "src/app/Classes/station";
+import { EmailService } from "src/app/Services/email.service";
+import { FamilyService } from "src/app/Services/Family.service";
+import { GlobalService } from "src/app/Services/global.service";
+import { TransportationService } from "src/app/Services/transportation.service";
 
 @Component({
-  selector: 'app-payment',
-  templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css']
+  selector: "app-payment",
+  templateUrl: "./payment.component.html",
+  styleUrls: ["./payment.component.css"],
 })
 export class PaymentComponent implements OnInit {
-
   thisTrans = JSON.parse(localStorage.getItem("transToShow"));
   local = this.thisTrans.description;
   waypoint;
-  constructor(private global: GlobalService, private transportationService: TransportationService, private emailSer: EmailService, private userSer: FamilyService) {
+  constructor(
+    private global: GlobalService,
+    private transportationService: TransportationService,
+    private emailSer: EmailService,
+    private userSer: FamilyService,
+    private router: Router
+  ) {
     this.waypoint = this.global.waypoints;
     console.log(this.waypoint);
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   byPassengers() {
-    var list = JSON.parse(localStorage.getItem('dir'));
-    for (let i = 0; i < list.length; i++) {
-      for (let j = 0; j < list[i].length; j++) {
+    var email;
+    var list = this.thisTrans.usersAndAddress;
+    list.forEach((element) => {
+      this.userSer.getFamilyList().subscribe((x) => {
+        email = x.find((u) => u.userId == element.user).email;
+        var htmlBody =
+          `<html>        <head><style>h1, p{font-family: system-ui}</style>        </head>        <body>          <h3>` +
+          `הסכום לתשלום להסעה ` +
+          this.thisTrans.description +
+          `: </h3> ` +
+          `<p> ` +
+          parseInt(this.thisTrans.schedules.price) /
+            this.thisTrans.usersAndAddress.length +
+          ` ש"ח. </p>` +
+          `<p>נסיעה טובה!!</p>       </body>      </html>`;
 
-
-      }
-
-    }
+        this.emailSer.sendEmailToList(email, "תשלום הסעה", htmlBody);
+      });
+      alert('הודעת תשלום נשלחה לנרשמים');
+    });
+    this.router.navigate(["/UserMain"]);
   }
 
   save() {
     var recipients: Array<string> = new Array<string>();
-    this.thisTrans.schedules.routes.countUsers = this.thisTrans.usersAndAddress.length;
-    this.thisTrans.schedules.routes.routeForVehicle = new Array<RouteForVehicle>();
+    this.thisTrans.schedules.routes.countUsers =
+      this.thisTrans.usersAndAddress.length;
+    this.thisTrans.schedules.routes.routeForVehicle =
+      new Array<RouteForVehicle>();
     for (let i = 0; i < this.waypoint.length; i++) {
       var routeForVehicle: RouteForVehicle = new RouteForVehicle();
       routeForVehicle.vehicle = this.global.vehicles[i];
       var stations: Array<Station> = new Array<Station>();
       for (let j = 1; j < this.waypoint[i].length; j++) {
-      routeForVehicle.todoLen = this.global.duration[i].distance;
-      routeForVehicle.duration = stringify(this.global.duration[i].duration);
+        routeForVehicle.todoLen = this.global.duration[i].distance;
+        routeForVehicle.duration = stringify(this.global.duration[i].duration);
         routeForVehicle.station = new Array<Station>();
         var station: Station = new Station();
         station.address = this.waypoint[i][j].location;
         station.oridinalNumber = j;
-        this.thisTrans.usersAndAddress.find(x => {
+        this.thisTrans.usersAndAddress.find((x) => {
           if (x.address === this.waypoint[i][j].location) {
             station.users.push(x.user);
-            this.userSer.getUserById(x.user).toPromise().then(u => recipients.push(u.email));
+            this.userSer
+              .getUserById(x.user)
+              .toPromise()
+              .then((u) => recipients.push(u.email));
           }
         });
         stations.push(station);
@@ -63,13 +85,39 @@ export class PaymentComponent implements OnInit {
       routeForVehicle.station = stations;
       this.thisTrans.schedules.routes.routeForVehicle.push(routeForVehicle);
     }
-    this.transportationService.updateTransport(this.thisTrans).subscribe(x => {
-      console.log(x);
-      var isDispresion = this.thisTrans.schedules.routes.isDispresion === true? 'פיזור' : 'איסוף';
-      var destOrigin = this.thisTrans.schedules.routes.isDispresion === true? 'כתובת המוצא' : 'כתובת היעד';
-      var htmlBody = 
-      `<html>        <head><style>h1, p{font-family: system-ui}</style>          <title>ההסעה כבר יוצאת לדרך!!</title>        </head>        <body>          <h3>להלן עדכון לגבי ` + this.thisTrans.description + ` שנרשמת אליה</h3>          <p>היי,</p>          <p>ההסעה כבר יוצאת לדרך...</p>     <p>לפניך פרטי המסלול:</p> <p>`+ this.thisTrans.description + `</p>   <p>`+isDispresion+`</p> <p>`+destOrigin+`:` + this.thisTrans.address + `</p> <p>שעה:`+ this.thisTrans.schedules.departureTime+`</p>      <p>זמן נסיעה משוער:`+ this.thisTrans.schedules.routes.routeForVehicle[0].duration+`</p><p>להצגת המסלול על המפה כנסו לאתר.  http://localhost:4200/UserMain</p>      <p>נסיעה טובה!!</p></p>        </body>      </html>`;
-      this.emailSer.sendEmailToList(recipients, 'פרטים לגבי ההסעה שנרשמת אליה', htmlBody);
-    });
+    this.transportationService
+      .updateTransport(this.thisTrans)
+      .subscribe((x) => {
+        console.log(x);
+        var isDispresion =
+          this.thisTrans.schedules.routes.isDispresion === true
+            ? "פיזור"
+            : "איסוף";
+        var destOrigin =
+          this.thisTrans.schedules.routes.isDispresion === true
+            ? "כתובת המוצא"
+            : "כתובת היעד";
+        var htmlBody =
+          `<html>        <head><style>h1, p{font-family: system-ui}</style>          <title>ההסעה כבר יוצאת לדרך!!</title>        </head>        <body>          <h3>להלן עדכון לגבי ` +
+          this.thisTrans.description +
+          ` שנרשמת אליה</h3>          <p>היי,</p>          <p>ההסעה כבר יוצאת לדרך...</p>     <p>לפניך פרטי המסלול:</p> <p>` +
+          this.thisTrans.description +
+          `</p>   <p>` +
+          isDispresion +
+          `</p> <p>` +
+          destOrigin +
+          `:` +
+          this.thisTrans.address +
+          `</p> <p>שעה:` +
+          this.thisTrans.schedules.departureTime +
+          `</p>      <p>זמן נסיעה משוער:` +
+          this.thisTrans.schedules.routes.routeForVehicle[0].duration +
+          `</p><p>להצגת המסלול על המפה כנסו לאתר.  http://localhost:4200/UserMain</p>      <p>נסיעה טובה!!</p></p>        </body>      </html>`;
+        this.emailSer.sendEmailToList(
+          recipients,
+          "פרטים לגבי ההסעה שנרשמת אליה",
+          htmlBody
+        );
+      });
   }
 }
