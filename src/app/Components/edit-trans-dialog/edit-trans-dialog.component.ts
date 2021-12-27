@@ -170,6 +170,14 @@ export class EditTransDialogComponent implements OnInit {
       this.userAddress = result.formatted_address;
   }
 
+  directionChanged(event){
+    this.localTrans.schedules.routes.isDispersion = !this.localTrans.schedules.routes.isDispersion;
+  }
+
+  aa(){
+    alert('hello');
+  }
+
   onLocationSelected(location: Location) {
     console.log('onLocationSelected: ', location);
     this.latitude = location.latitude;

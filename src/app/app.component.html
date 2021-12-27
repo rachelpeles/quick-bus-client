@@ -11,51 +11,50 @@
                       >
         {{link.label}}
       </a> -->
-      <a mat-tab-link *ngFor="let link of navLinks"
-      [routerLink]="link.link"
-      (click)="activeLink = link.link"
-      [active]="activeLink == link.link">
-        {{link.label}}
+      <a
+        mat-tab-link
+        *ngFor="let link of navLinks"
+        [routerLink]="link.link"
+        [disabled]="getUser() === 'הכנס'"
+        [active]="router.url == link.link"
+      >
+        {{ link.label }}
       </a>
     </nav>
-    <span>{{thisUser}}</span>
+    <!-- <span>{{ getUser() }}</span> -->
   </div>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <i class="material-icons person" matTooltip="{{thisUser}}">person</i>
-    </button>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <i class="material-icons person" matTooltip="{{ getUser() }}">person</i>
+  </button>
 
   <!-- menu for user sign in -->
   <mat-menu #menu="matMenu" xPosition="before">
-    <div *ngIf="thisUser!='הכנס'">
+    <div *ngIf="thisUser != 'הכנס'">
+      <button mat-menu-item (click)="toUserMain()">
+        <i class="material-icons menuIcons finger">fingerprint</i>
+        <span>אזור אישי</span>
+      </button>
 
-    <button mat-menu-item (click)="toUserMain()">
-      <i class="material-icons menuIcons finger">fingerprint</i>
-      <span>אזור אישי</span>
+      <button mat-menu-item (click)="toEditPassenger()">
+        <i class="material-icons menuIcons update">manage_accounts</i>
+        <span>עדכון פרטים</span>
+      </button>
+
+      <button mat-menu-item (click)="logInOut()">
+        <i class="material-icons menuIcons logOut">
+          power_settings_new
+        </i>
+        <span>יציאה</span>
+      </button>
+    </div>
+    <button mat-menu-item (click)="logInOut()" *ngIf="thisUser === 'הכנס'">
+      <i class="material-icons menuIcons">login</i>
+      <span>כניסה</span>
     </button>
-
-    <button mat-menu-item (click)="toEditPassenger()">
-      <i class="material-icons menuIcons update">manage_accounts</i>
-      <span>עדכון פרטים</span>
-    </button>
-
-    <button mat-menu-item (click)="logInOut()">
-      <i class="material-icons menuIcons logOut">
-        power_settings_new</i>
-      <span>יציאה</span>
-    </button>
-
-  </div>
-  <button mat-menu-item (click)="logInOut()" *ngIf="thisUser==='הכנס'">
-    <i class="material-icons menuIcons">login</i>
-    <span>כניסה</span>
-  </button>
   </mat-menu>
-  <img src="../assets/imag/quick-bus-logo.gif" id="logo" (click)="route()">
-
+  <img src="../assets/imag/quick-bus-logo.gif" id="logo" (click)="route()" />
 </mat-toolbar>
-<div id="all">
+<div id="all"></div>
 
-</div>
-
-<router-outlet></router-outlet> 
+<router-outlet></router-outlet>

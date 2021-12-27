@@ -51,13 +51,13 @@
       </div>
       <div class="main">
         <button mat-mini-fab class="route" (click)="createNew()"><i class="material-icons">alt_route</i></button>
-        <span [attr.aria-label]="myActionLabel" class="mainButton" (click)="createNew()">צור נסיעה
+        <span [attr.aria-label]="myActionLabel" class="mainButton" (click)="createNew()">צור הסעה
           חדשה</span>
       </div>
       <div class="main">
         <button mat-mini-fab class="directions" (click)="myTransport()"><i
             class="material-icons">directions</i></button>
-        <span class="mainButton" (click)="myTransport()">הנסיעות שלי</span>
+        <span class="mainButton" (click)="myTransport()">ההסעות שלי</span>
       </div>
   </div>
 
@@ -74,7 +74,7 @@
         הצטרף עכשיו
       </button>
     </div>
-    <div id="dataTable" *ngIf="dataexist">
+    <div id="dataTable" *ngIf="dataexist" class="table">
       <div class="flexdiv">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

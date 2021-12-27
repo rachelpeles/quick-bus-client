@@ -159,43 +159,48 @@ export class JoinToTransportComponent implements OnInit {
   }
 
   getIdError() {
-    return 'קוד ההסעה שהקשתם הינו שגוי';
+    this.openSnackBar('קוד ההסעה שהקשת שגוי');
   }
-
 
   transportationId: string;
   flag: boolean = false;
 
   get transsss() { return this.joinTransport.get('transportationId'); }
 
-
-  confirmStep(event: StepperSelectionEvent)
-  {
-    this.transSer.getAlltransport().subscribe(
-        data => {
-          this.transportationList = data;
-          this.thisTransportation = data.find(x=>x.transportationId==this.joinTransport.get('transportationId').value);
-          if(!this.thisTransportation)
-          this.getIdError();
-        },
-        error => {
-          alert(error.message);
-        }
-      );
-  }
+  // confirmStep(event: StepperSelectionEvent)
+  // {
+  //   this.transSer.getAlltransport().subscribe(
+  //       data => {
+  //         this.transportationList = data;
+  //         this.thisTransportation = data.find(x=>x.transportationId==this.joinTransport.get('transportationId').value);
+  //         if(!this.thisTransportation)
+  //          this.getIdError();
+  //       },
+  //       error => {
+  //         alert(error.message);
+  //       }
+  //     );
+  // }
 
   //open messege
   openSnackBar(message: string) {
     this.snackBar.open(message, 'אישור',{
-      duration: 2000,
+      duration: 5000,
     });
   }
   //פונקצית הוספת המשתמש לרשימת הממתינים
   toConfirm() {
+    if(this.joinTransport.get('transportationId').value.length < 24){
+      this.getIdError()
+    }
+    else{
     this.transSer.getTransportationById(this.joinTransport.get('transportationId').value).subscribe(data => {
       this.trans = data;
       console.log(this.trans);
-      if (this.trans.waitingList.some(x=>x.user==this.thisUser.userId))
+      if(!this.trans){
+        this.getIdError()
+      }
+      else if (this.trans.waitingList.some(x=>x.user==this.thisUser.userId))
         this.openSnackBar('כבר בקשת להצטרף להסעה זו');
       else if (this.trans.usersAndAddress.some(x => x.user == this.thisUser.userId))
         this.openSnackBar('הנך כבר רשום להסעה זו, פרטים מדויקים על ההסעה ישלחו למייל במועד קרוב יותר למועד ההסעה');
@@ -217,10 +222,12 @@ export class JoinToTransportComponent implements OnInit {
           if (x)
             this.openSnackBar('בקשתך להצטרף לנסיעה התקבלה וממתינה לאישור המנהל');
         });
+      
+      
+        this.router.navigate(['/UserMain']);
       }
-
     });
-    this.router.navigate(['/UserMain']);
+  }
   }
   getErrorPassword() {
 

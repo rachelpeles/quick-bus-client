@@ -21,9 +21,9 @@
   </mat-form-field>
 
   <!-- <mat-label>בחרו סוג ההסעה</mat-label><br> -->
-  <mat-radio-group [(ngModel)]="localTrans.schedules.routes.isDispersion" required>
-    <mat-radio-button value=false>איסוף</mat-radio-button><br>
-    <mat-radio-button value=true>פיזור</mat-radio-button>
+  <mat-radio-group required (change)="directionChanged($event)">
+    <mat-radio-button [value]="false" [checked]="data.actionType == 'edit' && !localTrans.schedules.routes.isDispersion">איסוף</mat-radio-button><br>
+    <mat-radio-button [value]="true" [checked]="data.actionType == 'edit' && localTrans.schedules.routes.isDispersion">פיזור</mat-radio-button>
   </mat-radio-group>
 
 </div>
@@ -34,11 +34,14 @@
 <!-- TODO -->
 <div fxFlex fxFlexAlign="center" class="autocomplete-container" [ngStyle.xs]="{'min-width.%': 100}"
   [ngStyle.sm]="{'width.%': 70}">
-  <mat-google-maps-autocomplete placeholderText=""
+  <mat-google-maps-autocomplete #address
+                                placeholderText=""
                                 addressLabelText="כתובת" country="il"
+                                [address]="localTrans.address"
                                 (onAutocompleteSelected)="onAutocompleteSelected($event)"
                                 (onLocationSelected)="onLocationSelected($event)"
-                                ngDefaultControl>
+                                ngDefaultControl
+                                >
   </mat-google-maps-autocomplete>
 </div>
 

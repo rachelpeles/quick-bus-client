@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Transportation } from 'src/app/Classes/transportation';
 import { participant, TransportationService } from 'src/app/Services/transportation.service';
@@ -9,13 +9,16 @@ import { participant, TransportationService } from 'src/app/Services/transportat
   styleUrls: ['./show-and-calc.component.css']
 })
 export class ShowAndCalcComponent implements OnInit {
-
+  // @Input()
+  // showOrEdit:boolean;
   trans: Transportation;
   usersAndAddress;
   abc;
   panelOpenState = false;
-
-  constructor(private transSer: TransportationService, private router: Router, private activeRoute: ActivatedRoute) { }
+  showOrEdit:string;
+  constructor(private transSer: TransportationService, private router: Router, private activeRoute: ActivatedRoute) { 
+    this.showOrEdit = router.url;
+  }
 
   async ngOnInit() {
     // this.activeRoute.params.subscribe(x=>{
@@ -29,8 +32,11 @@ export class ShowAndCalcComponent implements OnInit {
   }
 
   calc()
-  {
-    this.router.navigate(["CalcRoute"]);
+  {  
+    if(this.showOrEdit=="/ShowCalc")
+      this.router.navigate(["CalcRoute"]);
+    else
+      this.router.navigate(["ShowCalcRoute"]);
   }
 
 }

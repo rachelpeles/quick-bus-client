@@ -19,9 +19,9 @@
       <br>
       <span id="price">מחיר כולל להסעה: {{price}} ש"ח</span><br><br>
         <img *ngIf="load === true" src="../../../assets/imag/טוען.gif" width="100%">
-      <button mat-raised-button matTooltip="אישור ומעבר לתשלום" class="end-button" (click)="OK()">אישור ההסעה</button>
+      <button *ngIf="editOrShow" mat-raised-button matTooltip="אישור ומעבר לתשלום" class="end-button" (click)="OK()">אישור ההסעה</button>
       <button mat-raised-button matTooltip="הורדת תחנות סמוכות לקיצור זמן הנסיעה והפחתת עלויות" class="end-button"
-        (click)="stationUnion()" [disabled]="isunion">איחוד תחנות</button>
+        (click)="stationUnion()" [disabled]="isunion" *ngIf="editOrShow">איחוד תחנות</button>
       <br><br>
   </mat-drawer>
 

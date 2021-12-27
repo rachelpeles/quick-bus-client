@@ -29,6 +29,20 @@ table
   margin: 10px;
 }
 
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  margin-right: 15%;
+}
+/* .mat-form-field-infix {
+  width: 100vw !important;
+} */
+
+.disabledButton{
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
 .mat-raised-button
 {
   font-size: medium;

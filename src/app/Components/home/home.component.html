@@ -1,61 +1,92 @@
 <div class="page">
+  <div class="main showLogin" *ngIf="connect">
+    <img src="../../../assets/imag/quick-bus-logo.gif" width="20%" />
+    <div class="hello">
+      <p>שלום!</p>
+      <p>הגעת למקום הנכון</p>
+      <p>אתר ההסעות לילדים - Quick bus</p>
+      <p>בואו לנסוע איתנו במהירות:</p>
+    </div>
 
-    <!-- Title of an Card -->
-    <!-- <mat-card-title> -->
+    <form [formGroup]="regiForm" (ngSubmit)="LogInto()" class="form">
+      <i class="material-icons icons">person</i>
+      <mat-label>השם שלך</mat-label>
+      <br />
+      <form-field class="demo-full-width">
+        <input
+          class="form-control"
+          formControlName="UserName"
+          placeholder="נא להזין שם"
+        />
+      </form-field>
+      <br />
+      <mat-error>
+        <span
+          *ngIf="
+            !regiForm.get('UserName').valid && regiForm.get('UserName').touched
+          "
+        >
+          שדה זה חובה
+        </span>
+      </mat-error>
 
-
-    <!-- </mat-card-title> -->
-    <div class="main showLogin" *ngIf="connect">
-        <img src="../../../assets/imag/quick-bus-logo.gif" width="20%">
-        <div class="hello">
-            <p> שלום!</p>
-            <p>הגעת למקום הנכון</p>
-            <p>אתר ההסעות לילדים- quick bus- </p>
-            <p>בואו לסוע איתנו במהירות:</p>
+      <form-field class="demo-full-width">
+        <div class="input">
+          <i class="material-icons icons">vpn_key</i>
+          <mat-label>סיסמה</mat-label>
+          <br />
+          <input
+            class="form-control"
+            placeholder="נא הזן סיסמה"
+            [type]="hide ? 'password' : 'text'"
+            formControlName="Password"
+          />
+          <button
+            class="hide"
+            type="button"
+            matSuffix
+            mat-icon-button
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            aria-labelledby="hide"
+            [attr.aria-pressed]="hide"
+          >
+            <i class="material-icons icons">
+              {{ hide ? 'visibility_off' : 'visibility' }}
+            </i>
+          </button>
         </div>
-        <!-- <mat-card-content> -->
+      </form-field>
 
-        <form [formGroup]="regiForm" (ngSubmit)="LogInto()" class="form">
-            <i class="material-icons icons">person</i>
-            <mat-label>השם שלך</mat-label><br>
-            <form-field class="demo-full-width">
-                <input class="form-control" formControlName="UserName" placeholder="נא להזין שם">
-            </form-field><br>
-            <mat-error>
-                <span *ngIf="!regiForm.get('UserName').valid && regiForm.get('UserName').touched">שדה זה
-                    חובה</span>
-            </mat-error>
-
-            <form-field class="demo-full-width">
-                <div class="input">
-                    <i class="material-icons icons">vpn_key</i>
-                    <mat-label>סיסמה</mat-label><br>
-                    <input class="form-control" placeholder="נא הזן סיסמה" [type]="hide ? 'password' : 'text'"
-                        formControlName="Password">
-                    <button class="hide" type="button" matSuffix mat-icon-button (click)="hide = !hide"
-                        [attr.aria-label]="'Hide password'" aria-labelledby="hide" [attr.aria-pressed]="hide">
-                        <i class="material-icons icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
-                    </button>
-                </div>
-            </form-field>
-
-            <mat-error>
-                <span *ngIf="!regiForm.get('Password').valid && regiForm.get('Password').touched">שדה זה
-                    חובה</span>
-            </mat-error><br>
-            <button type="submit" id="sign" mat-raised-button class="red-button"
-                [disabled]="!regiForm.valid || IsAccepted==0">התחבר</button>
-            <br>
-            <a (click)="openDialog()" class="link-to-login">הרשם כעת</a>
-            <!-- <button class="b" mat-fab color="white" (click)="action()">
+      <mat-error>
+        <span
+          *ngIf="
+            !regiForm.get('Password').valid && regiForm.get('Password').touched
+          "
+        >
+          שדה זה חובה
+        </span>
+      </mat-error>
+      <br />
+      <button
+        type="submit"
+        id="sign"
+        mat-raised-button
+        class="red-button"
+        [disabled]="!regiForm.valid"
+      >
+        התחבר
+      </button>
+      <br />
+      <a (click)="openDialog()" class="link-to-login">הרשם כעת</a>
+      <!-- <button class="b" mat-fab color="white" (click)="action()">
                     <i class="material-icons add">add</i>
                   </button> -->
-        </form>
-        <!-- </mat-card-content> -->
-    </div>
-    <div class="main showRegister" *ngIf="!connect">
-        <app-new-passenger></app-new-passenger>
-        <a  class="link-to-login" (click)="toSignIn()">להתחברות</a>
-    </div>
-    
+    </form>
+    <!-- </mat-card-content> -->
+  </div>
+  <div class="main showRegister" *ngIf="!connect">
+    <app-new-passenger></app-new-passenger>
+    <a class="link-to-login" (click)="toSignIn()">להתחברות</a>
+  </div>
 </div>
