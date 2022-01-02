@@ -43,7 +43,7 @@ export class UpdateComponent implements OnInit {
     
     
     this.contactFormGroup=this.fb.group({
-      'telephon': ['', ([Validators.required, Validators.minLength(7), Validators.maxLength(10)])],
+      'telephon': ['', ([Validators.required, Validators.minLength(7)])],
       'email': ['', ([Validators.required, Validators.email])],
     })
 
