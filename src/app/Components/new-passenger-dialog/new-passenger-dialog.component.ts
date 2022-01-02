@@ -45,7 +45,7 @@ export class NewPassengerDialogComponent implements OnInit {
       {
         'userName': [null, Validators.required],
         'type': [null, Validators.required],
-        'phone': [null, [Validators.required, Validators.minLength(9), Validators.maxLength(10)]],
+        'phone': [null, [Validators.required, Validators.minLength(9)]],
         'address':[ [null, Validators.required]],
         'email': [null, [Validators.required, Validators.email]]
       });

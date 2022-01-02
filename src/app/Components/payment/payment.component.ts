@@ -32,8 +32,11 @@ export class PaymentComponent implements OnInit {
 
   byPassengers() {
     var email;
-    var list = this.thisTrans.usersAndAddress;
-    list.forEach((element) => {
+    // var list = this.thisTrans.usersAndAddress;
+
+    var usersAndAddress = this.thisTrans.usersAndAddress.filter((v,i,a)=>a.findIndex(t=>(t.user===v.user))===i)
+
+    usersAndAddress.forEach((element) => {
       this.userSer.getFamilyList().subscribe((x) => {
         email = x.find((u) => u.userId == element.user).email;
         var htmlBody =
@@ -49,8 +52,8 @@ export class PaymentComponent implements OnInit {
 
         this.emailSer.sendEmailToList(email, "תשלום הסעה", htmlBody);
       });
-      alert('הודעת תשלום נשלחה לנרשמים');
     });
+    alert('הודעת תשלום נשלחה לנרשמים');
     this.router.navigate(["/UserMain"]);
   }
 

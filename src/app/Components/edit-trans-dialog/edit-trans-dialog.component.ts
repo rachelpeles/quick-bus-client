@@ -131,7 +131,7 @@ export class EditTransDialogComponent implements OnInit {
       this.userSer.updateUser(addCreate).subscribe(x => console.log(x));
       // this.meSer.family=addCreate;
       localStorage.setItem('user', JSON.stringify(addCreate));
-      alert('יצרת בהצלחה הסעה ל' + this.localTrans.description + 'פרטי ההסעה ישלחו אליך למייל');
+      alert('יצרת בהצלחה הסעה ל' + this.localTrans.description + ' פרטי ההסעה ישלחו אליך למייל ');
 
       var email: Array<string> = [];
       // email[0]=this.meSer.family.email;

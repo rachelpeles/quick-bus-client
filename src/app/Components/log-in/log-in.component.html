@@ -25,16 +25,18 @@
                     <div class="input">
                         <i class="material-icons icons">vpn_key</i>
                         <mat-label>סיסמה</mat-label><br>
-                        <input class="form-control" type="password" placeholder="סיסמא"
+                        <input minlength="6" class="form-control" type="password" placeholder="סיסמא"
                             [type]="hide ? 'password' : 'text'" formControlName="password" required>
                         <button class="hide" type="button" matSuffix mat-icon-button (click)="hide = !hide"
                             [attr.aria-label]="'Hide password'" aria-labelledby="hide" [attr.aria-pressed]="hide">
                             <i class="material-icons icons">{{hide ? 'visibility_off' : 'visibility'}}</i>
                         </button>
-
                     </div>
                     <mat-error *ngIf="passwordsGroup.hasError('required', 'password') && passwordsGroup.get('password').touched">
                     נא הקלד סיסמה
+                </mat-error>
+                <mat-error *ngIf="passwordsGroup.hasError('minlength', 'password') && passwordsGroup.get('password').touched">
+                    נדרש מינימום 6 תוים
                 </mat-error>
                 </form-field>
                 <br>
@@ -55,9 +57,9 @@
             <form-field>
                 <i class="material-icons icons">settings_phone</i>
                 <mat-label>טלפון</mat-label><br>
-                <input class="form-control" formControlName="phone" required><br>
+                <input pattern="[0-9]{9,10}"  minlength="9" class="form-control" formControlName="phone" required><br>
                 <mat-error *ngIf="newPassengerForm.hasError('required', 'phone') && newPassengerForm.get('phone').touched">שדה זה חובה</mat-error>
-                <mat-error *ngIf="newPassengerForm.hasError('minlength', 'phone') && newPassengerForm.get('phone').touched">מספר לא תקין</mat-error>
+                <mat-error *ngIf="(newPassengerForm.hasError('minlength', 'phone') || newPassengerForm.hasError('pattern', 'phone'))&& newPassengerForm.get('phone').touched">מספר לא תקין</mat-error>
             </form-field><br>
 
             <form-field>
@@ -73,9 +75,12 @@
             <form-field>
                 <i class="material-icons icons">alternate_email</i>
                 <mat-label>אימייל</mat-label><br>
-                <input class="form-control" formControlName="email" required><br>
+                <input class="form-control" formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required><br>
                 <mat-error>
                     <span *ngIf="newPassengerForm.hasError('required', 'email') && newPassengerForm.get('email').touched">שדה זה חובה</span>
+                </mat-error>
+                <mat-error>
+                    <span *ngIf="newPassengerForm.hasError('pattern', 'email') && newPassengerForm.get('email').touched">הזן כתובת אימייל תקינה</span>
                 </mat-error>
             </form-field><br>
         </form>

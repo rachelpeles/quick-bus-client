@@ -6,6 +6,9 @@ import { Router } from "@angular/router";
 import { stringify } from "@angular/compiler/src/util";
 import { promise } from "selenium-webdriver";
 import { GlobalService } from "src/app/Services/global.service";
+import { HttpErrorResponse } from "@angular/common/http";
+import { FamilyService } from 'src/app/Services/Family.service';
+import { EmailService } from 'src/app/Services/email.service';
 
 
 @Component({
@@ -30,7 +33,8 @@ export class CalcRoutComponent implements OnInit {
   isunion = false;
   status = true;
   editOrShow:boolean;
-  constructor(private transSer: TransportationService, private router: Router, private global: GlobalService) {
+  displayButtons = false;
+  constructor(private transSer: TransportationService, private router: Router, private global: GlobalService, private userSer: FamilyService, private emailSer: EmailService) {
     this.editOrShow = (router.url=='/CalcRoute');
     console.log(this.editOrShow)
    }
@@ -156,7 +160,30 @@ export class CalcRoutComponent implements OnInit {
           this.thisTrans.schedules.price = this.price;
           this.global.vehicles = points.vehicleId;
           this.global.duration = this.times;
-        });
+          this.displayButtons = true;
+         })
+         .catch((err) => {
+          var email: Array<string> = [];
+          this.transSer.delete(this.thisTrans.transportationId).subscribe(x => console.log(x));
+          this.userSer.getFamilyList().subscribe(x => {
+            // thisUser.transportationCreated.forEach((element, index) => {
+            //   if(element===this.thisTrans.transportationId)
+            //     thisUser.transportationCreated.splice(index, 1);
+            // });
+            // thisUser.transportationCreated.splice(this.data.thisTrans.transportationId);
+            // this.userSer.updateUser(thisUser).subscribe(z => console.log(z));
+            this.thisTrans.usersAndAddress.forEach(element => {
+              email.push(x.find(u => u.userId == element.user).email);
+            });
+            var uniqueEmail = email.filter(function(elem, index, self) {
+              return index === self.indexOf(elem);
+            })
+            this.emailSer.sendEmailToList(uniqueEmail,
+              "ביטול הסעה"
+              , "שלום רב, ההסעה: " + this.thisTrans.description + " בוטלה. היא לא תתקיים מאחר ואין מספיק מקומות. בהצלחה ויום טוב");
+              alert(err.error.text+" ,הודעה נשלחה לנוסעים. ");
+          });this.router.navigate(["/UserMain"]);
+    });
     else
       await this.transSer
         .stationUnion(route, transportationId)
@@ -193,7 +220,31 @@ export class CalcRoutComponent implements OnInit {
           this.global.vehicles = points.vehicleId;
           this.global.duration = this.times;
           this.dir = new Array<any>();
-        });
+        })
+        .catch((err) => {
+          var email: Array<string> = [];
+          this.transSer.delete(this.thisTrans.transportationId).subscribe(x => console.log(x));
+          this.userSer.getFamilyList().subscribe(x => {
+            // thisUser.transportationCreated.forEach((element, index) => {
+            //   if(element===this.thisTrans.transportationId)
+            //     thisUser.transportationCreated.splice(index, 1);
+            // });
+            // thisUser.transportationCreated.splice(this.data.thisTrans.transportationId);
+            // this.userSer.updateUser(thisUser).subscribe(z => console.log(z));
+            this.thisTrans.usersAndAddress.forEach(element => {
+              email.push(x.find(u => u.userId == element.user).email);
+            });
+            var uniqueEmail = email.filter(function(elem, index, self) {
+              return index === self.indexOf(elem);
+            })
+            this.emailSer.sendEmailToList(uniqueEmail,
+              "ביטול הסעה"
+              , "שלום רב, ההסעה: " + this.thisTrans.description + " בוטלה. היא לא תתקיים מאחר ואין מספיק מקומות. בהצלחה ויום טוב");
+              alert(err.error.text+" ,הודעה נשלחה לנוסעים. ");
+            });
+          // alert(err.error.text);
+          this.router.navigate(["/UserMain"]);
+       });;
     this.getDirection();
   }
 }

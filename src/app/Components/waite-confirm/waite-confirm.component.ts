@@ -61,8 +61,12 @@ export class WaiteConfirmComponent implements OnInit {
 
   confirm() {
     var email;
+    var usersAndAddressChanged = false;
+    var usersAndAddresses=[];
+    usersAndAddresses.push(...this.data.thisTrans.usersAndAddress);
     this.list.filter((t) => {
-      if (t.completed)
+      if (t.completed){
+        usersAndAddressChanged = true;
         this.data.thisTrans.usersAndAddress.push({
           user: t.id,
           address: t.address,
@@ -78,7 +82,7 @@ export class WaiteConfirmComponent implements OnInit {
         email = x.find((u) => u.userId == t.id).email;
         var htmlBody =
           `<html>        <head><style>h1, p{font-family: system-ui}</style>        </head>        <body>          <h3>` +
-          `! בשורה משמחת!</h3>          <p>היי, </p>` +
+          `בשורה משמחת!</h3>          <p>היי, </p>` +
           `<p>בקשת להצטרף ל` +
           this.data.thisTrans.description +
           ` .</p>` +
@@ -86,8 +90,29 @@ export class WaiteConfirmComponent implements OnInit {
           `</p> <p>נסיעה טובה!!</p></p>        </body>      </html>`;
 
         this.emailser.sendEmailToList(email, "בקשתך אושרה", htmlBody);
-      });
+      }); 
+    }
     });
+
+    if (usersAndAddressChanged){
+      usersAndAddresses.forEach(element => {
+        this.userSer.getFamilyList().subscribe((x) => {
+          email = x.find((u) => u.userId == element.user).email;
+          var htmlBody =
+            `<html>        <head><style>h1, p{font-family: system-ui}</style>        </head>        <body>          <h3>` +
+            `לתשומת לבך!</h3>          <p>היי, </p>` +
+            `<p> אתה ברשימת הנוסעים בהסעה ` +
+            this.data.thisTrans.description +
+            ` .</p>` +
+            `<p>מספר הנוסעים השתנה</p>` +
+            `<p>נא עקוב אחר השינוי במסלול ובמחיר</p>` +
+            `</p> <p>נסיעה טובה!!</p></p>        </body>      </html>`;
+  
+          this.emailser.sendEmailToList(email, "שינוי פרטי נסיעה", htmlBody);
+        }); 
+      });
+    }
+ 
     this.transSer
       .updateTransport(this.data.thisTrans)
       .subscribe(async (res) => {
